@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import HeaderText from "../../common/HeaderText/HeaderText";
 import logo from "../../../assets/images/workfront.png";
 import {Button, makeStyles} from "@material-ui/core";
+import {PropTypes} from "prop-types";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -33,6 +34,10 @@ const SignInUpSwitcher = ({location}) => {
             </div>
         </div>
     );
+};
+
+SignInUpSwitcher.propTypes = {
+    location: PropTypes.string
 };
 
 export default SignInUpSwitcher;

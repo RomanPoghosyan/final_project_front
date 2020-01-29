@@ -1,6 +1,6 @@
 import React from "react";
 import {makeStyles} from "@material-ui/styles";
-
+import {PropTypes} from "prop-types";
 
 const useStyles = makeStyles({
     headerTextContainer: {
@@ -18,14 +18,17 @@ const useStyles = makeStyles({
 
 const HeaderText = ({element}) => {
     const classes = useStyles();
-
     return (
         <div className={classes.headerTextContainer}>
-            <div className={classes.line}></div>
+            <div className={classes.line}/>
             <div className={classes.content}>{element}</div>
-            <div className={classes.line}></div>
+            <div className={classes.line}/>
         </div>
     );
+};
+
+HeaderText.propTypes = {
+    element: PropTypes.element
 };
 
 

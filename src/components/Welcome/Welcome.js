@@ -4,7 +4,7 @@ import SignIn from "./SignIn/SignIn";
 import SignUp from "./SignUp/SignUp";
 import SignInUpSwitcher from "./SignInUpSwitcher/SignInUpSwitcher";
 import {withRouter} from "react-router-dom";
-
+import {PropTypes} from "prop-types";
 
 const useStyles = makeStyles({
     root: {
@@ -31,6 +31,10 @@ const Welcome = ({location: {pathname}}) => {
             <SignInUpSwitcher location={location} />
         </div>
     );
+};
+
+Welcome.propTypes = {
+  location: PropTypes.object
 };
 
 export default withRouter(Welcome);
