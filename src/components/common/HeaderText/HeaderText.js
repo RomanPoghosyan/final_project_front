@@ -9,7 +9,7 @@ const useStyles = makeStyles({
         alignItems: "center",
     },
     line: {
-        borderBottom: "1px solid #000",
+        borderBottom: "1px solid #3f3f4b",
     },
     content: {
         textAlign: "center"
@@ -21,9 +21,9 @@ const HeaderText = ({element}) => {
 
     return (
         <div className={classes.headerTextContainer}>
-            <div className={classes.line}></div>
+            <div className={classes.line} />
             <div className={classes.content}>{element}</div>
-            <div className={classes.line}></div>
+            <div className={classes.line} />
         </div>
     );
 };

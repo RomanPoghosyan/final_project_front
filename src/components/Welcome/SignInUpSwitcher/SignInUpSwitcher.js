@@ -16,8 +16,8 @@ const useStyles = makeStyles(() => ({
     link: {
         "& > *":{
             textDecoration: "none"
-        }
-    }
+        },
+    },
 }));
 
 
