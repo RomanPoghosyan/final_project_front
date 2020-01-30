@@ -35,7 +35,7 @@ const Header = () => {
             <div className={classes.logo} onClick={() => window.location.reload()}/>
             <div className={classes.auth}>
                 <Link to={"/sign-in"}><Button color={'primary'} variant={"contained"}>Sign in</Button></Link>
-              <Link to={'/sign-up'}><Button color={'primary'} variant={"contained"}>Sign up</Button></Link>
+                <Link to={'/sign-up'}><Button color={'primary'} variant={"contained"}>Sign up</Button></Link>
             </div>
         </header>
     );
