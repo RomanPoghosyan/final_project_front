@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     },
 });
 
-const Welcome = ({location: {pathname}}) => {
+const Auth = ({location: {pathname}}) => {
     const classes = useStyles();
     const [location, setLocation] = useState(pathname);
 
@@ -36,4 +36,4 @@ const Welcome = ({location: {pathname}}) => {
     );
 };
 
-export default withRouter(Welcome);
+export default withRouter(Auth);

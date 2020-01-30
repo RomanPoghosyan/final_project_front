@@ -1,5 +1,5 @@
 import React from 'react';
-import Welcome from "./components/Welcome/Welcome";
+import Welcome from "./components/Auth/Auth";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import {makeStyles} from "@material-ui/styles";
 import Main from "./components/Main/Main";
