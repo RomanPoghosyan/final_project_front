@@ -3,15 +3,16 @@ import {makeStyles} from "@material-ui/styles";
 
 const useStyles = makeStyles(( () => ({
     main: {
-      height: '100%',
-      background: 'linear-gradient(135deg, #0079bf, #5067c5)'
+        display: "grid",
+        justifyItems: "center",
+        height: '100%',
+        background: 'linear-gradient(135deg, #0079bf, #5067c5)'
     },
     content: {
-        width: '85%',
-        margin: 'auto',
-        height: "85%",
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
+        width: '85%',
+        height: "85%",
         color: '#fff',
         '& h2': {
             fontSize: "calc(3.5vw + 12px)",
