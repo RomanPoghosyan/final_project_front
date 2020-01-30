@@ -2,7 +2,7 @@ import React from 'react';
 import {makeStyles} from "@material-ui/styles";
 
 const useStyles = makeStyles(( () => ({
-    main: {
+    root: {
         display: "grid",
         justifyItems: "center",
         height: '100%',
@@ -31,7 +31,7 @@ const useStyles = makeStyles(( () => ({
 const Welcome = () => {
     const classes = useStyles();
     return (
-        <div className={classes.main}>
+        <div className={classes.root}>
             <div className={classes.content}>
                 <div className={classes.left}>
                     <h2>Katiro lets you work more collaboratively and get more done.</h2>

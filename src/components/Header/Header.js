@@ -4,8 +4,7 @@ import {makeStyles} from "@material-ui/styles";
 
 const useStyles = makeStyles({
     header: {
-        // gridArea: "h"
-        height: "60px"
+
     }
 });
 
