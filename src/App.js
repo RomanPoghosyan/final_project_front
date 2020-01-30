@@ -2,6 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import {makeStyles} from "@material-ui/styles";
 import Auth from "./components/Auth/Auth";
+import Main from "./components/Main/Main";
 
 // Not  in SignIn or SignUp
 const notInSignInOrSignUp = /^(?!.*(\/(sign-in|sign-up))).*$/;
