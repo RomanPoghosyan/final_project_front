@@ -1,6 +1,6 @@
 import React from "react";
 import {makeStyles} from "@material-ui/styles";
-
+import {PropTypes} from "prop-types";
 
 const useStyles = makeStyles({
     headerTextContainer: {
@@ -28,5 +28,8 @@ const HeaderText = ({element}) => {
     );
 };
 
+HeaderText.propTypes = {
+  element: PropTypes.element
+};
 
 export default HeaderText

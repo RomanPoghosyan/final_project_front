@@ -25,10 +25,11 @@ const useStyles = makeStyles(() => ({
 const SignInUpSwitcher = ({location}) => {
     const inSignIn = location === '/sign-in';
     const button = <Button children={inSignIn ? 'Sign Up' : 'Sign In'} variant={"contained"} color={"primary"}/>;
+    const logoElement =  <Link to={'/'}><img src={logo} alt={"Company logo"}/></Link>;
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <HeaderText element={<img src={logo} alt={"Company logo"}/>}/>
+           <HeaderText element={logoElement}/>
             <div className={classes.link}>
                 <Link to={inSignIn ? "/sign-up" : "/sign-in"}>{button}</Link>
             </div>

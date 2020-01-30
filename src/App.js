@@ -19,8 +19,8 @@ function App() {
         <div className={classes.wrapper}>
             <Router>
                 <Switch>
-                    <Route path={"/(sign-in|sign-up)"} render={() => <Auth />} />
-                    <Route path={"/"} render={() => <Main />} />
+                    <Route path={"/(sign-in|sign-up)"} component={Auth} />
+                    <Route path={"/"} component={Main} />
                 </Switch>
             </Router>
         </div>

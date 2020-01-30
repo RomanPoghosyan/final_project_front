@@ -15,12 +15,12 @@ const useStyles = makeStyles(( () => ({
         height: "85%",
         color: '#fff',
         '& h2': {
-            fontSize: "calc(3.5vw + 12px)",
-            lineHeight: "calc(3.5vw + 14px)"
+            fontSize: "calc(3.2vw + 12px)",
+            lineHeight: "calc(3.2vw + 14px)"
         },
         '& h3': {
-            fontSize: "calc(2.1vw + 12px)",
-            lineHeight: "calc(2.1vw + 14px)"
+            fontSize: "calc(1.9vw + 12px)",
+            lineHeight: "calc(1.9vw + 14px)"
         }
     },
     left: {
