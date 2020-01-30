@@ -28,7 +28,7 @@ const useStyles = makeStyles(( () => ({
     }
 })));
 
-function Main() {
+const Welcome = () => {
     const classes = useStyles();
     return (
         <div className={classes.main}>
@@ -47,6 +47,6 @@ function Main() {
         </div>
     );
 
-}
+};
 
-export default Main;
+export default Welcome;

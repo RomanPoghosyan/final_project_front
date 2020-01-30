@@ -1,8 +1,7 @@
 import React from 'react';
-import Welcome from "./components/Auth/Auth";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import {makeStyles} from "@material-ui/styles";
-import Main from "./components/Main/Main";
+import Auth from "./components/Auth/Auth";
 
 // Not  in SignIn or SignUp
 const notInSignInOrSignUp = /^(?!.*(\/(sign-in|sign-up))).*$/;
@@ -20,7 +19,7 @@ function App() {
     return (
         <div className={classes.wrapper}>
             <Router>
-                <Route path={"/(sign-in|sign-up)"} render={() => <Welcome />} />
+                <Route path={"/(sign-in|sign-up)"} render={() => <Auth />} />
                 <Route path={notInSignInOrSignUp} render={() => <Main />} />
             </Router>
         </div>
