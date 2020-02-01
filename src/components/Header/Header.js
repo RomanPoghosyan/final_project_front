@@ -32,7 +32,9 @@ const Header = () => {
     const classes = useStyles();
     return (
         <header className={classes.header}>
-            <div className={classes.logo} onClick={() => window.location.reload()}/>
+            <Link to={"/"}>
+                <div className={classes.logo} />
+            </Link>
             <div className={classes.auth}>
                 <Link to={"/sign-in"}><Button color={'primary'} variant={"contained"}>Sign in</Button></Link>
                 <Link to={'/sign-up'}><Button color={'primary'} variant={"contained"}>Sign up</Button></Link>
