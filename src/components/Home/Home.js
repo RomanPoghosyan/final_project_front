@@ -1,5 +1,5 @@
 import React from 'react';
-import Boards from "../Boards/Boards";
+import Boards from "./Boards/Boards";
 import {makeStyles} from "@material-ui/styles";
 import {withRouter} from "react-router-dom";
 
