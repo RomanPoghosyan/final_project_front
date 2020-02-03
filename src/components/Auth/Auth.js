@@ -37,7 +37,7 @@ const Auth = ({location: {pathname}}) => {
 };
 
 Auth.propTypes = {
-  location: PropTypes.string
+  location: PropTypes.object
 };
 
 export default withRouter(Auth);

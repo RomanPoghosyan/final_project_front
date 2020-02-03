@@ -4,7 +4,6 @@ import {makeStyles} from "@material-ui/styles";
 import Auth from "./components/Auth/Auth";
 import Main from "./components/Main/Main";
 
-
 const useStyles = makeStyles({
     wrapper: {
         display: "grid",
@@ -14,7 +13,6 @@ const useStyles = makeStyles({
 
 function App() {
     const classes = useStyles();
-
     return (
         <div className={classes.wrapper}>
             <Router>
