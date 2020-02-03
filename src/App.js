@@ -1,8 +1,11 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch, withRouter} from "react-router-dom";
 import {makeStyles} from "@material-ui/styles";
 import Auth from "./components/Auth/Auth";
 import Main from "./components/Main/Main";
+import {Provider} from "react-redux";
+import store from "./redux/store";
+import {compose} from "redux";
 
 
 const useStyles = makeStyles({
@@ -12,20 +15,34 @@ const useStyles = makeStyles({
     }
 });
 
-function App() {
+const App = () => {
     const classes = useStyles();
 
     return (
         <div className={classes.wrapper}>
-            <Router>
-                <Switch>
-                    <Route path={"/(sign-in|sign-up)"} component={Auth} />
-                    <Route path={"/"} component={Main} />
-                </Switch>
-            </Router>
+            <Switch>
+                <Route path={"/(sign-in|sign-up)"} component={Auth} />
+                <Route path={"/"} component={Main} />
+            </Switch>
         </div>
     );
-}
+};
 
 
-export default App;
+const AppWithData = compose(
+    withRouter
+)(App);
+
+const AppContainer = () => {
+    return (
+        <Router>
+            <Provider store={store}>
+                <AppWithData />
+            </Provider>
+        </Router>
+    );
+};
+
+
+
+export default AppContainer;
