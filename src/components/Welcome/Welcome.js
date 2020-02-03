@@ -37,13 +37,9 @@ const Welcome = () => {
                     <h2>Katiro lets you work more collaboratively and get more done.</h2>
                     <h3>Katiro boards, lists, and cards enable you to prioritize and organize your projects in a flexible, fun, and rewarding way.</h3>
                 </div>
-                <div className={classes.right}>
-
-                </div>
+                <div className={classes.right} />
             </div>
-            <div>
-
-            </div>
+            <div />
         </div>
     );
 
