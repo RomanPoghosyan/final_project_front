@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import HeaderText from "../../common/HeaderText/HeaderText";
 import {Button, makeStyles} from "@material-ui/core";
 import {PropTypes} from "prop-types";
-import Logo from "../../Logo/Logo";
+import Logo from "../../common/Logo/Logo";
 
 const useStyles = makeStyles(() => ({
     root: {

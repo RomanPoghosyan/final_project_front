@@ -3,7 +3,7 @@ import {makeStyles} from "@material-ui/styles";
 import logo from '../../assets/images/logo.jpg';
 import {Button} from "@material-ui/core";
 import {Link} from "react-router-dom";
-import Logo from "../Logo/Logo";
+import Logo from "../common/Logo/Logo";
 
 const useStyles = makeStyles({
     header: {
