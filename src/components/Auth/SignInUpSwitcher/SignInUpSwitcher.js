@@ -1,9 +1,9 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import HeaderText from "../../common/HeaderText/HeaderText";
-import logo from "../../../assets/images/workfront.png";
 import {Button, makeStyles} from "@material-ui/core";
 import {PropTypes} from "prop-types";
+import Logo from "../../common/Logo/Logo";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -25,7 +25,7 @@ const useStyles = makeStyles(() => ({
 const SignInUpSwitcher = ({location}) => {
     const inSignIn = location === '/sign-in';
     const button = <Button children={inSignIn ? 'Sign Up' : 'Sign In'} variant={"contained"} color={"primary"}/>;
-    const logoElement =  <Link to={'/'}><img src={logo} alt={"Company logo"}/></Link>;
+    const logoElement =  <Link to={'/'}><Logo /></Link>;
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -38,7 +38,7 @@ const SignInUpSwitcher = ({location}) => {
 };
 
 SignInUpSwitcher.propTypes = {
-    location: PropTypes.string
+    location: PropTypes.string.isRequired
 };
 
 export default SignInUpSwitcher;
