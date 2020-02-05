@@ -9,4 +9,4 @@ export const renderTextField = ({ input, meta: { touched, invalid, error }, ...c
         {...input}
         {...custom}
     />
-)
+);
