@@ -29,7 +29,7 @@ const HeaderText = ({element}) => {
 };
 
 HeaderText.propTypes = {
-  element: PropTypes.element
+  element: PropTypes.element.isRequired
 };
 
 export default HeaderText
