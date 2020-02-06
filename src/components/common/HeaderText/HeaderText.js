@@ -1,6 +1,6 @@
 import React from "react";
 import {makeStyles} from "@material-ui/styles";
-import {PropTypes} from "prop-types";
+import { PropTypes } from "prop-types";
 
 const useStyles = makeStyles({
     headerTextContainer: {
