@@ -23,7 +23,7 @@ const SignInForm = (props) => {
 
 const SignInReduxForm = reduxForm({form: "login"})(SignInForm);
 
-const SignIn = () => {
+const SignIn = (props) => {
     const classes = useStyles();
 
     const onSubmit = (formData) => {
