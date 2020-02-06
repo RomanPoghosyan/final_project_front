@@ -27,7 +27,6 @@ const SignIn = (props) => {
     const classes = useStyles();
 
     const onSubmit = (formData) => {
-        console.log(formData);
         props.login(formData.login, formData.password);
     };
 

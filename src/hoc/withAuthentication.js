@@ -6,6 +6,6 @@ const withAuthentication = (Component) => {
         const isAuth = useSelector(state => state.auth.isAuth);
         return <Component isAuth={isAuth}/>
     }
-}
+};
 
 export default withAuthentication;

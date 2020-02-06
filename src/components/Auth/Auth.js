@@ -3,9 +3,7 @@ import {makeStyles} from "@material-ui/styles";
 import SignIn from "./SignIn/SignIn";
 import SignUp from "./SignUp/SignUp";
 import SignInUpSwitcher from "./SignInUpSwitcher/SignInUpSwitcher";
-import {withRouter} from "react-router-dom";
 import {PropTypes} from "prop-types";
-import withAuthentication from "../../hoc/withAuthentication";
 import {compose} from "redux";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 
