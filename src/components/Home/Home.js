@@ -2,6 +2,7 @@ import React from 'react';
 import Boards from "./Boards/Boards";
 import {makeStyles} from "@material-ui/styles";
 import {withRouter} from "react-router-dom";
+import withAuthentication from "../../hoc/withAuthentication";
 
 const useStyles = makeStyles ( theme => ({
     home: {

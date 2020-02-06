@@ -5,6 +5,9 @@ import SignUp from "./SignUp/SignUp";
 import SignInUpSwitcher from "./SignInUpSwitcher/SignInUpSwitcher";
 import {withRouter} from "react-router-dom";
 import {PropTypes} from "prop-types";
+import withAuthentication from "../../hoc/withAuthentication";
+import {compose} from "redux";
+import withAuthRedirect from "../../hoc/withAuthRedirect";
 
 const useStyles = makeStyles({
     root: {
@@ -28,6 +31,7 @@ const Auth = ({location: {pathname}}) => {
         setLocation(pathname);
     }, [pathname]);
 
+
     return (
         <div className={classes.root}>
             {location === "/sign-in" ? <SignIn/> : <SignUp/>}
@@ -40,4 +44,6 @@ Auth.propTypes = {
   location: PropTypes.object.isRequired
 };
 
-export default withRouter(Auth);
+export default compose(
+    withAuthRedirect(true)
+)(Auth);

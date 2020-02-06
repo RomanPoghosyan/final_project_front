@@ -2,8 +2,9 @@ import React from "react";
 import Header from "../Header/Header";
 import {makeStyles} from "@material-ui/styles";
 import {Route} from "react-router-dom";
-import Welcome from "../Welcome/Welcome";
 import Home from "../Home/Home";
+import withAuthentication from "../../hoc/withAuthentication";
+import Welcome from "../Welcome/Welcome";
 
 
 const useStyles = makeStyles({
@@ -13,18 +14,19 @@ const useStyles = makeStyles({
     },
 });
 
-const Main = () => {
+const Main = (props) => {
     const classes = useStyles();
+    const MainContent = props.isAuth ? Home : Welcome;
 
     return (
         <div className={classes.mainWrapper}>
             <Header/>
             <div className={classes.content}>
-                <Route exact path={"/"} component={Home} />
+                <Route exact path={"/"} component={MainContent} />
             </div>
         </div>
     );
 };
 
 
-export default Main;
+export default withAuthentication( Main );

@@ -1,9 +1,10 @@
 import React from "react";
 import {makeStyles} from "@material-ui/styles";
-import logo from '../../assets/images/logo.jpg';
 import {Button} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import Logo from "../common/Logo/Logo";
+import withAuthentication from "../../hoc/withAuthentication";
+import {compose} from "redux";
 
 const useStyles = makeStyles({
     header: {
@@ -33,4 +34,6 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default compose(
+    withAuthentication
+)(Header);
