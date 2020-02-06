@@ -23,15 +23,16 @@ export const authReducer = (state = initialState, action) => {
 
 export const setAuthUserData = (userId, email, username, isAuth) => ({type: SET_USER_DATA, payload: { userId, email, username, isAuth }});
 
-export const getAuthUSerData = () => (dispatch) => {
+export const getAuthUserData = () => (dispatch) => {
     let token = window.localStorage.getItem('token');
+    console.log(token);
     if(token) {
         authAPI.me(token)
             .then(data => {
-                if (data.resultCode === 0) {
+                // if (data.resultCode === 0) {
                     let {id, email, username} = data;
                     dispatch(setAuthUserData(id, email, username, true));
-                }
+                // }
             });
     }
 };
@@ -39,10 +40,10 @@ export const getAuthUSerData = () => (dispatch) => {
 export const login = (email, password) => (dispatch) => {
     authAPI.login(email, password)
         .then(data => {
-            if(data.resultCode === 0){
+            // if(data.resultCode === 0){
                 window.localStorage.setItem('token', data.token);
-                dispatch(getAuthUSerData());
-            }
+                    dispatch(getAuthUserData());
+            // }
         });
 };
 

@@ -1,20 +1,19 @@
 import * as axios from "axios";
 
-let TOKEN = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyb21hbiIsImV4cCI6MTU4MDg2MzA4NywiaWF0IjoxNTgwODQ1MDg3fQ.uUEua_4pNsGcG9XqnUN3nmitNyUlvbzFgEAzZFPzuDKNf4UOxB2Buw_r8CxBII6rpaVjanZhug7fCwMK9Uw29w";;
+let TOKEN = "";
 
 const getToken = () => {
     return `Bearer ${TOKEN}`;
 }
-const setToken = (token) => {
-    TOKEN = token;
+const setToken = (t) => {
+    TOKEN = t;
 }
 
 const instance = axios.create({
     baseURL: "http://localhost:8080/api/1.0/",
-    withCredentials: true,
     headers: {
         "Content-Type": "application/json",
-        "Authorization": getToken(),
+        // "Authorization": `Bearer ${TOKEN}`,
     }
 });
 
@@ -39,7 +38,9 @@ let loginResponse = {
 export const authAPI = {
     me(token){
         setToken(token);
-        return instance.get(`auth/me`)
+        return instance.get(`auth/me`, {headers: {
+                "Authorization": getToken(),
+            }})
             .then(response => response.data);
     },
     login(email, password){
