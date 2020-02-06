@@ -29,10 +29,10 @@ export const getAuthUserData = () => (dispatch) => {
     if(token) {
         authAPI.me(token)
             .then(data => {
-                // if (data.resultCode === 0) {
-                    let {id, email, username} = data;
+                if (data.resultCode === 0) {
+                    let {id, email, username} = data.body;
                     dispatch(setAuthUserData(id, email, username, true));
-                // }
+                }
             });
     }
 };
@@ -40,10 +40,11 @@ export const getAuthUserData = () => (dispatch) => {
 export const login = (email, password) => (dispatch) => {
     authAPI.login(email, password)
         .then(data => {
-            // if(data.resultCode === 0){
-                window.localStorage.setItem('token', data.token);
+            console.log(data);
+            if(data.resultCode === 0){
+                window.localStorage.setItem('token', data.body.token);
                     dispatch(getAuthUserData());
-            // }
+            }
         });
 };
 
