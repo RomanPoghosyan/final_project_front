@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {makeStyles} from "@material-ui/styles";
 
 const useStyles = makeStyles(( () => ({
@@ -45,4 +45,4 @@ const Welcome = () => {
 
 };
 
-export default Welcome;
+export default memo(Welcome);

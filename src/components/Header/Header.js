@@ -1,9 +1,10 @@
-import React from "react";
+import React, {memo} from "react";
 import {makeStyles} from "@material-ui/styles";
-import logo from '../../assets/images/logo.jpg';
 import {Button} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import Logo from "../common/Logo/Logo";
+import withAuthentication from "../../hoc/withAuthentication";
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles({
     header: {
@@ -20,17 +21,29 @@ const useStyles = makeStyles({
     },
 });
 
-const Header = () => {
+const Header = ({isAuth}) => {
     const classes = useStyles();
+    let logoutButton = null;
+    if ( isAuth ) {
+        logoutButton = <Button color={'primary'} variant={"contained"}>Log out</Button>;
+    }
     return (
         <header className={classes.header}>
             <Logo />
             <div className={classes.auth}>
-                <Link to={"/sign-in"}><Button color={'primary'} variant={"contained"}>Sign in</Button></Link>
-                <Link to={'/sign-up'}><Button color={'primary'} variant={"contained"}>Sign up</Button></Link>
+                {logoutButton ? logoutButton :
+                    <>
+                        <Link to={"/sign-in"}><Button color={'primary'} variant={"contained"}>Sign in</Button></Link>
+                        <Link to={'/sign-up'}><Button color={'primary'} variant={"contained"}>Sign up</Button></Link>
+                    </>
+                }
             </div>
         </header>
     );
 };
 
-export default Header;
+Header.propTypes = {
+  isAuth: PropTypes.bool.isRequired
+};
+
+export default memo(withAuthentication(Header));

@@ -1,9 +1,8 @@
-import React from 'react';
+import React, {memo} from 'react';
 import Boards from "./Boards/Boards";
 import {makeStyles} from "@material-ui/styles";
-import {withRouter} from "react-router-dom";
 
-const useStyles = makeStyles ( theme => ({
+const useStyles = makeStyles ( () => ({
     home: {
         display: "grid",
         gridTemplateColumns: "1fr 3fr 1fr",
@@ -23,4 +22,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default memo(Home);

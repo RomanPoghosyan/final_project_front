@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Box, Typography, makeStyles} from '@material-ui/core';
 import {PropTypes} from "prop-types";
 
-const useStyles = makeStyles ( theme => ({
+const useStyles = makeStyles ( () => ({
     board: {
         backgroundColor: 'gray',
         borderRadius: "3px",
@@ -27,4 +27,4 @@ Board.propTypes = {
   title: PropTypes.string.isRequired
 };
 
-export default Board;
+export default memo(Board);
