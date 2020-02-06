@@ -46,5 +46,8 @@ export const authAPI = {
         return instance.post(`auth/login`, {username: email, password})
             .then(response => response.data);
     },
+    logout(){
+        setToken("");
+    }
 };
 

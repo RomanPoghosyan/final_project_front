@@ -25,7 +25,6 @@ export const setAuthUserData = (userId, email, username, isAuth) => ({type: SET_
 
 export const getAuthUserData = () => (dispatch) => {
     let token = window.localStorage.getItem('token');
-    console.log(token);
     if(token) {
         authAPI.me(token)
             .then(data => {
@@ -40,11 +39,17 @@ export const getAuthUserData = () => (dispatch) => {
 export const login = (email, password) => (dispatch) => {
     authAPI.login(email, password)
         .then(data => {
-            console.log(data);
             if(data.resultCode === 0){
                 window.localStorage.setItem('token', data.body.token);
-                    dispatch(getAuthUserData());
+                dispatch(getAuthUserData());
             }
         });
+};
+
+
+export const logout = () => {
+    window.localStorage.removeItem('token');
+    authAPI.logout();
+    return setAuthUserData(null, null, null, false);
 };
 
