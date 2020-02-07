@@ -51,7 +51,7 @@ export const login = (email, password) => (dispatch) => {
         });
 };
 
-export const signUp = formData => dispatch => {
+export const signup = formData => dispatch => {
     authAPI.signup(formData)
         .then ( ({data}) => {
             if (data.resultCode === 0 ){

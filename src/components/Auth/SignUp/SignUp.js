@@ -7,7 +7,7 @@ import {emailChecker, maxLengthCreator, onlyCharacters, required} from "../../..
 import {renderTextField} from "../../common/FormControlls/FormControlls";
 import PropTypes from "prop-types";
 import withAuthentication from "../../../hoc/withAuthentication";
-import {register} from "../../../redux/auth-reducer";
+import {signup} from "../../../redux/auth-reducer";
 import {useDispatch} from "react-redux";
 
 let maxLength15 = maxLengthCreator(15);
@@ -32,8 +32,6 @@ SignUpForm.propTypes = {
 };
 
 
-
-
 const SignUpReduxForm = reduxForm({form: "signup"})(memo(SignUpForm));
 
 const SignUp = () => {
@@ -42,7 +40,7 @@ const SignUp = () => {
     const signupDispatch = useDispatch();
 
     const onSubmit = (formData) => {
-        signupDispatch(register(formData));
+        signupDispatch(signup(formData));
     };
 
     return (

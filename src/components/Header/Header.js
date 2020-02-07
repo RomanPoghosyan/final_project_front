@@ -1,9 +1,8 @@
-import React, {memo} from "react";
+import React from "react";
 import {makeStyles} from "@material-ui/styles";
 import {Button} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import Logo from "../common/Logo/Logo";
-import withAuthentication from "../../hoc/withAuthentication";
 import PropTypes from 'prop-types';
 import {compose} from "redux";
 import {connect} from "react-redux";
@@ -43,14 +42,16 @@ const Header = (props) => {
     );
 };
 
+Header.propTypes = {
+    isAuth: PropTypes.bool.isRequired
+};
+
+
+
 let mapStateToProps = (state) => {
     return {
         isAuth: state.auth.isAuth
     };
-};
-
-Header.propTypes = {
-  isAuth: PropTypes.bool.isRequired
 };
 
 export default compose(
