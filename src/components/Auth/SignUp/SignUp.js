@@ -2,14 +2,14 @@ import React, {memo} from "react";
 import {Button} from "@material-ui/core";
 import HeaderText from "../../common/HeaderText/HeaderText";
 import useStyles from "../../../utils/styles/useHeaderTextStyle";
-import {Redirect} from "react-router-dom";
 import {Field, reduxForm} from "redux-form";
-import {required, onlyCharacters, emailChecker, maxLengthCreator} from "../../../utils/validators/validators";
+import {emailChecker, maxLengthCreator, onlyCharacters, required} from "../../../utils/validators/validators";
 import {renderTextField} from "../../common/FormControlls/FormControlls";
 import PropTypes from "prop-types";
 import withAuthentication from "../../../hoc/withAuthentication";
 import {register} from "../../../redux/auth-reducer";
 import {useDispatch} from "react-redux";
+
 let maxLength15 = maxLengthCreator(15);
 
 const SignUpForm = ({className, handleSubmit}) => {
@@ -36,14 +36,10 @@ SignUpForm.propTypes = {
 
 const SignUpReduxForm = reduxForm({form: "signup"})(memo(SignUpForm));
 
-const SignUp = ({isAuth}) => {
+const SignUp = () => {
     const classes = useStyles();
 
     const signupDispatch = useDispatch();
-
-    if (isAuth) {
-        return <Redirect to={"/"}/>
-    }
 
     const onSubmit = (formData) => {
         signupDispatch(register(formData));
