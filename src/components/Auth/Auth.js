@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, memo} from "react";
 import {makeStyles} from "@material-ui/styles";
 import SignIn from "./SignIn/SignIn";
 import SignUp from "./SignUp/SignUp";
 import SignInUpSwitcher from "./SignInUpSwitcher/SignInUpSwitcher";
-import {withRouter} from "react-router-dom";
 import {PropTypes} from "prop-types";
+import {compose} from "redux";
+import withAuthRedirect from "../../hoc/withAuthRedirect";
 
 const useStyles = makeStyles({
     root: {
@@ -28,6 +29,7 @@ const Auth = ({location: {pathname}}) => {
         setLocation(pathname);
     }, [pathname]);
 
+
     return (
         <div className={classes.root}>
             {location === "/sign-in" ? <SignIn/> : <SignUp/>}
@@ -40,4 +42,6 @@ Auth.propTypes = {
   location: PropTypes.object.isRequired
 };
 
-export default withRouter(Auth);
+export default compose(
+    withAuthRedirect(true)
+)(memo(Auth));

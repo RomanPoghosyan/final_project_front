@@ -1,4 +1,4 @@
-import React, {memo, useReducer} from "react";
+import React, {memo} from "react";
 import {Button} from "@material-ui/core";
 import HeaderText from "../../common/HeaderText/HeaderText";
 import useStyles from "../../../utils/styles/useHeaderTextStyle";

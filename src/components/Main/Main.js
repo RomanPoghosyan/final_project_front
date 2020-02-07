@@ -14,13 +14,15 @@ const useStyles = makeStyles({
     },
 });
 
-const Main = ({isAuth}) => {
+const Main = (props) => {
     const classes = useStyles();
+    const MainContent = props.isAuth ? Home : Welcome;
+
     return (
         <div className={classes.mainWrapper}>
             <Header/>
             <div className={classes.content}>
-                <Route exact path={"/"} component={isAuth ? Home : Welcome} />
+                <Route exact path={"/"} component={MainContent} />
             </div>
         </div>
     );
@@ -30,4 +32,4 @@ Main.propTypes = {
   isAuth: PropTypes.bool.isRequired
 };
 
-export default memo(withAuthentication(Main));
+export default withAuthentication( memo(Main) );

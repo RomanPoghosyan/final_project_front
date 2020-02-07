@@ -5,7 +5,7 @@ import { PropTypes } from "prop-types";
 const useStyles = makeStyles({
     headerTextContainer: {
         display: "grid",
-        gridTemplateColumns: "1fr 1fr 1fr",
+        gridTemplateColumns: "2fr 3fr 2fr",
         alignItems: "center",
     },
     line: {

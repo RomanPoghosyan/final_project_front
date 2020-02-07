@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import Logo from "../common/Logo/Logo";
 import withAuthentication from "../../hoc/withAuthentication";
 import PropTypes from 'prop-types';
+import {compose} from "redux";
 
 const useStyles = makeStyles({
     header: {
@@ -21,22 +22,14 @@ const useStyles = makeStyles({
     },
 });
 
-const Header = ({isAuth}) => {
+const Header = () => {
     const classes = useStyles();
-    let logoutButton = null;
-    if ( isAuth ) {
-        logoutButton = <Button color={'primary'} variant={"contained"}>Log out</Button>;
-    }
     return (
         <header className={classes.header}>
             <Logo />
             <div className={classes.auth}>
-                {logoutButton ? logoutButton :
-                    <>
-                        <Link to={"/sign-in"}><Button color={'primary'} variant={"contained"}>Sign in</Button></Link>
-                        <Link to={'/sign-up'}><Button color={'primary'} variant={"contained"}>Sign up</Button></Link>
-                    </>
-                }
+                <Link to={"/sign-in"}><Button color={'primary'} variant={"contained"}>Sign in</Button></Link>
+                <Link to={'/sign-up'}><Button color={'primary'} variant={"contained"}>Sign up</Button></Link>
             </div>
         </header>
     );
@@ -46,4 +39,7 @@ Header.propTypes = {
   isAuth: PropTypes.bool.isRequired
 };
 
-export default memo(withAuthentication(Header));
+export default compose(
+    withAuthentication
+)(memo(Header));
+
