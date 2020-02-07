@@ -6,6 +6,8 @@ import Logo from "../common/Logo/Logo";
 import withAuthentication from "../../hoc/withAuthentication";
 import PropTypes from 'prop-types';
 import {compose} from "redux";
+import {connect} from "react-redux";
+import {logout} from "../../redux/auth-reducer";
 
 const useStyles = makeStyles({
     header: {
@@ -22,17 +24,29 @@ const useStyles = makeStyles({
     },
 });
 
-const Header = () => {
+const Header = (props) => {
     const classes = useStyles();
     return (
         <header className={classes.header}>
             <Logo />
             <div className={classes.auth}>
-                <Link to={"/sign-in"}><Button color={'primary'} variant={"contained"}>Sign in</Button></Link>
-                <Link to={'/sign-up'}><Button color={'primary'} variant={"contained"}>Sign up</Button></Link>
+                {!props.isAuth && <>
+                    <Link to={"/sign-in"}><Button color={'primary'} variant={"contained"}>Sign in</Button></Link>
+                    <Link to={'/sign-up'}><Button color={'primary'} variant={"contained"}>Sign up</Button></Link>
+                </>}
+                {props.isAuth && (
+                    <Button color={'primary'} variant={"contained"} onClick={props.logout}>Log out</Button>
+                )}
+
             </div>
         </header>
     );
+};
+
+let mapStateToProps = (state) => {
+    return {
+        isAuth: state.auth.isAuth
+    };
 };
 
 Header.propTypes = {
@@ -40,6 +54,5 @@ Header.propTypes = {
 };
 
 export default compose(
-    withAuthentication
-)(memo(Header));
-
+    connect(mapStateToProps, {logout})
+)(Header);

@@ -1,4 +1,6 @@
 import {authAPI} from "../API/api";
+import {stopSubmit} from "redux-form";
+
 
 const SET_USER_DATA = "SET_USER_DATA";
 
@@ -25,7 +27,6 @@ export const setAuthUserData = (userId, email, username, isAuth) => ({type: SET_
 
 export const getAuthUserData = () => (dispatch) => {
     let token = window.localStorage.getItem('token');
-    console.log(token);
     if(token) {
         authAPI.me(token)
             .then(data => {
@@ -41,19 +42,29 @@ export const login = (email, password) => (dispatch) => {
     authAPI.login(email, password)
         .then(data => {
             if(data.resultCode === 0){
+                window.localStorage.setItem('token', data.body.token);
+                dispatch(getAuthUserData());
+            } else {
+                let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
+                dispatch(stopSubmit("login", {_error: message}));
+            }
+        });
+};
+
+export const signUp = formData => dispatch => {
+    authAPI.signup(formData)
+        .then ( ({data}) => {
+            if (data.resultCode === 0 ){
                 localStorage.setItem('token', data.body.token);
                 dispatch(getAuthUserData());
             }
         });
 };
 
-export const register = formData => dispatch => {
-    authAPI.signup(formData)
-      .then ( ({data}) => {
-          if (data.resultCode === 0 ){
-            localStorage.setItem('token', data.body.token);
-            dispatch(getAuthUserData());
-          }
-      });
+
+export const logout = () => {
+    window.localStorage.removeItem('token');
+    authAPI.logout();
+    return setAuthUserData(null, null, null, false);
 };
 

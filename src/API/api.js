@@ -18,22 +18,6 @@ const instance = axios.create({
 
 
 
-let meResponse = {
-    resultCode: 0,
-    data: {
-        id: 2,
-        email: 'blabla@bla.bla',
-        username: 'bla'
-    }
-};
-
-let loginResponse = {
-    resultCode: 0,
-    data: {
-        id: 2,
-    }
-};
-
 export const authAPI = {
     me(token){
         setToken(token);
@@ -45,6 +29,9 @@ export const authAPI = {
     login(email, password){
         return instance.post(`auth/login`, {username: email, password})
             .then(response => response.data);
+    },
+    logout(){
+        setToken("");
     },
     signup(singUpData) {
         return instance.post ( `auth/signup`, {...singUpData} );
