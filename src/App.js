@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {BrowserRouter as Router, Route, Switch, withRouter} from "react-router-dom";
 import {makeStyles} from "@material-ui/styles";
 import Auth from "./components/Auth/Auth";
 import Main from "./components/Main/Main";
-import {Provider} from "react-redux";
+import {Provider, connect} from "react-redux";
 import store from "./redux/store";
 import {compose} from "redux";
+import {initialize} from "./redux/app-reducer";
 
 const useStyles = makeStyles({
     wrapper: {
@@ -14,8 +15,15 @@ const useStyles = makeStyles({
     }
 });
 
-const App = () => {
+const App = (props) => {
     const classes = useStyles();
+
+    useEffect(() => {
+        props.initialize();
+    }, []);
+
+    if(!props.initialized) return <div>Loading...</div>;
+
     return (
         <div className={classes.wrapper}>
             <Switch>
@@ -27,8 +35,13 @@ const App = () => {
 };
 
 
+let mapStateToProps = (state) => ({
+    initialized: state.app.initialized
+});
+
 const AppWithData = compose(
-    withRouter
+    withRouter,
+    connect(mapStateToProps, {initialize})
 )(App);
 
 const AppContainer = () => {

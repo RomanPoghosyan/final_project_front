@@ -25,10 +25,10 @@ export const authReducer = (state = initialState, action) => {
 
 export const setAuthUserData = (userId, email, username, isAuth) => ({type: SET_USER_DATA, payload: { userId, email, username, isAuth }});
 
-export const getAuthUserData = () => (dispatch) => {
+export const getAuthUserData = () => async (dispatch) => {
     let token = window.localStorage.getItem('token');
     if(token) {
-        authAPI.me(token)
+        return authAPI.me(token)
             .then(data => {
                 if (data.resultCode === 0) {
                     let {id, email, username} = data.body;
