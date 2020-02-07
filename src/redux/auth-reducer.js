@@ -48,7 +48,7 @@ export const login = (email, password) => (dispatch) => {
 };
 
 export const register = formData => dispatch => {
-    authAPI.register(formData)
+    authAPI.signup(formData)
       .then ( ({data}) => {
           if (data.resultCode === 0 ){
             localStorage.setItem('token', data.body.token);

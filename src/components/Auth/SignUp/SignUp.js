@@ -39,14 +39,14 @@ const SignUpReduxForm = reduxForm({form: "signup"})(memo(SignUpForm));
 const SignUp = ({isAuth}) => {
     const classes = useStyles();
 
-    const registerAndSignUp = useDispatch();
+    const signupDispatch = useDispatch();
 
     if (isAuth) {
         return <Redirect to={"/"}/>
     }
 
     const onSubmit = (formData) => {
-        registerAndSignUp(register(formData));
+        signupDispatch(register(formData));
     };
 
     return (

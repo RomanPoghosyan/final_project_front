@@ -35,9 +35,6 @@ let loginResponse = {
 };
 
 export const authAPI = {
-    register (singUpData) {
-        return instance.post ( `auth/signup`, {...singUpData} );
-    },
     me(token){
         setToken(token);
         return instance.get(`auth/me`, {headers: {
@@ -48,6 +45,9 @@ export const authAPI = {
     login(email, password){
         return instance.post(`auth/login`, {username: email, password})
             .then(response => response.data);
+    },
+    signup(singUpData) {
+        return instance.post ( `auth/signup`, {...singUpData} );
     },
 };
 
