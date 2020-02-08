@@ -7,19 +7,15 @@ import {PropTypes} from "prop-types";
 import {compose} from "redux";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     root: {
         display: "grid",
         gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
         gridGap: "1rem",
-        background: "#dedede",
+        background: theme.palette.primary.main,
         height: "100%",
-        color: "#3f3f4b",
-        "& button": {
-            backgroundColor: "#3f3f4b"
-        }
     },
-});
+}));
 
 const Auth = ({location: {pathname}}) => {
     const classes = useStyles();

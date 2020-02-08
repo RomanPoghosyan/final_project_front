@@ -17,7 +17,7 @@ const SignInForm = (props) => {
             <Field label={"Login"} id="standard-basic" name={"login"} component={renderTextField} validate={[required]} />
             <Field label={"Password"} id="standard-password" name={"password"} component={renderTextField} validate={[required, maxLength15]} />
             <FormHelperText error={!!props.error}>{props.error}</FormHelperText>
-            <Button type={"submit"} variant={"contained"} color={"primary"}>Sign In</Button>
+            <Button type={"submit"} variant={"contained"} color={"secondary"}>Sign In</Button>
         </form>
     );
 };

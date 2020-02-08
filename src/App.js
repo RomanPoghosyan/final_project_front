@@ -7,12 +7,35 @@ import {Provider, connect} from "react-redux";
 import store from "./redux/store";
 import {compose} from "redux";
 import {initialize} from "./redux/app-reducer";
-import PropTypes from "prop-types";
+import {createMuiTheme} from '@material-ui/core/styles';
+import {ThemeProvider} from "@material-ui/styles";
 
 const useStyles = makeStyles({
     wrapper: {
         display: "grid",
         height: "100%"
+    }
+});
+
+const theme = createMuiTheme({
+    palette: {
+        typography: {
+            color: '#fff',
+        },
+        primary: {
+            main: "#dedede",
+        },
+        secondary: {
+            main: "#3f3f4b",
+            dark: "#3f51b5",
+        },
+        text: {
+            color: '#fff',
+        },
+        textColor: '#fff',
+        root: {
+            textDecoration: 'none',
+        },
     }
 });
 
@@ -52,13 +75,14 @@ const AppWithData = compose(
 const AppContainer = () => {
     return (
         <Router>
-            <Provider store={store}>
-                <AppWithData />
-            </Provider>
+            <ThemeProvider theme={theme}>
+                <Provider store={store}>
+                    <AppWithData/>
+                </Provider>
+            </ThemeProvider>
         </Router>
     );
 };
-
 
 
 export default AppContainer;

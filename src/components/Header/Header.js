@@ -8,7 +8,7 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import {logout} from "../../redux/auth-reducer";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     header: {
         display: "grid",
         gridTemplateColumns: "50px minmax(200px, 1fr)",
@@ -21,7 +21,10 @@ const useStyles = makeStyles({
         alignItems: 'center',
         justifyItems: 'baseline',
     },
-});
+    link: {
+      textDecoration: "none"
+    },
+}));
 
 const Header = (props) => {
     const classes = useStyles();
@@ -30,11 +33,11 @@ const Header = (props) => {
             <Logo />
             <div className={classes.auth}>
                 {!props.isAuth && <>
-                    <Link to={"/sign-in"}><Button color={'primary'} variant={"contained"}>Sign in</Button></Link>
-                    <Link to={'/sign-up'}><Button color={'primary'} variant={"contained"}>Sign up</Button></Link>
+                    <Link className={classes.link} to={"/sign-in"}><Button variant={"contained"} color={"primary"} >Sign in</Button></Link>
+                    <Link className={classes.link} to={'/sign-up'}><Button variant={"contained"} color={"primary"}>Sign up</Button></Link>
                 </>}
                 {props.isAuth && (
-                    <Button color={'primary'} variant={"contained"} onClick={props.logout}>Log out</Button>
+                    <Button color={"secondary"} variant={"contained"} onClick={props.logout}>Log out</Button>
                 )}
 
             </div>
