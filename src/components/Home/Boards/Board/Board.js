@@ -19,13 +19,13 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-function Board({title}) {
+function Board({project}) {
     const classes = useStyles();
     return (
         <Card className={classes.board}>
             <CardActionArea>
                 <CardContent>
-                    <Typography variant={"h5"} className={classes.title}>{title}</Typography>
+                    <Typography variant={"h5"} className={classes.title}>{project.title}</Typography>
                 </CardContent>
             </CardActionArea>
             <CardActions className={classes.icons}>
@@ -44,7 +44,7 @@ function Board({title}) {
 }
 
 Board.propTypes = {
-    title: PropTypes.string.isRequired
+    project: PropTypes.object.isRequired
 };
 
 export default memo(Board);

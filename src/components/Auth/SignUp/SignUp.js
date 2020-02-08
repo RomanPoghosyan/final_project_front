@@ -51,8 +51,5 @@ const SignUp = () => {
     );
 };
 
-SignUp.propTypes = {
-    isAuth: PropTypes.bool.isRequired
-};
 
 export default withAuthentication(SignUp);

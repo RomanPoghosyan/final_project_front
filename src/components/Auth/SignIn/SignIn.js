@@ -8,6 +8,7 @@ import {renderTextField} from "../../common/FormControlls/FormControlls";
 import {connect} from "react-redux";
 import {login} from "../../../redux/auth-reducer";
 import FormHelperText from "@material-ui/core/FormHelperText";
+import PropTypes from "prop-types";
 
 let maxLength15 = maxLengthCreator(15);
 
@@ -20,6 +21,12 @@ const SignInForm = (props) => {
             <Button type={"submit"} variant={"contained"} color={"secondary"}>Sign In</Button>
         </form>
     );
+};
+
+SignInForm.propTypes = {
+    className: PropTypes.string.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    error: PropTypes.string.isRequired,
 };
 
 const SignInReduxForm = reduxForm({form: "login"})(SignInForm);
@@ -37,6 +44,10 @@ const SignIn = (props) => {
             <SignInReduxForm onSubmit={onSubmit} className={classes.form}/>
         </div>
     );
+};
+
+SignIn.propTypes = {
+    login: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
