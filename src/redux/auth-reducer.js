@@ -29,7 +29,7 @@ export const getAuthUserData = () => async (dispatch) => {
     let token = window.localStorage.getItem('token');
     if(token) {
         return authAPI.me(token)
-            .then(data => {
+            .then(({data}) => {
                 if (data.resultCode === 0) {
                     let {id, email, username} = data.body;
                     dispatch(setAuthUserData(id, email, username, true));
@@ -40,7 +40,7 @@ export const getAuthUserData = () => async (dispatch) => {
 
 export const login = (email, password) => (dispatch) => {
     authAPI.login(email, password)
-        .then(data => {
+        .then(({data}) => {
             if(data.resultCode === 0){
                 window.localStorage.setItem('token', data.body.token);
                 dispatch(getAuthUserData());

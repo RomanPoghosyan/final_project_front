@@ -24,11 +24,9 @@ export const authAPI = {
         return instance.get(`auth/me`, {headers: {
                 "Authorization": getToken(),
             }})
-            .then(response => response.data);
     },
     login(email, password){
         return instance.post(`auth/login`, {username: email, password})
-            .then(response => response.data);
     },
     logout(){
         setToken("");
