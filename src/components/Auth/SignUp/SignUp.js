@@ -21,7 +21,7 @@ const SignUpForm = ({className, handleSubmit}) => {
             <Field label={"Email"} name={"email"} component={renderTextField} validate={[required, emailChecker]}/>
             <Field label={"Password"} id="standard-password-input" name={"password"} component={renderTextField}
                    validate={[required, maxLength15]}/>
-            <Button type={"submit"} variant={"contained"} color={"primary"}>Sign Up</Button>
+            <Button type={"submit"} variant={"contained"} color={"secondary"}>Sign Up</Button>
         </form>
     );
 };
