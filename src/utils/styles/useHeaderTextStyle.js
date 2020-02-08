@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     form: {
         display: "grid",
         alignContent: "start",
-        gridRowGap: "15px",
+        gridRowGap: "7px",
     },
 });
 

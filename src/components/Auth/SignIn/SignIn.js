@@ -7,7 +7,7 @@ import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import {renderTextField} from "../../common/FormControlls/FormControlls";
 import {connect} from "react-redux";
 import {login} from "../../../redux/auth-reducer";
-import {Redirect} from "react-router-dom";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
 let maxLength15 = maxLengthCreator(15);
 
@@ -16,6 +16,7 @@ const SignInForm = (props) => {
         <form onSubmit={props.handleSubmit} className={props.className}>
             <Field label={"Login"} id="standard-basic" name={"login"} component={renderTextField} validate={[required]} />
             <Field label={"Password"} id="standard-password" name={"password"} component={renderTextField} validate={[required, maxLength15]} />
+            <FormHelperText error={!!props.error}>{props.error}</FormHelperText>
             <Button type={"submit"} variant={"contained"} color={"primary"}>Sign In</Button>
         </form>
     );
@@ -27,13 +28,8 @@ const SignIn = (props) => {
     const classes = useStyles();
 
     const onSubmit = (formData) => {
-        console.log(formData);
         props.login(formData.login, formData.password);
     };
-
-    if(props.isAuth){
-        return <Redirect to={"/"} />
-    }
 
     return (
         <div className={classes.container}>

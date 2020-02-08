@@ -4,8 +4,9 @@ import {Redirect} from "react-router-dom";
 
 const withAuthRedirect = (allowUnAuthorized) => (Component) => (props) => {
     const isAuth = useSelector(state => state.auth.isAuth);
-    if(!isAuth && !allowUnAuthorized) return <Redirect to={"/"} />;
-    return <Component {...props} />;
+    if((allowUnAuthorized && !isAuth) || (!allowUnAuthorized && isAuth)) return <Component {...props} />;
+    return <Redirect to={"/"} />;
+
 };
 
 export default withAuthRedirect;
