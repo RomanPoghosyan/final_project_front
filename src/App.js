@@ -7,6 +7,7 @@ import {Provider, connect} from "react-redux";
 import store from "./redux/store";
 import {compose} from "redux";
 import {initialize} from "./redux/app-reducer";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles({
     wrapper: {
@@ -34,6 +35,10 @@ const App = (props) => {
     );
 };
 
+App.propTypes = {
+    initialized: PropTypes.bool.isRequired,
+    initialize: PropTypes.func.isRequired,
+};
 
 let mapStateToProps = (state) => ({
     initialized: state.app.initialized
