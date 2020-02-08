@@ -36,3 +36,11 @@ export const authAPI = {
     },
 };
 
+export const projectAPI = {
+    getAllByUserId(userId){
+        return instance.get(`projects/all/${userId}`, {headers: {
+                "Authorization": getToken(),
+            }});
+    }
+};
+
