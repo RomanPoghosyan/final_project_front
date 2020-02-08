@@ -27,13 +27,14 @@ export const setAuthUserData = (userId, email, username, isAuth) => ({type: SET_
 
 export const getAuthUserData = () => async (dispatch) => {
     let token = window.localStorage.getItem('token');
-    if(token) {
+    if (token) {
         return authAPI.me(token)
             .then(({data}) => {
                 if (data.resultCode === 0) {
                     let {id, email, username} = data.body;
                     dispatch(setAuthUserData(id, email, username, true));
                 }
+            }).catch((e) => {
             });
     }
 };
@@ -44,10 +45,11 @@ export const login = (email, password) => (dispatch) => {
             if(data.resultCode === 0){
                 window.localStorage.setItem('token', data.body.token);
                 dispatch(getAuthUserData());
-            } else {
-                let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
-                dispatch(stopSubmit("login", {_error: message}));
             }
+        })
+        .catch(({response: {data}}) => {
+            let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
+            dispatch(stopSubmit("login", {_error: message}));
         });
 };
 
