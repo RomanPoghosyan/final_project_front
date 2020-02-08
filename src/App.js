@@ -7,11 +7,25 @@ import {Provider, connect} from "react-redux";
 import store from "./redux/store";
 import {compose} from "redux";
 import {initialize} from "./redux/app-reducer";
+import {createMuiTheme} from '@material-ui/core/styles';
+import {ThemeProvider} from "@material-ui/styles";
 
 const useStyles = makeStyles({
     wrapper: {
         display: "grid",
         height: "100%"
+    }
+});
+
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: "#3f51b5",
+        },
+        secondary: {
+            main: "#dedede",
+            dark: "#3f3f4b",
+        },
     }
 });
 
@@ -22,13 +36,13 @@ const App = (props) => {
         props.initialize();
     }, []);
 
-    if(!props.initialized) return <div>Loading...</div>;
+    if (!props.initialized) return <div>Loading...</div>;
 
     return (
         <div className={classes.wrapper}>
             <Switch>
-                <Route path={"/(sign-in|sign-up)"} component={Auth} />
-                <Route path={"/"} component={Main} />
+                <Route path={"/(sign-in|sign-up)"} component={Auth}/>
+                <Route path={"/"} component={Main}/>
             </Switch>
         </div>
     );
@@ -47,13 +61,14 @@ const AppWithData = compose(
 const AppContainer = () => {
     return (
         <Router>
-            <Provider store={store}>
-                <AppWithData />
-            </Provider>
+            <ThemeProvider theme={theme}>
+                <Provider store={store}>
+                    <AppWithData/>
+                </Provider>
+            </ThemeProvider>
         </Router>
     );
 };
-
 
 
 export default AppContainer;

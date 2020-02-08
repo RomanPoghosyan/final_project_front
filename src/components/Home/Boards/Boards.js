@@ -33,7 +33,7 @@ function Boards() {
           }
           <Card className={classes.board}>
               <CardContent>
-                  <Fab color="primary" aria-label="add">
+                  <Fab color="secondary" aria-label="add">
                       <AddIcon />
                   </Fab>
               </CardContent>

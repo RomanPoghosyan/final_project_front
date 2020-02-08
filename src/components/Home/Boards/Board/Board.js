@@ -29,13 +29,13 @@ function Board({title}) {
                 </CardContent>
             </CardActionArea>
             <CardActions className={classes.icons}>
-                <Fab size={"small"} color={"primary"}>
+                <Fab size={"small"} color={"secondary"}>
                     K
                 </Fab>
-                <Fab size={"small"} color={"primary"}>
+                <Fab size={"small"} color={"secondary"}>
                     RP
                 </Fab>
-                <Fab size={"small"} color={"primary"}>
+                <Fab size={"small"} color={"secondary"}>
                     TY
                 </Fab>
             </CardActions>

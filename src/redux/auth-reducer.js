@@ -8,7 +8,7 @@ const initialState = {
     userId: null,
     email: null,
     username: null,
-    isAuth: true,
+    isAuth: false,
 };
 
 export const authReducer = (state = initialState, action) => {
