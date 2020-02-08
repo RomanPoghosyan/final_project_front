@@ -12,11 +12,8 @@ const useStyles = makeStyles(theme => ({
         display: "grid",
         gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
         gridGap: "1rem",
-        background: theme.palette.primary,
+        background: theme.palette.primary.main,
         height: "100%",
-        "& button": {
-            backgroundColor: theme.palette.secondary.main,
-        }
     },
 }));
 

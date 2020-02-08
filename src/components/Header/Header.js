@@ -21,9 +21,9 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         justifyItems: 'baseline',
     },
-    sign: {
-        color: theme.palette.secondary.dark
-    }
+    link: {
+      textDecoration: "none"
+    },
 }));
 
 const Header = (props) => {
@@ -33,11 +33,11 @@ const Header = (props) => {
             <Logo />
             <div className={classes.auth}>
                 {!props.isAuth && <>
-                    <Link to={"/sign-in"}><Button variant={"contained"} className={classes.sign}>Sign in</Button></Link>
-                    <Link to={'/sign-up'}><Button variant={"contained"} className={classes.sign}>Sign up</Button></Link>
+                    <Link className={classes.link} to={"/sign-in"}><Button variant={"contained"} color={"primary"} >Sign in</Button></Link>
+                    <Link className={classes.link} to={'/sign-up'}><Button variant={"contained"} color={"primary"}>Sign up</Button></Link>
                 </>}
                 {props.isAuth && (
-                    <Button className={classes.sign} variant={"contained"} onClick={props.logout}>Log out</Button>
+                    <Button color={"secondary"} variant={"contained"} onClick={props.logout}>Log out</Button>
                 )}
 
             </div>
