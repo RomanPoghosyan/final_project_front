@@ -24,7 +24,7 @@ const AddBoard = (props) => {
 
     const onSubmit = (formData) => {
         props.addProject(formData);
-        // setOpen(false);
+        setOpen(false);
     };
 
     return (

@@ -9,6 +9,8 @@ import {compose} from "redux";
 import {initialize} from "./redux/app-reducer";
 import {createMuiTheme} from '@material-ui/core/styles';
 import {ThemeProvider} from "@material-ui/styles";
+import PropTypes from "prop-types";
+
 
 const useStyles = makeStyles({
     wrapper: {

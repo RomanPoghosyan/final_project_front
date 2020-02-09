@@ -29,7 +29,7 @@ const SignInUpSwitcher = ({location}) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-           <HeaderText element={logoElement}/>
+            <HeaderText element={logoElement}/>
             <div className={classes.link}>
                 <Link to={inSignIn ? "/sign-up" : "/sign-in"}>{button}</Link>
             </div>
