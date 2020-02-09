@@ -60,6 +60,10 @@ export const signup = formData => dispatch => {
                 localStorage.setItem('token', data.body.token);
                 dispatch(getAuthUserData());
             }
+        })
+        .catch(({response: {data}}) => {
+            let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
+            dispatch(stopSubmit("signup", {_error: message}));
         });
 };
 
