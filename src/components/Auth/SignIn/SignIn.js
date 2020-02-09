@@ -26,7 +26,7 @@ const SignInForm = (props) => {
 SignInForm.propTypes = {
     className: PropTypes.string.isRequired,
     handleSubmit: PropTypes.func.isRequired,
-    error: PropTypes.string.isRequired,
+    error: PropTypes.string,
 };
 
 const SignInReduxForm = reduxForm({form: "login"})(SignInForm);
