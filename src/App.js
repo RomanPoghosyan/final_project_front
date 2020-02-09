@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {BrowserRouter as Router, Route, Switch, withRouter} from "react-router-dom";
 import {makeStyles} from "@material-ui/styles";
 import Auth from "./components/Auth/Auth";
@@ -41,10 +41,10 @@ const theme = createMuiTheme({
 
 const App = (props) => {
     const classes = useStyles();
-
+    const memoizedCallback  = useCallback(() => props.initialize(), [props]);
     useEffect(() => {
-        props.initialize();
-    }, []);
+        memoizedCallback();
+    }, [memoizedCallback]);
 
     if(!props.initialized) return <div>Loading...</div>;
 

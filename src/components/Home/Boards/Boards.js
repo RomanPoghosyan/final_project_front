@@ -1,12 +1,10 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {connect} from "react-redux";
 import Board from "./Board/Board";
-import {Fab, List, makeStyles} from "@material-ui/core";
-import {Add as AddIcon} from '@material-ui/icons';
-import {getProjects} from "../../../redux/boards-reducer";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
+import {List, makeStyles} from "@material-ui/core";
+import {addProject, getProjects} from "../../../redux/boards-reducer";
 import {PropTypes} from "prop-types";
+import AddBoard from "./Board/AddBoard/AddBoard";
 
 
 const useStyles = makeStyles ( theme => ({
@@ -29,24 +27,19 @@ const useStyles = makeStyles ( theme => ({
 function Boards(props) {
     const classes = useStyles();
 
-    useEffect(() => {
-        props.getProjects(props.userId);
-    }, [props.userId]);
+    // useEffect(() => {
+    //     props.getProjects(props.userId);
+    // }, [props.userId]);
+
+
+    const boards = props.projects.map ( (p) => {
+        return <Board key={p.id} project={p}/>
+    });
 
     return (
         <List className={classes.boards}>
-            {
-                props.projects.map ( (p) => {
-                    return <Board key={p.id} project={p}/>
-                })
-            }
-            <Card className={classes.board}>
-                <CardContent>
-                    <Fab color="secondary" aria-label="add">
-                        <AddIcon />
-                    </Fab>
-                </CardContent>
-            </Card>
+            {boards}
+            <AddBoard/>
         </List>
     );
 }
@@ -62,7 +55,7 @@ let mapStateToProps = (state) => ({
     userId: state.auth.userId,
 });
 
-export default connect(mapStateToProps, {getProjects})(Boards);
+export default connect(mapStateToProps, {getProjects, addProject})(Boards);
 
 
 
