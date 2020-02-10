@@ -68,7 +68,7 @@ const AddBoard = (props) => {
 };
 
 AddBoard.propTypes = {
-    addBoard: PropTypes.func.required,
+    addBoard: PropTypes.func.isRequired,
 };
 
 
