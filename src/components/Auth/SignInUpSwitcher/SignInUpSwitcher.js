@@ -24,12 +24,12 @@ const useStyles = makeStyles(() => ({
 
 const SignInUpSwitcher = ({location}) => {
     const inSignIn = location === '/sign-in';
-    const button = <Button children={inSignIn ? 'To Sign Up' : 'To Sign In'} variant={"contained"} color={"primary"}/>;
+    const button = <Button children={inSignIn ? 'To Sign Up' : 'To Sign In'} variant={"contained"} color={"secondary"}/>;
     const logoElement =  <Link to={'/'}><Logo /></Link>;
     const classes = useStyles();
     return (
         <div className={classes.root}>
-           <HeaderText element={logoElement}/>
+            <HeaderText element={logoElement}/>
             <div className={classes.link}>
                 <Link to={inSignIn ? "/sign-up" : "/sign-in"}>{button}</Link>
             </div>

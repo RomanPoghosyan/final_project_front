@@ -17,30 +17,43 @@ const instance = axios.create({
 });
 
 
-
 export const authAPI = {
-    me(token){
+    me(token) {
         setToken(token);
-        return instance.get(`auth/me`, {headers: {
+        return instance.get(`auth/me`, {
+            headers: {
                 "Authorization": getToken(),
-            }})
+            }
+        })
     },
-    login(email, password){
+    login(email, password) {
         return instance.post(`auth/login`, {username: email, password});
     },
-    logout(){
+    logout() {
         setToken("");
     },
     signup(singUpData) {
-        return instance.post ( `auth/signup`, {...singUpData} );
+        return instance.post(`auth/signup`, {...singUpData});
     },
 };
 
 export const projectAPI = {
-    getAllByUserId(userId){
-        return instance.get(`projects/all/${userId}`, {headers: {
+    getAllByUserId(userId) {
+        return instance.get(`projects/all/${userId}`, {
+            headers: {
                 "Authorization": getToken(),
-            }});
+            }
+        });
+    },
+    addProject(project) {
+        return instance.post(`projects`, {
+                ...project
+            }, {
+                headers: {
+                    "Authorization": getToken(),
+                }
+            }
+        );
     }
 };
 

@@ -1,8 +1,7 @@
 import React, {memo} from 'react';
-import {Card, Typography, makeStyles, CardContent, CardActionArea} from '@material-ui/core';
+import {Card, CardActionArea, CardContent, makeStyles, Typography} from '@material-ui/core';
 import {PropTypes} from "prop-types";
 import CardActions from "@material-ui/core/CardActions";
-import Button from "@material-ui/core/Button";
 import Fab from "@material-ui/core/Fab";
 
 const useStyles = makeStyles(() => ({
@@ -25,20 +24,9 @@ function Board({project}) {
         <Card className={classes.board}>
             <CardActionArea>
                 <CardContent>
-                    <Typography variant={"h5"} className={classes.title}>{project.title}</Typography>
+                    <Typography variant={"h5"} className={classes.title}>{project.name}</Typography>
                 </CardContent>
             </CardActionArea>
-            <CardActions className={classes.icons}>
-                <Fab size={"small"} color={"secondary"}>
-                    K
-                </Fab>
-                <Fab size={"small"} color={"secondary"}>
-                    RP
-                </Fab>
-                <Fab size={"small"} color={"secondary"}>
-                    TY
-                </Fab>
-            </CardActions>
         </Card>
     );
 }
