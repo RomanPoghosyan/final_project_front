@@ -16,17 +16,18 @@ const AddBoardForm = (props) => {
                 <FormHelperText error={!!props.error}>{props.error}</FormHelperText>
             </DialogContent>
             <DialogActions>
-                <Button onClick={props.handleClose} color="primary">Cancel</Button>
-                <Button type={"submit"} color="primary">Add</Button>
+                <Button onClick={props.handleClose} color={"secondary"} variant={"contained"}>Cancel</Button>
+                <Button type={"submit"} color={"secondary"} variant={"contained"}>Add</Button>
             </DialogActions>
         </form>
     );
 };
 
-AddBoardForm.propType = {
+AddBoardForm.propTypes = {
     handleSubmit: PropTypes.func.required,
     handleClose: PropTypes.func.required,
     className: PropTypes.string.required,
-}
+    error: PropTypes.string,
+};
 
 export default reduxForm({form: "addBoard"})(AddBoardForm);

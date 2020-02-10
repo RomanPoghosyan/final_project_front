@@ -4,11 +4,7 @@ import {stopSubmit} from "redux-form";
 const SET_BOARDS = "SET_BOARDS";
 const ADD_BOARD = "ADD_BOARD";
 
-const initialState = [
-    // {id: 1, name: "Workfront"},
-    // {id: 2, name: "Some Project"},
-    // {id: 3, name: "Tesla"},
-];
+const initialState = [];
 
 export const boardsReducer = (state = initialState, action) => {
     switch (action.type) {
