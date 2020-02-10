@@ -1,50 +1,44 @@
-import {projectAPI} from "../API/api";
+import {boardAPI} from "../API/api";
 import {stopSubmit} from "redux-form";
 
-const SET_PROJECTS = "SET_PROJECTS";
-const ADD_PROJECT = "ADD_PROJECT";
+const SET_BOARDS = "SET_BOARDS";
+const ADD_BOARD = "ADD_BOARD";
 
-const initialState = {
-    projects: [
-        {id: 1, name: "Workfront"},
-        {id: 2, name: "Some Project"},
-        {id: 3, name: "Tesla"},
-    ],
-};
+const initialState = [];
 
 export const boardsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET_PROJECTS:
-            return {
+        case SET_BOARDS:
+            return [
                 ...state,
-                // projects: [...action.payload]
-            };
-        case ADD_PROJECT:
-            return {
+                ...action.payload
+            ];
+        case ADD_BOARD:
+            return [
                 ...state,
-                projects: [...state.projects, action.payload]
-            };
+                action.payload
+            ];
         default:
             return state;
     }
 };
 
-export const setProjects = (projects) => ({type: SET_PROJECTS, payload: projects});
+export const setBoards = (boards) => ({type: SET_BOARDS, payload: boards});
 
-export const getProjects = (userId) => (dispatch) => {
-    projectAPI.getAllByUserId(userId)
+export const getBoards = (userId) => (dispatch) => {
+    boardAPI.getAllByUserId(userId)
         .then(({data}) => {
-            dispatch(setProjects(data.body));
+            dispatch(setBoards(data.body));
         })
 };
 
-export const addProjectSuccess = (project) => ({type: ADD_PROJECT, payload: project});
+export const addBoardSuccess = (board) => ({type: ADD_BOARD, payload: board});
 
-export const addProject = (project) => (dispatch) => {
-    projectAPI.addProject(project)
+export const addBoard = (project) => (dispatch) => {
+    boardAPI.addBoard(project)
         .then(({data}) => {
             if (data.resultCode === 0) {
-                dispatch(addProjectSuccess(data.body));
+                dispatch(addBoardSuccess(data.body));
             }
         })
         .catch(({response: {data}}) => {

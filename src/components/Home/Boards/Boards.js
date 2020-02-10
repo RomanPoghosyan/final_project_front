@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from "react-redux";
 import Board from "./Board/Board";
 import {List, makeStyles} from "@material-ui/core";
-import {addProject, getProjects} from "../../../redux/boards-reducer";
+import {getBoards} from "../../../redux/boards-reducer";
 import {PropTypes} from "prop-types";
 import AddBoard from "./Board/AddBoard/AddBoard";
 
@@ -13,6 +13,9 @@ const useStyles = makeStyles ( theme => ({
         gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
         gridTemplateRows: "repeat(auto-fill, minmax(110px, 1fr))",
         gridGap: '10px',
+        "& > *": {
+            cursor: "pointer"
+        }
     },
     board : {
         display: "grid",
@@ -27,13 +30,13 @@ const useStyles = makeStyles ( theme => ({
 function Boards(props) {
     const classes = useStyles();
 
-    // useEffect(() => {
-    //     props.getProjects(props.userId);
-    // }, [props.userId]);
+    useEffect(() => {
+        if(props.userId) props.getBoards(props.userId);
+    }, [props.userId]);
 
 
-    const boards = props.projects.map ( (p) => {
-        return <Board key={p.id} project={p}/>
+    const boards = props.boards.map ( (b) => {
+        return <Board key={b.id} board={b}/>
     });
 
     return (
@@ -45,17 +48,17 @@ function Boards(props) {
 }
 
 Boards.prototype = {
-    getProjects: PropTypes.func,
-    projects: PropTypes.array,
+    getBoards: PropTypes.func,
+    boards: PropTypes.array,
     userId: PropTypes.number,
 };
 
 let mapStateToProps = (state) => ({
-    projects: state.home.boards.projects,
+    boards: state.home.boards,
     userId: state.auth.userId,
 });
 
-export default connect(mapStateToProps, {getProjects, addProject})(Boards);
+export default connect(mapStateToProps, {getBoards})(Boards);
 
 
 

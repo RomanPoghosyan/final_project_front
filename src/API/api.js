@@ -37,7 +37,7 @@ export const authAPI = {
     },
 };
 
-export const projectAPI = {
+export const boardAPI = {
     getAllByUserId(userId) {
         return instance.get(`projects/all/${userId}`, {
             headers: {
@@ -45,9 +45,9 @@ export const projectAPI = {
             }
         });
     },
-    addProject(project) {
+    addBoard(board) {
         return instance.post(`projects`, {
-                ...project
+                ...board
             }, {
                 headers: {
                     "Authorization": getToken(),

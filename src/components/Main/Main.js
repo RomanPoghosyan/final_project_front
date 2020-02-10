@@ -23,6 +23,7 @@ const Main = (props) => {
             <Header/>
             <div className={classes.content}>
                 <Route exact path={"/"} component={MainContent} />
+                <Route path={"/board/{projectId}"} component={MainContent} />
             </div>
         </div>
     );

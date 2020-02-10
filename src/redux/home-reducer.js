@@ -3,5 +3,5 @@ import {boardsReducer} from "./boards-reducer";
 
 
 export default combineReducers({
-    boards: boardsReducer
+    boards: boardsReducer,
 });
