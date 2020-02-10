@@ -24,9 +24,9 @@ const AddBoardForm = (props) => {
 };
 
 AddBoardForm.propTypes = {
-    handleSubmit: PropTypes.func.required,
-    handleClose: PropTypes.func.required,
-    className: PropTypes.string.required,
+    handleSubmit: PropTypes.func.isRequired,
+    handleClose: PropTypes.func.isRequired,
+    className: PropTypes.string.isRequired,
     error: PropTypes.string,
 };
 
