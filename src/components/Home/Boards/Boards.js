@@ -47,7 +47,7 @@ function Boards(props) {
     );
 }
 
-Boards.prototype = {
+Boards.propTypes = {
     getBoards: PropTypes.func,
     boards: PropTypes.array,
     userId: PropTypes.number,
