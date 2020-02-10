@@ -16,7 +16,7 @@ const AddBoardForm = (props) => {
                 <FormHelperText error={!!props.error}>{props.error}</FormHelperText>
             </DialogContent>
             <DialogActions>
-                <Button onClick={props.handleClose} color={"secondary"} variant={"contained"}>Cancel</Button>
+                <Button onClick={props.handleClose} type={"button"} color={"secondary"} variant={"contained"}>Cancel</Button>
                 <Button type={"submit"} color={"secondary"} variant={"contained"}>Add</Button>
             </DialogActions>
         </form>

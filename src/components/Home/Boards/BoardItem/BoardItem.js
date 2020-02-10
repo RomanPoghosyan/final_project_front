@@ -22,7 +22,7 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-function Board({board}) {
+function BoardItem({board}) {
     const classes = useStyles();
     return (
         <Card className={classes.board}>
@@ -37,8 +37,8 @@ function Board({board}) {
     );
 }
 
-Board.propTypes = {
+BoardItem.propTypes = {
     board: PropTypes.object.isRequired
 };
 
-export default memo(Board);
+export default memo(BoardItem);

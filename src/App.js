@@ -54,7 +54,7 @@ const App = (props) => {
         <div className={classes.wrapper}>
             <Switch>
                 <Route path={"/(sign-in|sign-up)"} component={Auth} />
-                <Route path={"/"} component={Main} />
+                <Route component={Main} />
             </Switch>
         </div>
     );
