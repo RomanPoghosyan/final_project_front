@@ -21,7 +21,7 @@ test('new state', () => {
         email: 'user@user.net',
         username: 'user',
         isAuth: true,
-    }
+    };
     let action = setAuthUserData(7, 'user@user.net', 'user', true);
     const initialState = {
         userId: null,
