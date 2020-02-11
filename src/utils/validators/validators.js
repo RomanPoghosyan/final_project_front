@@ -1,6 +1,6 @@
 export const required = (input) => {
-    if (input) return undefined;
-    return "Field is required";
+    if (!input)
+        return "Field is required";
 };
 
 export const onlyCharacters = input => {
@@ -19,6 +19,4 @@ export const emailChecker = input => {
 
 export const maxLengthCreator = (maxLength) => (input) => {
     if(input.length > maxLength) return `Max length is ${maxLength}`;
-
-    return undefined;
 };
