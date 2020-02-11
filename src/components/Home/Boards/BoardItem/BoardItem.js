@@ -1,8 +1,6 @@
 import React, {memo} from 'react';
 import {Card, CardActionArea, CardContent, makeStyles, Typography} from '@material-ui/core';
 import {PropTypes} from "prop-types";
-import CardActions from "@material-ui/core/CardActions";
-import Fab from "@material-ui/core/Fab";
 import {Link} from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
@@ -22,7 +20,7 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-function Board({board}) {
+function BoardItem({board}) {
     const classes = useStyles();
     return (
         <Card className={classes.board}>
@@ -37,8 +35,8 @@ function Board({board}) {
     );
 }
 
-Board.propTypes = {
+BoardItem.propTypes = {
     board: PropTypes.object.isRequired
 };
 
-export default memo(Board);
+export default memo(BoardItem);

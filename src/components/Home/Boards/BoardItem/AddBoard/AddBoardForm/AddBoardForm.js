@@ -10,13 +10,13 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 
 const AddBoardForm = (props) => {
     return (
-        <form onSubmit={props.handleSubmit} className={props.className}>
+        <form onSubmit={props.handleSubmit} >
             <DialogContent>
                 <Field label={"Project Name"} id="standard-basic" name={"name"} component={renderTextField} margin="dense" variant="outlined" validate={[required]} />
                 <FormHelperText error={!!props.error}>{props.error}</FormHelperText>
             </DialogContent>
             <DialogActions>
-                <Button onClick={props.handleClose} color={"secondary"} variant={"contained"}>Cancel</Button>
+                <Button onClick={props.handleClose} type={"button"} color={"secondary"} variant={"contained"}>Cancel</Button>
                 <Button type={"submit"} color={"secondary"} variant={"contained"}>Add</Button>
             </DialogActions>
         </form>
@@ -24,9 +24,8 @@ const AddBoardForm = (props) => {
 };
 
 AddBoardForm.propTypes = {
-    handleSubmit: PropTypes.func.required,
-    handleClose: PropTypes.func.required,
-    className: PropTypes.string.required,
+    handleSubmit: PropTypes.func.isRequired,
+    handleClose: PropTypes.func.isRequired,
     error: PropTypes.string,
 };
 

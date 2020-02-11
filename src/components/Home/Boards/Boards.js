@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import {connect} from "react-redux";
-import Board from "./Board/Board";
+import BoardItem from "./BoardItem/BoardItem";
 import {List, makeStyles} from "@material-ui/core";
 import {getBoards} from "../../../redux/boards-reducer";
 import {PropTypes} from "prop-types";
-import AddBoard from "./Board/AddBoard/AddBoard";
+import AddBoard from "./BoardItem/AddBoard/AddBoard";
 
 
 const useStyles = makeStyles ( theme => ({
@@ -36,7 +36,7 @@ function Boards(props) {
 
 
     const boards = props.boards.map ( (b) => {
-        return <Board key={b.id} board={b}/>
+        return <BoardItem key={b.id} board={b}/>
     });
 
     return (
@@ -47,7 +47,7 @@ function Boards(props) {
     );
 }
 
-Boards.prototype = {
+Boards.propTypes = {
     getBoards: PropTypes.func,
     boards: PropTypes.array,
     userId: PropTypes.number,
