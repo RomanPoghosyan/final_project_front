@@ -1,6 +1,8 @@
 import React, {memo} from 'react';
 import Boards from "./Boards/Boards";
 import {makeStyles} from "@material-ui/styles";
+import {useDispatch} from "react-redux";
+import {addTask, addTaskAction} from "../../redux/tasks-reducer";
 
 const useStyles = makeStyles ( (theme) => ({
         home: {
@@ -13,11 +15,16 @@ const useStyles = makeStyles ( (theme) => ({
 
 function Home() {
     const classes = useStyles();
+    const dispatch = useDispatch();
     return (
         <div className={classes.home} >
             <div />
             <Boards />
             <div />
+            <button onClick={() =>  {
+                console.log("does");
+                dispatch(addTask({ title: "Hello world", description: "wORLD hEllo", "project_id": "1", "assignee_id": "1", "assignor":"1" } ))
+            }}>Click please</button>
         </div>
     );
 }

@@ -1,6 +1,7 @@
 import * as axios from "axios";
 
 let TOKEN = "";
+const AUTHORIZATION = "Authorization";
 
 const getToken = () => {
     return `Bearer ${TOKEN}`;
@@ -22,7 +23,7 @@ export const authAPI = {
         setToken(token);
         return instance.get(`auth/me`, {
             headers: {
-                "Authorization": getToken(),
+                [AUTHORIZATION]: getToken(),
             }
         })
     },
@@ -41,7 +42,7 @@ export const boardAPI = {
     getAllByUserId(userId) {
         return instance.get(`projects/all/${userId}`, {
             headers: {
-                "Authorization": getToken(),
+                [AUTHORIZATION]: getToken(),
             }
         });
     },
@@ -50,10 +51,19 @@ export const boardAPI = {
                 ...board
             }, {
                 headers: {
-                    "Authorization": getToken(),
+                    [AUTHORIZATION]: getToken(),
                 }
             }
         );
     }
 };
 
+export const taskAPI = {
+    addTask (task) {
+        return instance.post(`tasks`, {...task}, {
+            headers: {
+                [AUTHORIZATION]: getToken()
+            }
+        })
+    }
+};

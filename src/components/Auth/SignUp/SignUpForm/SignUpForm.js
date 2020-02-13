@@ -8,16 +8,16 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 
 let maxLength15 = maxLengthCreator(15);
 
-const SignUpForm = (props) => {
+const SignUpForm = ({className, handleSubmit, error}) => {
     return (
-        <form onSubmit={props.handleSubmit} className={props.className}>
+        <form onSubmit={handleSubmit} className={className}>
             <Field label={"First name"} name={"first_name"} component={renderTextField} validate={[required, onlyCharacters, maxLength15]}/>
             <Field label={"Last name"} name={"last_name"} component={renderTextField} validate={[required, onlyCharacters,maxLength15]}/>
             <Field label={"Username"} name={"username"} component={renderTextField} validate={[required]}/>
             <Field label={"Email"} name={"email"} component={renderTextField} validate={[required, emailChecker]}/>
             <Field label={"Password"} id="standard-password-input" name={"password"} component={renderTextField}
                    validate={[required, maxLength15]}/>
-            <FormHelperText error={!!props.error}>{props.error}</FormHelperText>
+            <FormHelperText error={!!error}>{error}</FormHelperText>
             <Button type={"submit"} variant={"contained"} color={"secondary"}>Sign Up</Button>
         </form>
     );
