@@ -6,8 +6,8 @@ import Welcome from "../Welcome/Welcome";
 import Home from "../Home/Home";
 import withAuthentication from "../../hoc/withAuthentication";
 import PropTypes from 'prop-types';
-const Board = React.lazy(() => import("../Board/Board"));
 import AccountSettings from "../AccountSettings/AccountSettings";
+const Board = React.lazy(() => import("../Board/Board"));
 
 const useStyles = makeStyles({
     mainWrapper: {
