@@ -1,8 +1,6 @@
 import React, {memo} from 'react';
 import {Card, CardActionArea, CardContent, makeStyles, Typography} from '@material-ui/core';
 import {PropTypes} from "prop-types";
-import CardActions from "@material-ui/core/CardActions";
-import Fab from "@material-ui/core/Fab";
 import {Link} from "react-router-dom";
 
 const useStyles = makeStyles(() => ({

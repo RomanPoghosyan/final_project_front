@@ -6,7 +6,7 @@ import Logo from "../common/Logo/Logo";
 import PropTypes from 'prop-types';
 import {compose} from "redux";
 import {connect} from "react-redux";
-import {logout} from "../../redux/auth-reducer";
+import HeaderRightHand from "./HeaderRightSide/HeaderRightSide";
 
 const useStyles = makeStyles(theme => ({
     header: {
@@ -37,7 +37,7 @@ const Header = (props) => {
                     <Link className={classes.link} to={'/sign-up'}><Button variant={"contained"} color={"primary"}>Sign up</Button></Link>
                 </>}
                 {props.isAuth && (
-                    <Button color={"secondary"} variant={"contained"} onClick={props.logout}>Log out</Button>
+                    <HeaderRightHand />
                 )}
 
             </div>
@@ -47,7 +47,6 @@ const Header = (props) => {
 
 Header.propTypes = {
     isAuth: PropTypes.bool.isRequired,
-    logout: PropTypes.func.isRequired,
 };
 
 
@@ -59,5 +58,5 @@ let mapStateToProps = (state) => {
 };
 
 export default compose(
-    connect(mapStateToProps, {logout})
+    connect(mapStateToProps)
 )(Header);

@@ -6,10 +6,11 @@ import Main from "./components/Main/Main";
 import {Provider, useSelector, useDispatch} from "react-redux";
 import store from "./redux/store";
 import {compose} from "redux";
-import {initializedSuccess} from "./redux/app-reducer";
 import theme from "./utils/styles/theme";
 import {ThemeProvider} from "@material-ui/styles";
-import PropTypes from "prop-types";
+import {initialize} from './redux/app-reducer';
+import AccountSettings from "./components/AccountSettings/AccountSettings";
+import {getAuthUserFullData} from "./redux/auth-reducer";
 
 
 const useStyles = makeStyles({
@@ -22,12 +23,13 @@ const useStyles = makeStyles({
 
 const App = (props) => {
     const classes = useStyles();
-    const initialize = useDispatch();
-    const memoizedCallback  = useCallback(() => initialize(initializedSuccess()), [props]);
+    const dispatch = useDispatch();
+    const memoizedCallback  = useCallback(() => dispatch(initialize()), [dispatch]);
     const initialized = useSelector(state => state.app.initialized);
     useEffect(() => {
         memoizedCallback();
-    }, [memoizedCallback]);
+        dispatch(getAuthUserFullData());
+    }, [dispatch, memoizedCallback]);
 
     if(!initialized) return <div>Loading...</div>;
 
@@ -35,6 +37,7 @@ const App = (props) => {
         <div className={classes.wrapper}>
             <Switch>
                 <Route path={"/(sign-in|sign-up)"} component={Auth} />
+                <Route path={"/accountSettings"} component={AccountSettings}/>
                 <Route component={Main} />
             </Switch>
         </div>

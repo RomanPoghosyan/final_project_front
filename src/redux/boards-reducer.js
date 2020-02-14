@@ -10,7 +10,6 @@ export const boardsReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_BOARDS:
             return [
-                ...state,
                 ...action.payload
             ];
         case ADD_BOARD:

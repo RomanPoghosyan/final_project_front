@@ -3,6 +3,8 @@ import * as axios from "axios";
 let TOKEN = "";
 const AUTHORIZATION = "Authorization";
 
+
+
 const getToken = () => {
     return `Bearer ${TOKEN}`;
 };
@@ -36,6 +38,14 @@ export const authAPI = {
     signup(singUpData) {
         return instance.post(`auth/signup`, {...singUpData});
     },
+    getUserData(token) {
+        setToken(token);
+        return instance.get(`auth/userData`, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        });
+    }
 };
 
 export const boardAPI = {

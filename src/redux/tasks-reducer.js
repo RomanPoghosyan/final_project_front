@@ -1,4 +1,4 @@
-import {authAPI, taskAPI} from "../API/api";
+import {taskAPI} from "../API/api";
 import {stopSubmit} from "redux-form";
 
 const ADD_TASK = "ADD_TASK";
@@ -17,12 +17,9 @@ export const tasksReducer = (state = initialState, action) => {
 export const addTaskAction = task => ({type: ADD_TASK, payload: task});
 
 export const addTask = task => dispatch => {
-    debugger;
-    console.log("data");
     taskAPI.addTask(task)
         .then(({data}) => {
             if (data.resultCode === 0) {
-                console.log(data)
                 dispatch(addTaskAction(data.body))
             }
         }).catch(({response: data}) => {
