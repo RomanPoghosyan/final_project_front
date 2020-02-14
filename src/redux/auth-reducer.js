@@ -35,6 +35,7 @@ export const getAuthUserData = () => async (dispatch) => {
                     dispatch(setAuthUserData(id, email, username, true));
                 }
             }).catch((e) => {
+                console.log(e);
             });
     }
 };

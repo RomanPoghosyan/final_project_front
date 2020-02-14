@@ -41,14 +41,14 @@ const theme = createMuiTheme({
     }
 });
 
-const App = (props) => {
+const App = ({initialized, initialize}) => {
     const classes = useStyles();
-    const memoizedCallback  = useCallback(() => props.initialize(), [props]);
+    const memoizedCallback  = useCallback(() => initialize(), [initialize]);
     useEffect(() => {
         memoizedCallback();
     }, [memoizedCallback]);
 
-    if(!props.initialized) return <div>Loading...</div>;
+    if(!initialized) return <div>Loading...</div>;
 
     return (
         <div className={classes.wrapper}>

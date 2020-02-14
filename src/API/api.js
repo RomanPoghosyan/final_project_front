@@ -54,6 +54,15 @@ export const boardAPI = {
                 }
             }
         );
+    },
+    addColumn(status) {
+        return instance.post(`statuses`, {
+            ...status
+        }, {
+            headers: {
+                "Authorization": getToken(),
+            }
+        } )
     }
 };
 
