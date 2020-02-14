@@ -30,7 +30,7 @@ const Header = (props) => {
     const classes = useStyles();
     return (
         <header className={classes.header}>
-            <Logo />
+            <Link to={"/"}><Logo /></Link>
             <div className={classes.auth}>
                 {!props.isAuth && <>
                     <Link className={classes.link} to={"/sign-in"}><Button variant={"contained"} color={"primary"} >Sign in</Button></Link>

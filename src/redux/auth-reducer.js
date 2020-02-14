@@ -8,11 +8,6 @@ const initialState = {
     userId: null,
     email: null,
     username: null,
-    firstName: null,
-    lastName: null,
-    createdAt: null,
-    updatedAt: null,
-    phoneNumber: null,
     isAuth: false,
 };
 
@@ -28,19 +23,7 @@ export const authReducer = (state = initialState, action) => {
     }
 };
 
-export const setAuthUserFullData = (userId, email, username, firstName, lastName, createdAt, updatedAt, phoneNumber, isAuth) => ({
-    type: SET_USER_DATA,
-    payload: {userId, email, username, firstName, lastName, createdAt, updatedAt, phoneNumber, isAuth}
-});
-
-export const getAuthUserFullData = () => async (dispatch) => {
-
-};
-
-export const setAuthUserData = (userId, email, username, isAuth) => ({
-    type: SET_USER_DATA,
-    payload: {userId, email, username, isAuth}
-});
+export const setAuthUserData = (userId, email, username, isAuth) => ({type: SET_USER_DATA, payload: { userId, email, username, isAuth }});
 
 export const getAuthUserData = () => async (dispatch) => {
     let token = window.localStorage.getItem('token');
@@ -52,6 +35,7 @@ export const getAuthUserData = () => async (dispatch) => {
                     dispatch(setAuthUserData(id, email, username, true));
                 }
             }).catch((e) => {
+                console.log(e);
             });
     }
 };
@@ -59,7 +43,7 @@ export const getAuthUserData = () => async (dispatch) => {
 export const login = (email, password) => (dispatch) => {
     authAPI.login(email, password)
         .then(({data}) => {
-            if (data.resultCode === 0) {
+            if(data.resultCode === 0){
                 window.localStorage.setItem('token', data.body.token);
                 dispatch(getAuthUserData());
             }
