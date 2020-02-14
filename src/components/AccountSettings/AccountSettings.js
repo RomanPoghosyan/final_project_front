@@ -1,29 +1,35 @@
 import React from "react";
-import TextField from "@material-ui/core/TextField";
-import Header from "../Header/Header";
 import {makeStyles} from "@material-ui/core/styles";
+import AccountSettingsForm from "./AccountSettingsForm/AccountSettingsForm";
+import {useDispatch} from "react-redux";
+import {updateUser} from "../../redux/user-reducer";
+import withAuthRedirect from "../../hoc/withAuthRedirect";
 
 const useStyles = makeStyles(() => ({
-    settings: {
-        display:'grid',
-        gridTemplateRows: '60px 1fr'
-    },
-    form:{
-        display:'grid',
-        margin:'auto'
+    form: {
+        display: 'grid',
+        margin: 'auto',
+        width: '40%',
+        minWidth: '300px',
+        maxWidth: "550px",
     }
 }));
 
+
 const AccountSettings = () => {
     const classes = useStyles();
+    const dispatch = useDispatch();
+
+    const onSubmit = formData => {
+        const {email, username, first_name, last_name, phone_number, location } = formData;
+        const user = { email, username, first_name, last_name, phone_number, location};
+        dispatch(updateUser(user));
+    };
+
     return (
-        <div className={classes.settings}>
-            <Header/>
-            <form className={classes.form}>
-                <TextField disabled id="standard-disabled" label="Username" defaultValue="Hello World"/>
-            </form>
-        </div>
+        <AccountSettingsForm onSubmit={onSubmit} className={classes.form}/>
     )
 };
 
-export default AccountSettings;
+
+export default  withAuthRedirect(false)(AccountSettings);

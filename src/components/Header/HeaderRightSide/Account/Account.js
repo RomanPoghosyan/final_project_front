@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {Fab} from '@material-ui/core';
-import {useDispatch, useSelector} from "react-redux";
 import StyledMenu from "../../../../utils/styles/StyledMenu";
 import Typography from "@material-ui/core/Typography";
 import {Close} from "@material-ui/icons";
@@ -10,7 +9,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import {logout} from "../../../../redux/auth-reducer";
 import {Link} from "react-router-dom";
-
+import {useDispatch} from "react-redux";
 
 const useStyles = makeStyles(theme => ({
     header: {
@@ -26,18 +25,18 @@ const useStyles = makeStyles(theme => ({
         textDecoration: 'none',
         color: '#000'
     },
+    accountIcon: {
+        width: '40px',
+        height: '100%',
+        minWidth: '0px',
+        padding: '9px 0'
+    }
 }));
 
 function Account () {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
-
-    const fullName = useSelector(({auth}) => {
-        if (auth.firstName)
-            return `${auth.firstName} ${auth.lastName}`;
-        return '';
-    });
-
+    const dispatch = useDispatch();
     function handleClose() {
         setAnchorEl(null);
     }
@@ -46,15 +45,15 @@ function Account () {
         setAnchorEl(event.currentTarget);
     }
 
-    const dispatch = useDispatch();
     return (
         <>
             <Fab
+                className={classes.accountIcon}
                 size="small"
                 onClick={handleClick}
                 color="secondary"
                 aria-label="add">
-                {fullName && fullName[0].toUpperCase() + fullName[fullName.indexOf(" ") + 1].toUpperCase()}
+                {'ll'}
             </Fab>
             <StyledMenu
                 id="customized-menu"
@@ -63,15 +62,15 @@ function Account () {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-                <header className={classes.header}>
+                <div className={classes.header}>
                     <Typography variant="h6" component="h6" align={"right"}>
-                        {fullName}
+                        {'literal'}
                     </Typography>
                     <Close cursor={"pointer"} className={classes.close} onClick={handleClose}/>
-                </header>
+                </div>
                 <List dense={false}>
                     <ListItem>
-                        <Link to={"/accoutSettings"}>
+                        <Link to={"/accountSettings"}>
                             <ListItemText className={classes.link} primary={"Account"} />
                         </Link>
                     </ListItem>

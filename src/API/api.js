@@ -38,14 +38,6 @@ export const authAPI = {
     signup(singUpData) {
         return instance.post(`auth/signup`, {...singUpData});
     },
-    getUserData(token) {
-        setToken(token);
-        return instance.get(`auth/userData`, {
-            headers: {
-                [AUTHORIZATION]: getToken(),
-            }
-        });
-    }
 };
 
 export const boardAPI = {
@@ -75,5 +67,22 @@ export const taskAPI = {
                 [AUTHORIZATION]: getToken()
             }
         })
+    }
+};
+
+export const userAPI = {
+    getUser() {
+        return instance.get ('', {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        });
+    },
+    updateUser (user) {
+        return instance.put ('',  {...user}, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        });
     }
 };

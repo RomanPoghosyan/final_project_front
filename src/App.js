@@ -10,7 +10,6 @@ import theme from "./utils/styles/theme";
 import {ThemeProvider} from "@material-ui/styles";
 import {initialize} from './redux/app-reducer';
 import AccountSettings from "./components/AccountSettings/AccountSettings";
-import {getAuthUserFullData} from "./redux/auth-reducer";
 
 
 const useStyles = makeStyles({
@@ -28,8 +27,7 @@ const App = (props) => {
     const initialized = useSelector(state => state.app.initialized);
     useEffect(() => {
         memoizedCallback();
-        dispatch(getAuthUserFullData());
-    }, [dispatch, memoizedCallback]);
+    }, [memoizedCallback]);
 
     if(!initialized) return <div>Loading...</div>;
 
@@ -37,7 +35,6 @@ const App = (props) => {
         <div className={classes.wrapper}>
             <Switch>
                 <Route path={"/(sign-in|sign-up)"} component={Auth} />
-                <Route path={"/accountSettings"} component={AccountSettings}/>
                 <Route component={Main} />
             </Switch>
         </div>

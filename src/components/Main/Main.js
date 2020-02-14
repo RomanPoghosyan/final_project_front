@@ -7,6 +7,7 @@ import Home from "../Home/Home";
 import withAuthentication from "../../hoc/withAuthentication";
 import PropTypes from 'prop-types';
 import Board from "../Board/Board";
+import AccountSettings from "../AccountSettings/AccountSettings";
 
 const useStyles = makeStyles({
     mainWrapper: {
@@ -25,7 +26,8 @@ const Main = (props) => {
             <div className={classes.content}>
                 <Switch>
                     <Route exact path={"/"} component={MainContent}/>
-                    <Route path={"/board/:boardId"} render={() => <Board/>}/>
+                    <Route path={"/board/:boardId"} component={Board}/>
+                    <Route path={"/accountSettings"} component={AccountSettings}/>
                 </Switch>
             </div>
         </div>

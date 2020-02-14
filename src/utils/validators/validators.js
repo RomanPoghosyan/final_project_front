@@ -20,3 +20,10 @@ export const emailChecker = input => {
 export const maxLengthCreator = (maxLength) => (input) => {
     if(input.length > maxLength) return `Max length is ${maxLength}`;
 };
+
+export const phoneNumberChecker = input => {
+  const REGEX = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s/0-9]*$/;
+  if (!REGEX.test(input)) {
+      return "Enter valid phone number";
+  }
+};
