@@ -2,7 +2,7 @@ import React from 'react';
 import Notification from "./Notification/Notification";
 import Account from "./Account/Account";
 
-function HeaderRightHand() {
+function HeaderRightSide() {
     return (
         <>
             <Notification/>
@@ -11,4 +11,4 @@ function HeaderRightHand() {
     );
 }
 
-export default HeaderRightHand;
+export default HeaderRightSide;

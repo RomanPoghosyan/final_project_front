@@ -34,69 +34,60 @@ export const setAuthUserFullData = (userId, email, username, firstName, lastName
 });
 
 export const getAuthUserFullData = () => async (dispatch) => {
+
+};
+
+export const setAuthUserData = (userId, email, username, isAuth) => ({
+    type: SET_USER_DATA,
+    payload: {userId, email, username, isAuth}
+});
+
+export const getAuthUserData = () => async (dispatch) => {
     let token = window.localStorage.getItem('token');
     if (token) {
-        const {data} = await authAPI.getUserData(token);
-        if (data.resultCode === 0) {
-            let {
-                id, email, username, first_name: firstName, last_name: lastName,
-                created_at: createdAt, updated_at: updatedAt, phoneNumber
-            } = data.body;
-            await dispatch(setAuthUserFullData(id, email, username, firstName, lastName, createdAt, updatedAt, phoneNumber, true));
-        }
+        return authAPI.me(token)
+            .then(({data}) => {
+                if (data.resultCode === 0) {
+                    let {id, email, username} = data.body;
+                    dispatch(setAuthUserData(id, email, username, true));
+                }
+            }).catch((e) => {
+            });
     }
 };
 
-    export const login = (email, password) => (dispatch) => {
-        authAPI.login(email, password)
-            .then(({data}) => {
-                if (data.resultCode === 0) {
-                    window.localStorage.setItem('token', data.body.token);
-                    dispatch(getAuthUserData());
-                }
-            })
-            .catch(({response: {data}}) => {
-                let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
-                dispatch(stopSubmit("login", {_error: message}));
-            });
-    };
+export const login = (email, password) => (dispatch) => {
+    authAPI.login(email, password)
+        .then(({data}) => {
+            if (data.resultCode === 0) {
+                window.localStorage.setItem('token', data.body.token);
+                dispatch(getAuthUserData());
+            }
+        })
+        .catch(({response: {data}}) => {
+            let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
+            dispatch(stopSubmit("login", {_error: message}));
+        });
+};
 
-    export const signup = formData => dispatch => {
-        authAPI.signup(formData)
-            .then(({data}) => {
-                if (data.resultCode === 0) {
-                    localStorage.setItem('token', data.body.token);
-                    dispatch(getAuthUserData());
-                }
-            })
-            .catch(({response: {data}}) => {
-                let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
-                dispatch(stopSubmit("signup", {_error: message}));
-            });
-    };
+export const signup = formData => dispatch => {
+    authAPI.signup(formData)
+        .then(({data}) => {
+            if (data.resultCode === 0) {
+                localStorage.setItem('token', data.body.token);
+                dispatch(getAuthUserData());
+            }
+        })
+        .catch(({response: {data}}) => {
+            let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
+            dispatch(stopSubmit("signup", {_error: message}));
+        });
+};
 
 
-    export const logout = () => {
-        window.localStorage.removeItem('token');
-        authAPI.logout();
-        return setAuthUserData(null, null, null, false);
-    };
+export const logout = () => {
+    window.localStorage.removeItem('token');
+    authAPI.logout();
+    return setAuthUserData(null, null, null, false);
+};
 
-    export const setAuthUserData = (userId, email, username, isAuth) => ({
-        type: SET_USER_DATA,
-        payload: {userId, email, username, isAuth}
-    });
-
-    export const getAuthUserData = () => async (dispatch) => {
-        let token = window.localStorage.getItem('token');
-        if (token) {
-            return authAPI.me(token)
-                .then(({data}) => {
-                    if (data.resultCode === 0) {
-                        let {id, email, username} = data.body;
-                        dispatch(setAuthUserData(id, email, username, true));
-                    }
-                }).catch((e) => {
-                });
-        }
-    };

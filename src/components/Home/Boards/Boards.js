@@ -35,8 +35,8 @@ function Boards(props) {
     }, [props.userId]);
 
 
-    const boards = props.boards.map ( (b, index) => {
-        return <BoardItem key={index} board={b}/>
+    const boards = props.boards.map ( (b) => {
+        return <BoardItem key={b.id} board={b}/>
     });
 
     return (

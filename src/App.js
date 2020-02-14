@@ -28,8 +28,7 @@ const App = (props) => {
     const initialized = useSelector(state => state.app.initialized);
     useEffect(() => {
         memoizedCallback();
-        dispatch(getAuthUserFullData());
-    }, [dispatch, memoizedCallback]);
+    }, [memoizedCallback]);
 
     if(!initialized) return <div>Loading...</div>;
 
@@ -37,7 +36,6 @@ const App = (props) => {
         <div className={classes.wrapper}>
             <Switch>
                 <Route path={"/(sign-in|sign-up)"} component={Auth} />
-                <Route path={"/accountSettings"} component={AccountSettings}/>
                 <Route component={Main} />
             </Switch>
         </div>

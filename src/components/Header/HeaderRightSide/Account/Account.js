@@ -63,12 +63,12 @@ function Account () {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-                <header className={classes.header}>
+                <div className={classes.header}>
                     <Typography variant="h6" component="h6" align={"right"}>
                         {fullName}
                     </Typography>
                     <Close cursor={"pointer"} className={classes.close} onClick={handleClose}/>
-                </header>
+                </div>
                 <List dense={false}>
                     <ListItem>
                         <Link to={"/accoutSettings"}>

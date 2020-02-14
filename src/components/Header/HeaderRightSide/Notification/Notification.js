@@ -56,12 +56,12 @@ function Notification() {
               onClose={handleClose}
           >
               <section className={classes.notifications}>
-                  <header className={classes.header}>
+                  <div className={classes.header}>
                       <Typography variant="h6" component="h6" align={"right"}>
                           Notifications
                       </Typography>
                       <Close cursor={"pointer"} className={classes.close} onClick={handleClose}/>
-                  </header>
+                  </div>
                   <div className={classes.notificationList}>
                       <Typography variant={"subtitle2"}>
                           Нет непрочитанных уведомлений

@@ -6,7 +6,7 @@ import Logo from "../common/Logo/Logo";
 import PropTypes from 'prop-types';
 import {compose} from "redux";
 import {connect} from "react-redux";
-import HeaderRightHand from "./HeaderRightSide/HeaderRightSide";
+import HeaderRightSide from "./HeaderRightSide/HeaderRightSide";
 
 const useStyles = makeStyles(theme => ({
     header: {
@@ -37,7 +37,7 @@ const Header = (props) => {
                     <Link className={classes.link} to={'/sign-up'}><Button variant={"contained"} color={"primary"}>Sign up</Button></Link>
                 </>}
                 {props.isAuth && (
-                    <HeaderRightHand />
+                    <HeaderRightSide />
                 )}
 
             </div>
