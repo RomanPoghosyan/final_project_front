@@ -1,7 +1,6 @@
 import {isEqual} from "../utils/helpers/isEqual";
 import {boardAPI} from "../API/api";
 import {stopSubmit} from "redux-form";
-import {addBoardSuccess} from "./boards-reducer";
 
 const COLUMN_REORDER = "COLUMN_REORDER";
 const TASK_REORDER = "TASK_REORDER";
@@ -98,7 +97,7 @@ export const taskMoved = (result) => (dispatch, getState) => {
     const finishTaskIds = [...finish.taskIds];
     finishTaskIds.splice(destination.index, 0, draggableId);
     dispatch(taskReordered(finish.id, finishTaskIds));
-}
+};
 
 export const addColumn = (name) => (dispatch, getState) => {
     const status = {

@@ -6,7 +6,7 @@ import {reduxForm} from "redux-form/es/index";
 
 const AddColumnForm = ({handleSubmit, deactivateEditMode, classes}) => {
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={classes.form}>
             <Field name={"columnName"} component={"input"} autoFocus={true} className={classes.input}/>
             <div className={classes.buttonGroup}>
                 <Button type={"submit"} color={"secondary"} variant={"contained"} >Add</Button>
