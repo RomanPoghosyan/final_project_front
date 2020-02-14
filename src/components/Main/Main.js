@@ -6,7 +6,7 @@ import Welcome from "../Welcome/Welcome";
 import Home from "../Home/Home";
 import withAuthentication from "../../hoc/withAuthentication";
 import PropTypes from 'prop-types';
-import AccountSettings from "../AccountSettings/AccountSettings";
+
 const Board = React.lazy(() => import("../Board/Board"));
 
 const useStyles = makeStyles({
@@ -27,7 +27,6 @@ const Main = (props) => {
                 <Switch>
                     <Route exact path={"/"} component={MainContent}/>
                     <Route path={"/board/:boardId"} render={() => <Suspense fallback={"loadingggg"}><Board/></Suspense>}/>
-                    <Route path={"/accountSettings"} component={AccountSettings}/>
                 </Switch>
             </div>
         </div>
