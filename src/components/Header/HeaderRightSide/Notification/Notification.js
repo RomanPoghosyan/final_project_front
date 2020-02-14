@@ -32,7 +32,7 @@ const useStyles = makeStyles ( theme => ({
     }
 }));
 
-function Notification () {
+function Notification() {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
     function handleClose() {
@@ -50,7 +50,7 @@ function Notification () {
               variant="contained"
               color="primary"
               onClick={handleClick}
-              className={classes.notificationButton}>
+          >
               <NotificationsNone />
           </Button>
           <StyledMenu
@@ -62,12 +62,12 @@ function Notification () {
               onClose={handleClose}
           >
               <section className={classes.notifications}>
-                  <div className={classes.header}>
+                  <header className={classes.header}>
                       <Typography variant="h6" component="h6" align={"right"}>
                           Notifications
                       </Typography>
                       <Close cursor={"pointer"} className={classes.close} onClick={handleClose}/>
-                  </div>
+                  </header>
                   <div className={classes.notificationList}>
                       <Typography variant={"subtitle2"}>
                           Нет непрочитанных уведомлений

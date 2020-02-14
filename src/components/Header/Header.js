@@ -6,7 +6,7 @@ import Logo from "../common/Logo/Logo";
 import PropTypes from 'prop-types';
 import {compose} from "redux";
 import {connect} from "react-redux";
-import HeaderRightHand from "./HeaderRightSide/HeaderRightSide";
+import {logout} from "../../redux/auth-reducer";
 
 const useStyles = makeStyles(theme => ({
     header: {
@@ -30,14 +30,14 @@ const Header = (props) => {
     const classes = useStyles();
     return (
         <header className={classes.header}>
-            <Logo />
+            <Link to={"/"}><Logo /></Link>
             <div className={classes.auth}>
                 {!props.isAuth && <>
                     <Link className={classes.link} to={"/sign-in"}><Button variant={"contained"} color={"primary"} >Sign in</Button></Link>
                     <Link className={classes.link} to={'/sign-up'}><Button variant={"contained"} color={"primary"}>Sign up</Button></Link>
                 </>}
                 {props.isAuth && (
-                    <HeaderRightHand />
+                    <Button color={"secondary"} variant={"contained"} onClick={props.logout}>Log out</Button>
                 )}
 
             </div>
@@ -58,5 +58,5 @@ let mapStateToProps = (state) => {
 };
 
 export default compose(
-    connect(mapStateToProps)
+    connect(mapStateToProps, {logout})
 )(Header);

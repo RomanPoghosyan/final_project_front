@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {connect} from "react-redux";
 import BoardItem from "./BoardItem/BoardItem";
 import {List, makeStyles} from "@material-ui/core";
@@ -27,27 +27,29 @@ const useStyles = makeStyles ( theme => ({
     }
 }));
 
-function Boards(props) {
+function Boards({userId, boards, getBoards}) {
     const classes = useStyles();
+    const memoizedGetBoards = useCallback(() => getBoards(userId), [userId, getBoards]);
+
 
     useEffect(() => {
-        if(props.userId) props.getBoards(props.userId);
-    }, [props.userId]);
+        if(userId) memoizedGetBoards(userId);
+    }, [userId, memoizedGetBoards]);
 
 
-    const boards = props.boards.map ( (b, index) => {
-        return <BoardItem key={index} board={b}/>
+    const boardList = boards.map ( (b) => {
+        return <BoardItem key={b.id} board={b}/>
     });
 
     return (
         <List className={classes.boards}>
-            {boards}
+            {boardList}
             <AddBoard/>
         </List>
     );
 }
 
-Boards.prototype = {
+Boards.propTypes = {
     getBoards: PropTypes.func,
     boards: PropTypes.array,
     userId: PropTypes.number,
