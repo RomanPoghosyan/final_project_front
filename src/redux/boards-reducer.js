@@ -29,6 +29,9 @@ export const getBoards = (userId) => (dispatch) => {
         .then(({data}) => {
             dispatch(setBoards(data.body));
         })
+        .catch(({response: {data}}) => {
+            // TODO notify that user doesn't have any projects
+        });
 };
 
 export const addBoardSuccess = (board) => ({type: ADD_BOARD, payload: board});
