@@ -26,7 +26,6 @@ const useStyles = makeStyles ( theme => ({
     },
     notificationButton: {
         width: '40px',
-        height: '100%',
         minWidth: '0px',
         padding: '6px 0'
     }
@@ -50,6 +49,7 @@ function Notification() {
               variant="contained"
               color="primary"
               onClick={handleClick}
+              className={classes.notificationButton}
           >
               <NotificationsNone />
           </Button>

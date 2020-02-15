@@ -6,7 +6,6 @@ const withAuthRedirect = (allowUnAuthorized) => (Component) => (props) => {
     const isAuth = useSelector(state => state.auth.isAuth);
     if((allowUnAuthorized && !isAuth) || (!allowUnAuthorized && isAuth)) return <Component {...props} />;
     return <Redirect to={"/"} />;
-
 };
 
 export default withAuthRedirect;

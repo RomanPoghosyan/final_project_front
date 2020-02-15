@@ -4,10 +4,10 @@ import Account from "./Account/Account";
 
 function HeaderRightHand() {
     return (
-        <div>
+        <>
             <Notification/>
             <Account />
-        </div>
+        </>
     );
 }
 

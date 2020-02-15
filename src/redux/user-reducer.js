@@ -1,60 +1,57 @@
 import {userAPI} from "../API/api";
 import {stopSubmit} from "redux-form";
+import {setNotify} from "./notify-reducer";
 
 const SET_USER_FULL_DATA = "SET_USER_FULL_DATA";
 
 const initialState = {
-    id: null,
     email: null,
     username: null,
-    firstName: null,
-    lastName: null,
-    createdAt: null,
-    updatedAt: null,
+    first_name: null,
+    last_name: null,
+    created_at: null,
+    updated_at: null,
     phoneNumber: null,
 };
 
-export const userReducer = ( state = initialState, action ) => {
+const userReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_USER_FULL_DATA:
             return {
                 ...state,
                 ...action.payload
             };
+
         default:
             return state;
     }
 };
 
 export const getUserData = () => dispatch => {
-    userAPI.getUser().then ( ({data}) => {
-       if ( data.resultCode === 0 ) {
-           const user = {};
-           for ( let key in data.body ) {
-               if (!Array.isArray(data.body[key]))
-                   user[key] = data.body[key];
-           }
-           dispatch(setUserData({...user}));
-       }
+    userAPI.getUser().then(({data}) => {
+        if (data.resultCode === 0) {
+            dispatch(setUserData({...data.body}));
+        }
     });
 };
 
-const setUserData = user => {
-  return {
-    type: SET_USER_FULL_DATA,
-    payload: {...user}
-  }
+export const setUserData = user => {
+    return {
+        type: SET_USER_FULL_DATA,
+        payload: {...user}
+    }
 };
 
 export const updateUser = (user) => dispatch => {
-    userAPI.updateUser(user).then ( ({data}) => {
+    userAPI.updateUser(user).then(({data}) => {
         if (data.resultCode === 0) {
             dispatch(setUserData(user));
-            console.log(user);
+            dispatch(setNotify({open: true, type: 'success', content: 'Account settings are changed'}));
         }
     }).catch(({response: {data}}) => {
         let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
         dispatch(stopSubmit("settings", {_error: message}));
+        dispatch(setNotify({open: true, type: 'error', content: 'Account settings are not changed'}));
     });
 };
 

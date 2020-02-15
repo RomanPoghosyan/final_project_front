@@ -10,6 +10,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import {logout} from "../../../../redux/auth-reducer";
 import {Link} from "react-router-dom";
 import {useDispatch} from "react-redux";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles(theme => ({
     header: {
@@ -27,9 +28,8 @@ const useStyles = makeStyles(theme => ({
     },
     accountIcon: {
         width: '40px',
-        height: '100%',
         minWidth: '0px',
-        padding: '9px 0'
+        padding: '6px 0'
     }
 }));
 
@@ -47,14 +47,14 @@ function Account () {
 
     return (
         <>
-            <Fab
+            <Button
                 className={classes.accountIcon}
-                size="small"
                 onClick={handleClick}
-                color="secondary"
+                color="primary"
+                variant="contained"
                 aria-label="add">
                 {'ll'}
-            </Fab>
+            </Button>
             <StyledMenu
                 id="customized-menu"
                 anchorEl={anchorEl}
@@ -70,12 +70,12 @@ function Account () {
                 </div>
                 <List dense={false}>
                     <ListItem>
-                        <Link to={"/accountSettings"}>
+                        <Link to={"/account-settings"} onClick={handleClose}>
                             <ListItemText className={classes.link} primary={"Account"} />
                         </Link>
                     </ListItem>
                     <ListItem>
-                        <Link to={"/"}>
+                        <Link to={"/"} onClick={handleClose}>
                             <ListItemText className={classes.link} primary={"Boards"} />
                         </Link>
                     </ListItem>
