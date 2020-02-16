@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 
 
 
-export default function Column(props) {
+const Column = (props) => {
     const classes = useStyles();
 
     return (
@@ -65,4 +65,6 @@ export default function Column(props) {
             )}
         </Draggable>
     )
-}
+};
+
+export default Column;

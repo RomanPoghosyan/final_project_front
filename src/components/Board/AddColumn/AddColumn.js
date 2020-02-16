@@ -17,6 +17,7 @@ const useStyles = makeStyles(theme => ({
     },
     title: {
         padding: "8px",
+        cursor: "pointer",
     },
     form: {
         display: "grid",
