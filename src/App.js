@@ -8,7 +8,6 @@ import store from "./redux/store";
 import {compose} from "redux";
 import theme from "./utils/styles/theme";
 import {initialize} from './redux/app-reducer';
-import AccountSettings from "./components/AccountSettings/AccountSettings";
 import PropTypes from 'prop-types';
 
 

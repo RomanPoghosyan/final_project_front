@@ -6,7 +6,7 @@ const COLUMN_REORDER = "COLUMN_REORDER";
 const TASK_REORDER = "TASK_REORDER";
 
 const initialState = {
-    id: 47,
+    id: 1,
     name: "Workfront Project",
     tasks: {
         "task-1": {id: "task-1", content: "Watch 50 videos about React"},

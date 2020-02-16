@@ -4,7 +4,7 @@ import {Draggable, Droppable} from "react-beautiful-dnd";
 import MemoizedTask from "./MemoizedTask/MemoizedTask";
 
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
     container: {
         border: "1px solid lightgrey",
         borderRadius: "2px",
@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 
 
 
-export default function Column(props) {
+const Column = (props) => {
     const classes = useStyles();
 
     return (
@@ -65,4 +65,6 @@ export default function Column(props) {
             )}
         </Draggable>
     )
-}
+};
+
+export default Column;

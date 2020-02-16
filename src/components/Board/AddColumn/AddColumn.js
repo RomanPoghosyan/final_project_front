@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {addColumn} from "../../../redux/board-reducer";
 
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
     container: {
         margin: "8px",
         border: "1px solid lightgrey",
@@ -17,6 +17,7 @@ const useStyles = makeStyles(theme => ({
     },
     title: {
         padding: "8px",
+        cursor: "pointer",
     },
     form: {
         display: "grid",

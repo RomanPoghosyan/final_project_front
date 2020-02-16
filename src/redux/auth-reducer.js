@@ -74,3 +74,4 @@ export const logout = () => {
     authAPI.logout();
     return setAuthUserData(null, null, null, false);
 };
+
