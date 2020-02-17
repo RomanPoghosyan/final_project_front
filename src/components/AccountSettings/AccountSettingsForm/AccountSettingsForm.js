@@ -49,9 +49,9 @@ const AccountSettingsForm = ({classes, handleSubmit, error, initialize, user}) =
         </form>
     )
 };
-//handleSubmit, error, initialize
+
 AccountSettingsForm.propTypes = {
-    className: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     error: PropTypes.string,
     initialize: PropTypes.func.isRequired,

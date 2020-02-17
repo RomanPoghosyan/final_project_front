@@ -1,10 +1,19 @@
-import {getAuthUserData} from "./auth-reducer";
+import {getUserData} from "./user-reducer";
 
 const INITIALIZED_SUCCESS = "INITIALIZED_SUCCESS";
 
 let initialState = {
     initialized: false
 };
+
+/**
+ *
+ * appReducer ( should return new state for appReducer )
+ *
+ * @param {Object} state
+ * @param {Object} action
+ * @returns {{state: Object, initialized: boolean}}
+ */
 
 const appReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -18,10 +27,24 @@ const appReducer = (state = initialState, action) => {
     }
 };
 
+/**
+ *
+ * initializedSuccess ( should return action with type INITIALIZED_SUCCESS when initializing is finished success )
+ *
+ * @returns {{type: string}}
+ */
+
 export const initializedSuccess = () => ({type: INITIALIZED_SUCCESS});
 
+/**
+ *
+ * initialize ( should call to the server for getting user object data )
+ *
+ * @returns {function(...[*]=)} (from thunk)
+ */
+
 export const initialize = () => async (dispatch) => {
-    await dispatch(getAuthUserData());
+    await dispatch(getUserData());
     dispatch(initializedSuccess());
 };
 

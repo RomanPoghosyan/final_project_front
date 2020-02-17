@@ -2,6 +2,7 @@ import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import {Draggable, Droppable} from "react-beautiful-dnd";
 import MemoizedTask from "./MemoizedTask/MemoizedTask";
+import PropTypes from "prop-types";
 
 
 const useStyles = makeStyles(() => ({
@@ -65,6 +66,12 @@ const Column = (props) => {
             )}
         </Draggable>
     )
+};
+
+Column.propTypes = {
+    index: PropTypes.number.isRequired,
+    column: PropTypes.object.isRequired,
+    tasks: PropTypes.array.isRequired,
 };
 
 export default Column;

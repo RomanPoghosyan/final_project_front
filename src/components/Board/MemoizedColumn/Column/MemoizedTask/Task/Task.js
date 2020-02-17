@@ -1,7 +1,7 @@
 import React from "react";
 import {Draggable} from "react-beautiful-dnd";
 import {makeStyles} from "@material-ui/core/styles";
-
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -34,6 +34,11 @@ const Task = (props) => {
             }
         </Draggable>
     )
+};
+
+Task.propTypes = {
+    task: PropTypes.object.isRequired,
+    index: PropTypes.number.isRequired,
 };
 
 export default Task;

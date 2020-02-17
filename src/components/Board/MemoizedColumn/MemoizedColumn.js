@@ -1,5 +1,6 @@
 import React from "react";
 import Column from "./Column/Column";
+import PropTypes from 'prop-types';
 
 
 const MemoizedColumn = React.memo((props) => {
@@ -9,5 +10,11 @@ const MemoizedColumn = React.memo((props) => {
     return <Column column={column} tasks={tasks}
                    isDropDisabled={isDropDisabled} index={index}/>;
 });
+//    const {column, taskMap, index} = props;
+MemoizedColumn.propTypes = {
+    index: PropTypes.number.isRequired,
+    column: PropTypes.object.isRequired,
+    taskMap: PropTypes.object.isRequired,
+};
 
 export default MemoizedColumn;

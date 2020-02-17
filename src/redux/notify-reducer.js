@@ -6,6 +6,15 @@ const initialState = {
     content: ''
 };
 
+/**
+ *
+ * notifyReducer ( should return new state for notifyReducer )
+ *
+ * @param {Object} state
+ * @param {Object} action
+ * @returns {{type: string, open: boolean, content: string}}
+ */
+
 const notifyReducer = (state = initialState, action) => {
     switch (action.type) {
         case NOTIFY:
@@ -16,6 +25,14 @@ const notifyReducer = (state = initialState, action) => {
             return state;
     }
 };
+
+/**
+ *
+ * setNotify ( should return action with type NOTIFY when notifying is needed )
+ *
+ * @param {Object} notification
+ * @returns {{payload: Object, type: string}}
+ */
 
 export const setNotify = (notification) => {
     return {

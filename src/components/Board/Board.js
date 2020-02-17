@@ -7,7 +7,7 @@ import {compose} from "redux";
 import {taskMoved} from "../../redux/board-reducer";
 import {makeStyles} from "@material-ui/core";
 import MemoizedColumn from "./MemoizedColumn/MemoizedColumn";
-
+import {PropTypes} from "prop-types";
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -47,8 +47,13 @@ const Board = (props) => {
             <AddColumn boardId={props.match.params.boardId}/>
         </div>
     );
-}
+};
 
+Board.propTypes = {
+    taskMoved: PropTypes.func.isRequired,
+    board: PropTypes.object.isRequired,
+    match: PropTypes.string.isRequired
+};
 
 const mapStateToProps = (state) => ({
     board: state.home.currentBoard,

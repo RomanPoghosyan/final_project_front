@@ -2,7 +2,7 @@ import React from "react";
 import HeaderText from "../../common/HeaderText/HeaderText";
 import useStyles from "../../../utils/styles/useHeaderTextStyle";
 import withAuthentication from "../../../hoc/withAuthentication";
-import {signup} from "../../../redux/auth-reducer";
+import {signup} from "../../../redux/user-reducer";
 import {useDispatch} from "react-redux";
 import SignUpForm from "./SignUpForm/SignUpForm";
 

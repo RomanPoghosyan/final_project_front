@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {Fab} from '@material-ui/core';
 import StyledMenu from "../../../../utils/styles/StyledMenu";
 import Typography from "@material-ui/core/Typography";
 import {Close} from "@material-ui/icons";
@@ -7,9 +6,9 @@ import {makeStyles} from "@material-ui/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import {logout} from "../../../../redux/auth-reducer";
+import {logout} from "../../../../redux/user-reducer";
 import {Link} from "react-router-dom";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles(theme => ({
@@ -45,6 +44,8 @@ function Account () {
         setAnchorEl(event.currentTarget);
     }
 
+    const fullName = useSelector(state => [state.user.first_name, state.user.last_name]);
+
     return (
         <>
             <Button
@@ -53,7 +54,7 @@ function Account () {
                 color="primary"
                 variant="contained"
                 aria-label="add">
-                {'ll'}
+                {fullName[0][0].concat(fullName[1][0])}
             </Button>
             <StyledMenu
                 id="customized-menu"
@@ -64,7 +65,7 @@ function Account () {
             >
                 <div className={classes.header}>
                     <Typography variant="h6" component="h6" align={"right"}>
-                        {'literal'}
+                        {`${fullName[0]} ${fullName[1]}`}
                     </Typography>
                     <Close cursor={"pointer"} className={classes.close} onClick={handleClose}/>
                 </div>

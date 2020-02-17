@@ -80,7 +80,8 @@ export const taskAPI = {
 };
 
 export const userAPI = {
-    getUser() {
+    getUser(token) {
+        setToken(token);
         return instance.get ('', {
             headers: {
                 [AUTHORIZATION]: getToken(),

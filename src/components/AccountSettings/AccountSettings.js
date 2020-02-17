@@ -35,10 +35,6 @@ const AccountSettings = () => {
     const user = useSelector(state => state.user);
 
     const onSubmit = formData => {
-        // const {email, username, first_name, last_name, phoneNumber, location } = formData;
-        console.log(formData);
-        console.log(user);
-        // const user = { email, username, first_name, last_name, phoneNumber, location};
         dispatch(updateUser(formData));
     };
     useEffect(() => {

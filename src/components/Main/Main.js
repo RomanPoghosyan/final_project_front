@@ -18,9 +18,9 @@ const useStyles = makeStyles({
     },
 });
 
-const Main = (props) => {
+const Main = ({isAuth}) => {
     const classes = useStyles();
-    const MainContent = props.isAuth ? Home : Welcome;
+    const MainContent = isAuth ? Home : Welcome;
 
     return (
         <div className={classes.mainWrapper}>
@@ -29,8 +29,7 @@ const Main = (props) => {
                 <Switch>
                     <Route exact path={"/"} component={MainContent}/>
                     <Route path={'/account-settings'} component={AccountSettings}/>
-                    <Route path={"/board/:boardId"}
-                           render={() => <Suspense fallback={"loadingggg"}><Board/></Suspense>}/>
+                    <Route path={"/board/:boardId"} render={() => <Suspense fallback={"loadingggg"}><Board/></Suspense>}/>
                 </Switch>
             </div>
             <Notify />
