@@ -6,9 +6,10 @@ import Logo from "../common/Logo/Logo";
 import PropTypes from 'prop-types';
 import {compose} from "redux";
 import {connect} from "react-redux";
-import {logout} from "../../redux/auth-reducer";
+import {logout} from "../../redux/user-reducer";
+import HeaderRightHand from "./HeaderRightSide/HeaderRightSide";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
     header: {
         display: "grid",
         gridTemplateColumns: "50px minmax(200px, 1fr)",
@@ -20,24 +21,25 @@ const useStyles = makeStyles(theme => ({
         gridTemplateColumns: '1fr 1fr',
         alignItems: 'center',
         justifyItems: 'baseline',
+        gridGap: '10px',
     },
     link: {
       textDecoration: "none"
     },
 }));
 
-const Header = (props) => {
+const Header = ({isAuth}) => {
     const classes = useStyles();
     return (
         <header className={classes.header}>
             <Link to={"/"}><Logo /></Link>
             <div className={classes.auth}>
-                {!props.isAuth && <>
+                {!isAuth && <>
                     <Link className={classes.link} to={"/sign-in"}><Button variant={"contained"} color={"primary"} >Sign in</Button></Link>
                     <Link className={classes.link} to={'/sign-up'}><Button variant={"contained"} color={"primary"}>Sign up</Button></Link>
                 </>}
-                {props.isAuth && (
-                    <Button color={"secondary"} variant={"contained"} onClick={props.logout}>Log out</Button>
+                {isAuth && (
+                    <HeaderRightHand/>
                 )}
 
             </div>
@@ -50,10 +52,9 @@ Header.propTypes = {
 };
 
 
-
 let mapStateToProps = (state) => {
     return {
-        isAuth: state.auth.isAuth
+        isAuth: state.user.isAuth
     };
 };
 

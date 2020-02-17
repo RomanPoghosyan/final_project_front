@@ -57,7 +57,7 @@ Boards.propTypes = {
 
 let mapStateToProps = (state) => ({
     boards: state.home.boards,
-    userId: state.auth.userId,
+    userId: state.user.id,
 });
 
 export default connect(mapStateToProps, {getBoards})(Boards);

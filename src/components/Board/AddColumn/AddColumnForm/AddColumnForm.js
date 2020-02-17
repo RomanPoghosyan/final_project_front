@@ -3,6 +3,7 @@ import {Field} from "redux-form";
 import {Button} from "@material-ui/core";
 import CloseIcon from "@material-ui/core/SvgIcon/SvgIcon";
 import {reduxForm} from "redux-form/es/index";
+import PropTypes from 'prop-types';
 
 const AddColumnForm = ({handleSubmit, deactivateEditMode, classes}) => {
     return (
@@ -14,6 +15,12 @@ const AddColumnForm = ({handleSubmit, deactivateEditMode, classes}) => {
             </div>
         </form>
     );
+};
+
+AddColumnForm.propTypes = {
+    handleSubmit: PropTypes.func.isRequired,
+    deactivateEditMode: PropTypes.func.isRequired,
+    classes: PropTypes.object.isRequired,
 };
 
 export default reduxForm({form: "addColumn"})(AddColumnForm);

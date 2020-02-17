@@ -78,3 +78,21 @@ export const taskAPI = {
         })
     }
 };
+
+export const userAPI = {
+    getUser(token) {
+        setToken(token);
+        return instance.get ('', {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        });
+    },
+    updateUser (user) {
+        return instance.put ('',  {...user}, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        });
+    }
+};

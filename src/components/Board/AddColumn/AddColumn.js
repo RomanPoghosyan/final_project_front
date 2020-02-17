@@ -3,9 +3,10 @@ import AddColumnForm from "./AddColumnForm/AddColumnForm";
 import {makeStyles} from "@material-ui/core/styles";
 import {connect} from "react-redux";
 import {addColumn} from "../../../redux/board-reducer";
+import PropTypes from 'prop-types';
 
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
     container: {
         margin: "8px",
         border: "1px solid lightgrey",
@@ -61,6 +62,9 @@ const AddColumn = ({boardId, addColumn}) => {
     );
 };
 
-
+AddColumn.propTypes = {
+    boardId: PropTypes.string.isRequired,
+    addColumn: PropTypes.func.isRequired,
+};
 
 export default connect(null, {addColumn})(AddColumn);
