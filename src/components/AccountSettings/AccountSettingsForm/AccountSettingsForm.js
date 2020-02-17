@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useCallback, useEffect} from "react";
 import {reduxForm, Field} from "redux-form";
 import {renderTextField} from "../../common/FormControlls/FormControlls";
 import {Button} from "@material-ui/core";
@@ -17,9 +17,13 @@ import FormControl from "@material-ui/core/FormControl";
 let maxLength15 = maxLengthCreator(15);
 
 const AccountSettingsForm = ({classes, handleSubmit, error, initialize, user}) => {
+
+    const memoizedCallback  = useCallback((user) => initialize(user), [initialize]);
+
     useEffect(() => {
-        initialize({...user});
-    }, [user]);
+        memoizedCallback({...user});
+    }, [memoizedCallback, user]);
+
     return (
         <form onSubmit={handleSubmit} className={classes.form}>
             <FormControl className={classes.formGroup}>
@@ -29,7 +33,7 @@ const AccountSettingsForm = ({classes, handleSubmit, error, initialize, user}) =
                     <Field label={"Last name:"} name={"last_name"} component={renderTextField}
                            validate={[required, onlyCharacters, maxLength15]}/>
                     <Field label={"Username:"} name={"username"} component={renderTextField} validate={[required]}/>
-                    <Field label={"Phone number:"} name={"phoneNumber"} component={renderTextField}
+                    <Field label={"Phone number:"} name={"phone_number"} component={renderTextField}
                            validate={[phoneNumberChecker]}/>
                 </FormGroup>
                 <FormGroup>

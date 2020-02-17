@@ -63,7 +63,7 @@ const AddColumn = ({boardId, addColumn}) => {
 };
 
 AddColumn.propTypes = {
-    boardId: PropTypes.number.isRequired,
+    boardId: PropTypes.string.isRequired,
     addColumn: PropTypes.func.isRequired,
 };
 

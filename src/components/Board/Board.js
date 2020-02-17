@@ -52,7 +52,7 @@ const Board = (props) => {
 Board.propTypes = {
     taskMoved: PropTypes.func.isRequired,
     board: PropTypes.object.isRequired,
-    match: PropTypes.string.isRequired
+    match: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({

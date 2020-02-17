@@ -13,7 +13,7 @@ const initialState = {
     location: null,
     created_at: null,
     updated_at: null,
-    phoneNumber: null,
+    phone_number: null,
     isAuth: false,
 };
 
@@ -50,15 +50,15 @@ const userReducer = (state = initialState, action) => {
 
 export const getUserData = () => dispatch => {
     let token = window.localStorage.getItem('token');
-    if (!token)
-        return;
-    userAPI.getUser(token).then(({data}) => {
-        if (data.resultCode === 0) {
-            const {id, email, username, first_name, last_name, location, created_at, updated_at, phone_number} = data.body;
-            dispatch(setUserData(id, email, username, first_name, last_name,
-                location, created_at, updated_at, phone_number, true));
-        }
-    });
+    if (token)
+        return userAPI.getUser(token)
+            .then(({data}) => {
+                if (data.resultCode === 0) {
+                    const {id, email, username, first_name, last_name, location, created_at, updated_at, phone_number} = data.body;
+                    dispatch(setUserData(id, email, username, first_name, last_name,
+                        location, created_at, updated_at, phone_number, true));
+                }
+        });
 };
 
 /**
@@ -95,18 +95,18 @@ export function setUserData(id, email, username, first_name, last_name, location
  */
 
 export const updateUser = (user) => dispatch => {
-    userAPI.updateUser(user).then(({data}) => {
-        if (data.resultCode === 0) {
-            const {id, email, username, first_name, last_name, location, created_at, updated_at, phone_number} = user;
-            dispatch(setUserData(id, email, username, first_name, last_name,
-                location, created_at, updated_at, phone_number, true));
-            dispatch(setNotify({open: true, type: 'success', content: 'Account settings are changed'}));
-        }
-    }).catch(({response: {data}}) => {
-        let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
-        dispatch(stopSubmit("settings", {_error: message}));
-        dispatch(setNotify({open: true, type: 'error', content: 'Account settings are not changed'}));
-    });
+    userAPI.updateUser(user)
+        .then(({data}) => {
+            if (data.resultCode === 0) {
+                const {id, email, username, first_name, last_name, location, created_at, updated_at, phone_number} = data.body;
+                dispatch(setUserData(id, email, username, first_name, last_name, location, created_at, updated_at, phone_number, true));
+                dispatch(setNotify({open: true, type: 'success', content: 'Account settings are changed'}));
+            }
+        }).catch(({response: {data}}) => {
+            let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
+            dispatch(stopSubmit("settings", {_error: message}));
+            dispatch(setNotify({open: true, type: 'error', content: 'Account settings are not changed'}));
+        });
 };
 
 /**

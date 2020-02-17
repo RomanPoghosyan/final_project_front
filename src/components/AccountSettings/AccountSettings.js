@@ -1,8 +1,8 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import AccountSettingsForm from "./AccountSettingsForm/AccountSettingsForm";
 import {useDispatch, useSelector} from "react-redux";
-import {getUserData, updateUser} from "../../redux/user-reducer";
+import {updateUser} from "../../redux/user-reducer";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 
 const useStyles = makeStyles(() => ({
@@ -32,16 +32,14 @@ const useStyles = makeStyles(() => ({
 const AccountSettings = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const user = useSelector(state => state.user);
+    const {id, isAuth, ...user} = useSelector(state => state.user);
 
     const onSubmit = formData => {
+        debugger;
         dispatch(updateUser(formData));
     };
-    useEffect(() => {
-        dispatch(getUserData());
-    }, []);
 
-    if(!user.username) return <p>Loading...</p>;
+    if(!isAuth) return <p>Loading...</p>;
     return (
         <AccountSettingsForm onSubmit={onSubmit} user={user} classes={classes}/>
     )
