@@ -3,6 +3,8 @@ import * as axios from "axios";
 let TOKEN = "";
 const AUTHORIZATION = "Authorization";
 
+
+
 const getToken = () => {
     return `Bearer ${TOKEN}`;
 };
@@ -55,6 +57,15 @@ export const boardAPI = {
                 }
             }
         );
+    },
+    addColumn(status) {
+        return instance.post(`statuses`, {
+            ...status
+        }, {
+            headers: {
+                "Authorization": getToken(),
+            }
+        } )
     }
 };
 
@@ -65,5 +76,23 @@ export const taskAPI = {
                 [AUTHORIZATION]: getToken()
             }
         })
+    }
+};
+
+export const userAPI = {
+    getUser(token) {
+        setToken(token);
+        return instance.get ('', {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        });
+    },
+    updateUser (user) {
+        return instance.put ('',  {...user}, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        });
     }
 };

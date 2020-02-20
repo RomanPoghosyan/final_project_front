@@ -1,15 +1,14 @@
-import React, {memo, useCallback, useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {BrowserRouter as Router, Route, Switch, withRouter} from "react-router-dom";
-import {makeStyles} from "@material-ui/styles";
+import {makeStyles, ThemeProvider} from "@material-ui/styles";
 import Auth from "./components/Auth/Auth";
 import Main from "./components/Main/Main";
-import {Provider, useSelector, useDispatch} from "react-redux";
+import {connect, Provider} from "react-redux";
 import store from "./redux/store";
 import {compose} from "redux";
-import {initializedSuccess} from "./redux/app-reducer";
 import theme from "./utils/styles/theme";
-import {ThemeProvider} from "@material-ui/styles";
-import PropTypes from "prop-types";
+import {initialize} from './redux/app-reducer';
+import PropTypes from 'prop-types';
 
 
 const useStyles = makeStyles({
@@ -20,11 +19,9 @@ const useStyles = makeStyles({
 });
 
 
-const App = (props) => {
+const App = ({initialized, initialize}) => {
     const classes = useStyles();
-    const initialize = useDispatch();
-    const memoizedCallback  = useCallback(() => initialize(initializedSuccess()), [props]);
-    const initialized = useSelector(state => state.app.initialized);
+    const memoizedCallback  = useCallback(() => initialize(), [initialize]);
     useEffect(() => {
         memoizedCallback();
     }, [memoizedCallback]);
@@ -41,10 +38,19 @@ const App = (props) => {
     );
 };
 
+App.propTypes = {
+    initialized: PropTypes.bool.isRequired,
+    initialize: PropTypes.func.isRequired,
+};
+
+let mapStateToProps = (state) => ({
+    initialized: state.app.initialized
+});
 
 const AppWithData = compose(
     withRouter,
-)(memo(App));
+    connect(mapStateToProps, {initialize})
+)(App);
 
 const AppContainer = () => {
     return (
