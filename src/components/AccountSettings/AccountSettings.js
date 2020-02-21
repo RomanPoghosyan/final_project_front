@@ -35,7 +35,6 @@ const AccountSettings = () => {
     const {id, isAuth, ...user} = useSelector(state => state.user);
 
     const onSubmit = formData => {
-        debugger;
         dispatch(updateUser(formData));
     };
 

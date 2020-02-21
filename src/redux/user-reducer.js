@@ -58,7 +58,9 @@ export const getUserData = () => dispatch => {
                     dispatch(setUserData(id, email, username, first_name, last_name,
                         location, created_at, updated_at, phone_number, true));
                 }
-        });
+        }).catch ( () => {
+                logout();
+            });
 };
 
 /**

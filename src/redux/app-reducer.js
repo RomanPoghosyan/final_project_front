@@ -1,4 +1,5 @@
 import {getUserData} from "./user-reducer";
+import {getLastNotifications} from "./notification-reducer";
 
 const INITIALIZED_SUCCESS = "INITIALIZED_SUCCESS";
 
@@ -45,6 +46,7 @@ export const initializedSuccess = () => ({type: INITIALIZED_SUCCESS});
 
 export const initialize = () => async (dispatch) => {
     await dispatch(getUserData());
+    await dispatch(getLastNotifications());
     dispatch(initializedSuccess());
 };
 

@@ -4,10 +4,22 @@ let TOKEN = "";
 const AUTHORIZATION = "Authorization";
 
 
-
+/**
+ *
+ * getToken ( returns TOKEN with Bearer keyword )
+ *
+ * @returns {string}
+ */
 const getToken = () => {
     return `Bearer ${TOKEN}`;
 };
+
+/**
+ *
+ * setToken ( setter for token )
+ *
+ * @param t
+ */
 const setToken = (t) => {
     TOKEN = t;
 };
@@ -19,7 +31,12 @@ const instance = axios.create({
     }
 });
 
-
+/**
+ *
+ * authAPI ( authentication api calls )
+ *
+ * @type {{logout(): void, me(*=): *, login(*=, *): *, signup(*): *}}
+ */
 export const authAPI = {
     me(token) {
         setToken(token);
@@ -40,6 +57,12 @@ export const authAPI = {
     },
 };
 
+/**
+ *
+ * boardAPI ( board API calls )
+ *
+ * @type {{getAllByUserId(*): *, addColumn(*): *, addBoard(*): *}}
+ */
 export const boardAPI = {
     getAllByUserId(userId) {
         return instance.get(`projects/all/${userId}`, {
@@ -69,6 +92,14 @@ export const boardAPI = {
     }
 };
 
+
+/**
+ *
+ * taskAPI ( task API calls )
+ *
+ * @type {{addTask(*): *}}
+ */
+
 export const taskAPI = {
     addTask (task) {
         return instance.post(`tasks`, {...task}, {
@@ -79,6 +110,12 @@ export const taskAPI = {
     }
 };
 
+/**
+ *
+ * userAPI ( user API calls )
+ *
+ * @type {{getUser(*=): *, updateUser(*): *}}
+ */
 export const userAPI = {
     getUser(token) {
         setToken(token);
@@ -95,4 +132,46 @@ export const userAPI = {
             }
         });
     }
+};
+
+
+/**
+ *
+ * notificationAPI ( notification API calls )
+ *
+ * @type {{sendInvitationNotification(*): *, getNotifications(): *}}
+ */
+export const notificationAPI = {
+    sendInvitationNotification (notification) {
+        return instance.post(`notification/invite`, {...notification}, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        });
+    },
+
+    getNotifications () {
+        return instance.get ('notifications', {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        });
+    },
+
+    putNotificationStatus ( notificationId, isSeen ) {
+        return instance.put ( `notifications/set-status`, { notificationId, isSeen }, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        })
+    },
+
+    getLastFiveNotifications () {
+        return instance.get ( `notifications/last-notifications`, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        })
+    }
+
 };

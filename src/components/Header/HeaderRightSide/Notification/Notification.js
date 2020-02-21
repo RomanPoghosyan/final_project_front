@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import {Button} from "@material-ui/core";
-import {Close, NotificationsNone} from "@material-ui/icons";
-import StyledMenu from "../../../../utils/styles/StyledMenu";
-import Typography from "@material-ui/core/Typography";
-import {Link} from "react-router-dom";
+import {NotificationsNone} from "@material-ui/icons";
 import {makeStyles} from "@material-ui/styles";
+import { useSelector} from "react-redux";
+import Badge from "@material-ui/core/Badge";
+import NotificationMenu from "./NotificationMenu/NotificationMenu";
 
-const useStyles = makeStyles ( theme => ({
+const useStyles = makeStyles(theme => ({
     notifications: {
         display: "grid",
         gridTemplateRows: "1fr 4fr",
@@ -28,12 +28,17 @@ const useStyles = makeStyles ( theme => ({
         width: '40px',
         minWidth: '0px',
         padding: '6px 0'
+    },
+    notificationItems: {
+        width: '80%',
+        margin: 'auto',
     }
 }));
 
 function Notification() {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
+    let notifications = useSelector(state => state.home.notification);
     function handleClose() {
         setAnchorEl(null);
     }
@@ -41,43 +46,36 @@ function Notification() {
     function handleClick(event) {
         setAnchorEl(event.currentTarget);
     }
+
+    notifications = notifications.filter ( notification => notification.status === 'NOT_SEEN');
+    if ( notifications.length > 5 ) {
+        notifications = convertToFiveNotification();
+    }
     return (
-      <>
-          <Button
-              aria-controls="customized-menu"
-              aria-haspopup="true"
-              variant="contained"
-              color="primary"
-              onClick={handleClick}
-              className={classes.notificationButton}
-          >
-              <NotificationsNone />
-          </Button>
-          <StyledMenu
-              type={"notification"}
-              id="customized-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-          >
-              <section className={classes.notifications}>
-                  <header className={classes.header}>
-                      <Typography variant="h6" component="h6" align={"right"}>
-                          Notifications
-                      </Typography>
-                      <Close cursor={"pointer"} className={classes.close} onClick={handleClose}/>
-                  </header>
-                  <div className={classes.notificationList}>
-                      <Typography variant={"subtitle2"}>
-                          Нет непрочитанных уведомлений
-                          Нажмите <Link to={"/"}>Просмотреть все</Link>, чтобы просмотреть все уведомления
-                      </Typography>
-                  </div>
-              </section>
-          </StyledMenu>
-      </>
+        <>
+            <Badge badgeContent={notifications.length} color="error">
+            <Button
+                aria-controls="customized-menu"
+                aria-haspopup="true"
+                variant="contained"
+                color="primary"
+                onClick={handleClick}
+                className={classes.notificationButton}
+            >
+                <NotificationsNone/>
+            </Button>
+            </Badge>
+            <NotificationMenu anchorEl={anchorEl} handleClose={handleClose} notifications={notifications} classes={classes}/>
+        </>
     );
+}
+
+function convertToFiveNotification(notifications) {
+    let result = [];
+    for ( let i = 0; i < 5; i++ ) {
+        result.push(notifications[i]);
+    }
+    return result;
 }
 
 export default Notification;
