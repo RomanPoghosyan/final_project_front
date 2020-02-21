@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     border: none;
+    font-family: "Roboto Light", "Roboto Thin", sans-serif;
 }
 
 html, body, #root {

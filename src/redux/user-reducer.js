@@ -164,7 +164,7 @@ export const signup = formData => dispatch => {
 export const logout = () => {
     window.localStorage.removeItem('token');
     authAPI.logout();
-    return setUserData(null, null, null, null, null, null, null, null, false);
+    return setUserData(null, null, null, null, null, null, null, null, null, false);
 };
 
 export default userReducer;
