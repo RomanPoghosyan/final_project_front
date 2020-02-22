@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 const Task = (props) => {
     const classes = useStyles();
     return (
-        <Draggable draggableId={props.task.id} index={props.index}>
+        <Draggable draggableId={String(props.task.id)} index={props.index}>
             {
                 (provided, snapshot) => (
                     <div className={`${classes.container} ${snapshot.isDragging ? classes.isDragging : ""}`}
@@ -28,7 +28,7 @@ const Task = (props) => {
                          {...provided.draggableProps}
                          {...provided.dragHandleProps}
                     >
-                        {props.task.content}
+                        {props.task.title}
                     </div>
                 )
             }

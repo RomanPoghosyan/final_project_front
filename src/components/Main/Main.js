@@ -10,7 +10,7 @@ import AccountSettings from "../AccountSettings/AccountSettings";
 import Notify from "../Notify/Notify";
 import AllNotifications from "../AllNotifications/AllNotifications";
 
-const Board = React.lazy(() => import("../Board/Board"));
+const BoardContainer = React.lazy(() => import("../Board/BoardContainer"));
 
 const useStyles = makeStyles({
     mainWrapper: {
@@ -30,7 +30,7 @@ const Main = ({isAuth}) => {
                 <Switch>
                     <Route exact path={"/"} component={MainContent}/>
                     <Route path={'/account-settings'} component={AccountSettings}/>
-                    <Route path={"/board/:boardId"} render={() => <Suspense fallback={"loadingggg"}><Board/></Suspense>}/>
+                    <Route path={"/board/:boardId"} render={() => <Suspense fallback={"loadingggg"}><BoardContainer /></Suspense>}/>
                     <Route path={"/notifications"} component={AllNotifications}/>
                 </Switch>
             </div>

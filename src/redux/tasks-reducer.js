@@ -1,56 +1,60 @@
 import {taskAPI} from "../API/api";
-import {stopSubmit} from "redux-form";
 
-const ADD_TASK = "ADD_TASK";
+const SET_TASKS = "SET_TASKS";
+const ADD_TASK_SUCCESS = "ADD_TASK_SUCCESS";
 
-const initialState = {};
-
-/**
- *
- * tasksReducer ( should return new state for tasksReducer )
- *
- * @param state
- * @param action
- * @returns {{}}
- */
+const initialState = {
+    // tasks: {
+    //     1: {id: 1, title: "Watch 50 videos about React"},
+    //     2: {id: 2, title: "Spring 5 videos"},
+    //     3: {id: 3, title: "Complete DND"},
+    //     4: {id: 4, title: "Think about other brolems that might be happen"},
+    // },
+    // current: null,
+};
 
 export const tasksReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_TASK:
-            return {...state, ...action.payload};
+        case SET_TASKS:
+            return {
+                ...state,
+                tasks: {
+                    ...action.payload,
+                }
+            };
+        case ADD_TASK_SUCCESS:
+            const {task} = action.payload;
+            return {
+                ...state,
+                tasks: {
+                    ...state.tasks,
+                    ...task,
+                },
+            };
         default:
             return state;
     }
 };
 
-/**
- *
- * addTaskAction ( should return action with type ADD_TASK  )
- *
- * @param {Object} task
- * @returns {{payload: Object, type: string}}
- */
+export const setTasks = (tasks) => ({type: SET_TASKS, payload: tasks});
 
-export const addTaskAction = task => ({type: ADD_TASK, payload: task});
+export const addTaskSuccess = (task) => ({type: ADD_TASK_SUCCESS, payload: {task}});
 
-/**
- *
- * addTask ( should call to the server for posting task and call addTaskAction if everything was fine  )
- *
- * @param {Object} task
- * @returns {function(...[*]=)}
- */
-
-export const addTask = task => dispatch => {
+export const addTask = (title, columnId) => (dispatch, getState) => {
+    const task = {
+        title,
+        task_status_id: columnId,
+        project_id: getState().home.currentBoard.id,
+    };
     taskAPI.addTask(task)
         .then(({data}) => {
             if (data.resultCode === 0) {
-                dispatch(addTaskAction(data.body))
+                dispatch(addTaskSuccess(data.body));
+                // dispatch(addTaskToColumnSuccess(data.body, columnId));
             }
-        }).catch(({response: data}) => {
-            let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
-            dispatch(stopSubmit("addTask"), {_error: message});
-    })
+        })
+        .catch(({response: {data}}) => {
+            // let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
+            // dispatch(stopSubmit("addTask", {_error: message}));
+        });
 };
-// addTask ( { title: "Hello world", description: "wORLD hEllo", "project_id": "1", "assignee_id": "1", "assignor":"1" } );
-// window.addTask = addTask;

@@ -27,7 +27,7 @@ SignIn.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    isAuth: state.user.isAuth
+    isAuth: state.user.currentUser.isAuth
 });
 
 export default connect(mapStateToProps, {login})(SignIn);

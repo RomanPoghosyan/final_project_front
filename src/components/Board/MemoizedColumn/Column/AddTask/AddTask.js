@@ -1,25 +1,23 @@
 import React, {useState} from "react";
-import AddColumnForm from "./AddColumnForm/AddColumnForm";
 import {makeStyles} from "@material-ui/core/styles";
+import {Button} from "@material-ui/core";
+import AddTaskForm from "./AddTaskForm/AddTaskForm";
+// import {addTask} from "../../../../../redux/board-reducer";
+import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {addColumn} from "../../../redux/board-reducer";
-import PropTypes from 'prop-types';
+import {addTask} from "../../../../../redux/tasks-reducer";
 
 
 const useStyles = makeStyles(() => ({
     container: {
         margin: "8px",
-        border: "1px solid lightgrey",
-        borderRadius: "2px",
-        width: "220px",
-        height: 37,
         display: "flex",
         flexDirection: "column",
     },
-    title: {
-        padding: "8px",
-        cursor: "pointer",
-    },
+    // title: {
+    //     padding: "8px",
+    //     cursor: "pointer",
+    // },
     form: {
         display: "grid",
         gridRowGap: "3px",
@@ -37,7 +35,7 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const AddColumn = ({boardId, addColumn}) => {
+const AddTask = ({addTask, columnId}) => {
     const [editMode, setEditMode] = useState(false);
     const classes = useStyles();
 
@@ -50,21 +48,21 @@ const AddColumn = ({boardId, addColumn}) => {
     };
 
     const onSubmit = (formData) => {
-        addColumn(formData.columnName);
+        addTask(formData.taskName, columnId);
         setEditMode(false);
     } ;
 
+
     return (
         <div className={classes.container}>
-            {!editMode && <h3 onClick={activateEditMode} className={classes.title}>Add Column</h3>}
-            {editMode && <AddColumnForm onSubmit={onSubmit} deactivateEditMode={deactivateEditMode} classes={classes}/>}
+            {!editMode && <Button onClick={activateEditMode} type={"submit"} color={"secondary"} variant={"contained"} >Add</Button>}
+            {editMode && <AddTaskForm onSubmit={onSubmit} deactivateEditMode={deactivateEditMode} classes={classes}/>}
         </div>
     );
 };
 
-AddColumn.propTypes = {
-    boardId: PropTypes.number.isRequired,
-    addColumn: PropTypes.func.isRequired,
+AddTask.propTypes = {
+    columnId: PropTypes.number,
 };
 
-export default connect(null, {addColumn})(AddColumn);
+export default connect(null, {addTask})(AddTask);

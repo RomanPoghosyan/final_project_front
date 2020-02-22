@@ -32,7 +32,7 @@ const useStyles = makeStyles(() => ({
 const AccountSettings = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const {id, isAuth, ...user} = useSelector(state => state.user);
+    const {id, isAuth, ...user} = useSelector(state => state.user.currentUser);
 
     const onSubmit = formData => {
         dispatch(updateUser(formData));

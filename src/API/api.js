@@ -71,6 +71,14 @@ export const boardAPI = {
             }
         });
     },
+    getBoard(boardId) {
+        return instance.get(`projects/${boardId}`, {
+                headers: {
+                    [AUTHORIZATION]: getToken(),
+                }
+            }
+        );
+    },
     addBoard(board) {
         return instance.post(`projects`, {
                 ...board
@@ -81,6 +89,24 @@ export const boardAPI = {
             }
         );
     },
+    setColumnOrder(body) {
+        return instance.put(`projects/column-reorder`, {
+            ...body
+        }, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        })
+    },
+    setTaskOrder(body) {
+        return instance.put(`statuses/task-reorder`, {
+            ...body
+        }, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        })
+    },
     addColumn(status) {
         return instance.post(`statuses`, {
             ...status
@@ -89,7 +115,7 @@ export const boardAPI = {
                 "Authorization": getToken(),
             }
         } )
-    }
+    },
 };
 
 
@@ -126,6 +152,14 @@ export const userAPI = {
         });
     },
     updateUser (user) {
+        return instance.put ('users',  {...user}, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        });
+    },
+    search(username) {
+        return instance.get (`users/search/${username}`, {
         return instance.put ('users',  {...user}, {
             headers: {
                 [AUTHORIZATION]: getToken(),

@@ -3,18 +3,26 @@ import {stopSubmit} from "redux-form";
 import {setNotify} from "./notify-reducer";
 
 const SET_USER_FULL_DATA = "SET_USER_FULL_DATA";
+const SET_SEARCHED_USERS = "SET_SEARCHED_USERS";
 
 const initialState = {
-    id: null,
-    email: null,
-    username: null,
-    first_name: null,
-    last_name: null,
-    location: null,
-    created_at: null,
-    updated_at: null,
-    phone_number: null,
-    isAuth: false,
+    searchedUsers: [
+        // {id: 12, username: "black", first_name: "John"},
+        // {id: 13, username: "white", first_name: "Kaia"},
+        // {id: 14, username: "yellow", first_name: "Olivia"},
+    ],
+    currentUser: {
+        id: null,
+        email: null,
+        username: null,
+        first_name: null,
+        last_name: null,
+        location: null,
+        created_at: null,
+        updated_at: null,
+        phone_number: null,
+        isAuth: false,
+    }
 };
 
 /**
@@ -33,35 +41,20 @@ const userReducer = (state = initialState, action) => {
         case SET_USER_FULL_DATA:
             return {
                 ...state,
-                ...action.payload
+                currentUser: {...action.payload}
             };
-
+        case SET_SEARCHED_USERS:
+            return {
+                ...state,
+                searchedUsers: [
+                    ...action.payload,
+                ]
+            };
         default:
             return state;
     }
 };
 
-/**
- *
- * getUserData ( should call to the server for getting user object data and dispatch setUserData action )
- *
- * @returns {function(...[*]=)} (from thunk)
- */
-
-export const getUserData = () => dispatch => {
-    let token = window.localStorage.getItem('token');
-    if (token)
-        return userAPI.getUser(token)
-            .then(({data}) => {
-                if (data.resultCode === 0) {
-                    const {id, email, username, first_name, last_name, location, created_at, updated_at, phone_number} = data.body;
-                    dispatch(setUserData(id, email, username, first_name, last_name,
-                        location, created_at, updated_at, phone_number, true));
-                }
-        }).catch ( () => {
-                logout();
-            });
-};
 
 /**
  *
@@ -90,6 +83,31 @@ export function setUserData(id, email, username, first_name, last_name, location
 
 /**
  *
+ * getUserData ( should call to the server for getting user object data and dispatch setUserData action )
+ *
+ * @returns {function(...[*]=)} (from thunk)
+ */
+
+export const getUserData = () => dispatch => {
+    let token = window.localStorage.getItem('token');
+    if (token) {
+        return userAPI.getUser(token)
+            .then(({data}) => {
+                if (data.resultCode === 0) {
+                    const {id, email, username, first_name, last_name, location, created_at, updated_at, phone_number} = data.body;
+                    dispatch(setUserData(id, email, username, first_name, last_name,
+                        location, created_at, updated_at, phone_number, true));
+                }
+            })
+            .catch ( () => {
+                logout();
+            });
+    }
+};
+
+
+/**
+ *
  * updateUser ( should call to the server for updating user object data and dispatch setUserData action )
  *
  * @param {Object} user
@@ -104,7 +122,8 @@ export const updateUser = (user) => dispatch => {
                 dispatch(setUserData(id, email, username, first_name, last_name, location, created_at, updated_at, phone_number, true));
                 dispatch(setNotify({open: true, type: 'success', content: 'Account settings are changed'}));
             }
-        }).catch(({response: {data}}) => {
+        })
+        .catch(({response: {data}}) => {
             let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
             dispatch(stopSubmit("settings", {_error: message}));
             dispatch(setNotify({open: true, type: 'error', content: 'Account settings are not changed'}));
@@ -165,6 +184,24 @@ export const logout = () => {
     window.localStorage.removeItem('token');
     authAPI.logout();
     return setUserData(null, null, null, null, null, null, null, null, null, false);
+};
+
+export const setSearchedUsers = (searchedUsers) => ({type: SET_SEARCHED_USERS, payload: searchedUsers});
+
+export const search = username => dispatch => {
+    dispatch(setSearchedUsers([]));
+    if(username.length > 3) {
+        userAPI.search(username)
+            .then(({data}) => {
+                if (data.resultCode === 0) {
+                    dispatch(setSearchedUsers(data.body));
+                }
+            })
+            .catch(({response: {data}}) => {
+                console.log("error in search");
+                // let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
+            });
+    }
 };
 
 export default userReducer;

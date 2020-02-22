@@ -1,3 +1,5 @@
+import {search} from "../../redux/user-reducer";
+
 export const required = (input) => {
     if (!input)
         return "Field is required";
@@ -22,4 +24,8 @@ export const maxLengthCreator = (maxLength) => (input) => {
 export const phoneNumberChecker = input => {
     const REGEX = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s/0-9]*$/;
     return regexChecker(input, REGEX, "Enter valid phone number");
+};
+
+export const asyncValidate = async (values, dispatch) => {
+    return dispatch(search(values.username))
 };
