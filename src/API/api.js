@@ -143,7 +143,7 @@ export const userAPI = {
  */
 export const notificationAPI = {
     sendInvitationNotification (notification) {
-        return instance.post(`notification/invite`, {...notification}, {
+        return instance.post(`notifications/invite`, {...notification}, {
             headers: {
                 [AUTHORIZATION]: getToken(),
             }
@@ -173,5 +173,4 @@ export const notificationAPI = {
             }
         })
     }
-
 };

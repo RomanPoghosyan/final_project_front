@@ -31,7 +31,7 @@ const Main = ({isAuth}) => {
                     <Route exact path={"/"} component={MainContent}/>
                     <Route path={'/account-settings'} component={AccountSettings}/>
                     <Route path={"/board/:boardId"} render={() => <Suspense fallback={"loadingggg"}><Board/></Suspense>}/>
-                    <Route path={"/all-notifications"} component={AllNotifications}/>
+                    <Route path={"/notifications"} component={AllNotifications}/>
                 </Switch>
             </div>
             <Notify />

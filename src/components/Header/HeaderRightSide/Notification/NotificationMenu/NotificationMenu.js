@@ -33,7 +33,7 @@ function NotificationMenu({anchorEl, notifications, classes, handleClose}) {
                     <div className={classes.notificationList}>
                         <Typography variant={"subtitle2"}>
                             Нет непрочитанных уведомлений
-                            Нажмите <Link onClick={handleClose} to={"/all-notifications"}>Просмотреть все</Link>, чтобы просмотреть все уведомления
+                            Нажмите <Link onClick={handleClose} to={"/notifications"}>Просмотреть все</Link>, чтобы просмотреть все уведомления
                         </Typography>
                     </div>
                 </section>
