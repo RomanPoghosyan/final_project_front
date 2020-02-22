@@ -160,7 +160,6 @@ export const userAPI = {
     },
     search(username) {
         return instance.get (`users/search/${username}`, {
-        return instance.put ('users',  {...user}, {
             headers: {
                 [AUTHORIZATION]: getToken(),
             }
