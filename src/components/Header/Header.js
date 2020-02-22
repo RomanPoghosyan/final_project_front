@@ -54,7 +54,7 @@ Header.propTypes = {
 
 let mapStateToProps = (state) => {
     return {
-        isAuth: state.user.isAuth
+        isAuth: state.user.currentUser.isAuth
     };
 };
 

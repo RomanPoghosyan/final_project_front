@@ -3,18 +3,26 @@ import {stopSubmit} from "redux-form";
 import {setNotify} from "./notify-reducer";
 
 const SET_USER_FULL_DATA = "SET_USER_FULL_DATA";
+const SET_SEARCHED_USERS = "SET_SEARCHED_USERS";
 
 const initialState = {
-    id: null,
-    email: null,
-    username: null,
-    first_name: null,
-    last_name: null,
-    location: null,
-    created_at: null,
-    updated_at: null,
-    phone_number: null,
-    isAuth: false,
+    searchedUsers: [
+        // {id: 12, username: "black", first_name: "John"},
+        // {id: 13, username: "white", first_name: "Kaia"},
+        // {id: 14, username: "yellow", first_name: "Olivia"},
+    ],
+    currentUser: {
+        id: null,
+        email: null,
+        username: null,
+        first_name: null,
+        last_name: null,
+        location: null,
+        created_at: null,
+        updated_at: null,
+        phone_number: null,
+        isAuth: false,
+    }
 };
 
 /**
@@ -33,9 +41,15 @@ const userReducer = (state = initialState, action) => {
         case SET_USER_FULL_DATA:
             return {
                 ...state,
-                ...action.payload
+                currentUser: {...action.payload}
             };
-
+        case SET_SEARCHED_USERS:
+            return {
+                ...state,
+                searchedUsers: [
+                    ...action.payload,
+                ]
+            };
         default:
             return state;
     }
@@ -170,6 +184,24 @@ export const logout = () => {
     window.localStorage.removeItem('token');
     authAPI.logout();
     return setUserData(null, null, null, null, null, null, null, null, null, false);
+};
+
+export const setSearchedUsers = (searchedUsers) => ({type: SET_SEARCHED_USERS, payload: searchedUsers});
+
+export const search = username => dispatch => {
+    dispatch(setSearchedUsers([]));
+    if(username.length > 3) {
+        userAPI.search(username)
+            .then(({data}) => {
+                if (data.resultCode === 0) {
+                    dispatch(setSearchedUsers(data.body));
+                }
+            })
+            .catch(({response: {data}}) => {
+                console.log("error in search");
+                // let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
+            });
+    }
 };
 
 export default userReducer;

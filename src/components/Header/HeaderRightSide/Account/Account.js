@@ -44,7 +44,7 @@ function Account () {
         setAnchorEl(event.currentTarget);
     }
 
-    const fullName = useSelector(state => [state.user.first_name, state.user.last_name]);
+    const fullName = useSelector(state => [state.user.currentUser.first_name, state.user.currentUser.last_name]);
 
     return (
         <>

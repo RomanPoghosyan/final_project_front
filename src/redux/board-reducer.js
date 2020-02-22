@@ -1,4 +1,4 @@
-import {boardAPI, taskAPI} from "../API/api";
+import {boardAPI} from "../API/api";
 import {stopSubmit} from "redux-form";
 import {setTasks} from "./tasks-reducer";
 
@@ -102,12 +102,12 @@ export const dataFetched = (isFetched) => ({type: DATA_FETCHED, payload: isFetch
 export const setBoardData = (board) => ({type: SET_BOARD_DATA, payload: board});
 
 export const getBoardData = (boardId) => (dispatch) => {
+    dispatch(dataFetched(false));
     boardAPI.getBoard(boardId)
         .then(async ({data}) => {
             if (data.resultCode === 0) {
                 const {tasks, ...board} = data.body;
 
-                dispatch(dataFetched(false))
                 Promise.all([
                     dispatch(setTasks(tasks)),
                     dispatch(setBoardData(board)),

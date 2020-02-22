@@ -1,10 +1,9 @@
-import React, {useCallback, useEffect} from "react";
-import {withRouter} from "react-router-dom";
+import React from "react";
 import AddColumn from "./AddColumn/AddColumn";
 import {DragDropContext, Droppable} from "react-beautiful-dnd";
 import {connect} from "react-redux";
 import {compose} from "redux";
-import {getBoardData, taskMoved} from "../../redux/board-reducer";
+import {taskMoved} from "../../redux/board-reducer";
 import {makeStyles} from "@material-ui/core";
 import MemoizedColumn from "./MemoizedColumn/MemoizedColumn";
 import {PropTypes} from "prop-types";
@@ -16,21 +15,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const Board = ({board, tasks, match, taskMoved, getBoardData}) => {
+const Board = ({board, tasks, taskMoved}) => {
     const classes = useStyles();
-    const boardId = match.params.boardId;
-
-    const memoizedCallback  = useCallback((boardId) => getBoardData(boardId), [getBoardData]);
-
-    useEffect(() => {
-        memoizedCallback(boardId);
-    }, [memoizedCallback, boardId]);
 
     const onDragEnd = (result) => {
         taskMoved(result);
     };
 
-    if(!board.isFetched) return <p>Loasding...</p>
+    if(!board.isFetched) return <p>Loading...</p>
 
     const columns = board.columnOrder.map((columnId, index) => {
         const column = board.columns[columnId];
@@ -54,7 +46,7 @@ const Board = ({board, tasks, match, taskMoved, getBoardData}) => {
                     )}
                 </Droppable>
             </DragDropContext>
-            <AddColumn boardId={boardId}/>
+            <AddColumn boardId={board.id}/>
         </div>
     );
 };
@@ -62,7 +54,6 @@ const Board = ({board, tasks, match, taskMoved, getBoardData}) => {
 Board.propTypes = {
     taskMoved: PropTypes.func.isRequired,
     board: PropTypes.object.isRequired,
-    match: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -71,6 +62,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default compose(
-    withRouter,
-    connect(mapStateToProps, {taskMoved, getBoardData})
+    connect(mapStateToProps, {taskMoved})
 )(Board);

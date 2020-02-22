@@ -120,5 +120,12 @@ export const userAPI = {
                 [AUTHORIZATION]: getToken(),
             }
         });
+    },
+    search(username) {
+        return instance.get (`users/search/${username}`, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        });
     }
 };
