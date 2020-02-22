@@ -119,14 +119,14 @@ export const taskAPI = {
 export const userAPI = {
     getUser(token) {
         setToken(token);
-        return instance.get ('', {
+        return instance.get ('users', {
             headers: {
                 [AUTHORIZATION]: getToken(),
             }
         });
     },
     updateUser (user) {
-        return instance.put ('',  {...user}, {
+        return instance.put ('users',  {...user}, {
             headers: {
                 [AUTHORIZATION]: getToken(),
             }
