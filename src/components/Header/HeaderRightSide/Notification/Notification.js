@@ -47,7 +47,7 @@ function Notification() {
         setAnchorEl(event.currentTarget);
     }
 
-    notifications = notifications.filter ( notification => notification.status === 'NOT_SEEN');
+    notifications = notifications.filter( notification => notification.status === 'NOT_SEEN');
     if ( notifications.length > 5 ) {
         notifications = convertToFiveNotification();
     }

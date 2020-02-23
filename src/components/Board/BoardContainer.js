@@ -7,6 +7,7 @@ import {makeStyles} from "@material-ui/core";
 import {PropTypes} from "prop-types";
 import Board from "./Board";
 import Panel from "./Panel/Panel";
+import withAuthRedirect from "../../hoc/withAuthRedirect";
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -41,5 +42,6 @@ BoardContainer.propTypes = {
 
 export default compose(
     withRouter,
-    connect(null, {getBoardData})
+    connect(null, {getBoardData}),
+    withAuthRedirect(false)
 )(BoardContainer);

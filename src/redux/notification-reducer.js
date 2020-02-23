@@ -3,8 +3,20 @@ import {setNotify} from "./notify-reducer";
 
 export const SET_NOTIFICATIONS = 'SET_NOTIFICATIONS';
 export const SET_NOTIFICATION_STATUS_SUCCESS = 'SET_NOTIFICATION_STATUS_SUCCESS';
+export const SET_INVITATION_SUCCESS = 'SET_INVITATION_SUCCESS';
 
-const initialState = [];
+const initialState = [
+    // {
+    //     "id": 1,
+    //     "status": "NOT_SEEN",
+    //     "type": "INVITATION",
+    //     "notifiedByFirstName": "roman",
+    //     "notifiedByLastName": "roman",
+    //     "projectName": "First Project",
+    //     "taskTitle": null,
+    //     "invitationStatus": "PENDING"
+    // }
+];
 
 /**
  *
@@ -25,6 +37,16 @@ export const notificationReducer = (state = initialState, action) => {
                     return {
                         ...notification,
                         status: action.payload.status,
+                    };
+                }
+                return notification;
+            });
+        case SET_INVITATION_SUCCESS:
+            return state.map(notification => {
+                if (notification.id === action.payload.notificationId) {
+                    return {
+                        ...notification,
+                        invitationStatus: action.payload.status,
                     };
                 }
                 return notification;
@@ -65,20 +87,19 @@ export const getNotifications = () => dispatch => {
         })
 };
 
-/**
- *
- * sendInvitationNotification ( adds notification to the user )
- *
- * @param userId
- * @param projectId
- * @returns {function(*): *}
- */
-export const sendInvitationNotification = (userId, projectId) => dispatch => {
-    return notificationAPI.sendInvitationNotification({userId, projectId})
+export const getLastNotifications = () => (dispatch) => {
+    return notificationAPI.getLastFiveNotifications()
         .then(({data}) => {
-            console.log(data);
-        })
+            if (data.body !== null)
+                dispatch(setNotifications(data.body));
+        }).catch(({response: {data}}) => {
+            dispatch(setNotify({
+                open: true, type: 'error', content: `${data.message.length ? data.message :
+                    "Something went wrong"}`
+            }));
+        });
 };
+
 
 export const setNotificationStatusSuccess = (notificationId, status) => ({
     type: SET_NOTIFICATION_STATUS_SUCCESS,
@@ -88,12 +109,10 @@ export const setNotificationStatusSuccess = (notificationId, status) => ({
 export const setNotificationStatus = (notificationId, isSeen = false) => (dispatch, getState) => {
     return notificationAPI.putNotificationStatus(notificationId, isSeen)
         .then(({data}) => {
-            // const state = [...getState().home.notification];
-            // const index = state.findIndex(val => val.id === data.body.id );
-            // state[index].status = data.body.status;
-            // dispatch(setNotifications(state));
-            dispatch(setNotificationStatusSuccess(notificationId, data.body.status));
-            setNotify({open: true, type: "success", content: "Notification status is changed!"});
+            if (data.resultCode === 0) {
+                dispatch(setNotificationStatusSuccess(notificationId, data.body.status));
+                setNotify({open: true, type: "success", content: "Invitation accepted!"});
+            }
         }).catch(({response: {data}}) => {
             dispatch(setNotify({
                 open: true, type: 'error', content: `${data.message.length ? data.message :
@@ -102,15 +121,46 @@ export const setNotificationStatus = (notificationId, isSeen = false) => (dispat
         });
 };
 
-export const getLastNotifications = () => dispatch => {
-    return notificationAPI.getLastFiveNotifications()
-        .then ( ({data}) => {
-          if ( data.body !== null )
-              dispatch(setNotifications(data.body));
+
+/**
+ *
+ * sendInvitationNotification ( adds notification to the user )
+ *
+ * @param notification {{projectId: *, roleId: *, username: *}}
+ * @returns {function(*): *}
+ */
+export const sendInvitationNotification = (notification) => (dispatch, getState) => {
+    if (getState().user.searchedUsers.some(u => u.username === notification.username)) {
+        return notificationAPI.sendInvitationNotification(notification)
+            .then(({data}) => {
+                dispatch(setNotify({
+                    open: true, type: 'success', content: "Invitation sent!"
+                }));
+            });
+    } else {
+        dispatch(setNotify({
+            open: true, type: 'error', content: "Something went wrong"
+        }));
+    }
+};
+
+
+
+export const setInvitationStatus = (notificationId, status) => ({
+    type: SET_INVITATION_SUCCESS,
+    payload: {notificationId, status}
+});
+
+export const replyToInvitation = (notificationId, isAccepted) => (dispatch) => {
+    return notificationAPI.replyToInvitation(notificationId, isAccepted)
+        .then(({data}) => {
+            dispatch(setInvitationStatus(notificationId, data.body.invitationStatus));
+            setNotify({open: true, type: "success", content: `Invitation ${isAccepted? "accept" : "reject"}ed!`});
         }).catch(({response: {data}}) => {
             dispatch(setNotify({
                 open: true, type: 'error', content: `${data.message.length ? data.message :
                     "Something went wrong"}`
             }));
-        })
+        });
 };
+

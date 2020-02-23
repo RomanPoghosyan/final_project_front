@@ -4,7 +4,6 @@ import {setTasks} from "./tasks-reducer";
 
 const SET_BOARD_DATA = "SET_BOARD_DATA";
 const ADD_COLUMN_SUCCESS = "ADD_COLUMN_SUCCESS";
-// const ADD_TASK_SUCCESS = "ADD_TASK_SUCCESS";
 const ADD_TASK_TO_COLUMN_SUCCESS = "ADD_TASK_TO_COLUMN_SUCCESS";
 const COLUMN_REORDER = "COLUMN_REORDER";
 const TASK_REORDER = "TASK_REORDER";
@@ -55,23 +54,18 @@ export const boardReducer = (state = initialState, action) => {
                     ...action.payload,
                 },
                 columnOrder: [
-                    ...state.columnOrder, Object.keys(action.payload)[0],
+                    ...state.columnOrder, +Object.keys(action.payload)[0],
                 ]
             };
-        // case ADD_TASK_SUCCESS:
         case ADD_TASK_TO_COLUMN_SUCCESS:
             const {task, columnId} = action.payload;
             return {
                 ...state,
-                // tasks: {
-                //     ...state.tasks,
-                //     ...task,
-                // },
                 columns: {
                     ...state.columns,
                     [columnId]: {
                         ...state.columns[columnId],
-                        taskIds: [...state.columns[columnId].taskIds, Object.keys(task)[0]],
+                        taskIds: [...state.columns[columnId].taskIds, +Object.keys(task)[0]],
                     }
                 }
             };
@@ -141,29 +135,10 @@ export const addColumn = (name) => (dispatch, getState) => {
         });
 };
 
-// export const addTaskSuccess = (task, columnId) => ({type: ADD_TASK_SUCCESS, payload: {task, columnId}});
 export const addTaskToColumnSuccess = (task, columnId) => ({
     type: ADD_TASK_TO_COLUMN_SUCCESS,
     payload: {task, columnId}
 });
-
-// export const addTask = (title, columnId) => (dispatch, getState) => {
-//     const task = {
-//         title,
-//         task_status_id: columnId,
-//         project_id: getState().home.currentBoard.id,
-//     };
-//     taskAPI.addTask(task)
-//         .then(({data}) => {
-//             if (data.resultCode === 0) {
-//                 dispatch(addTaskSuccess(data.body, columnId));
-//             }
-//         })
-//         .catch(({response: {data}}) => {
-//             // let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
-//             // dispatch(stopSubmit("addTask", {_error: message}));
-//         });
-// };
 
 export const columnReordered = (columnOrder) => ({type: COLUMN_REORDER, payload: columnOrder});
 

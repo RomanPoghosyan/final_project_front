@@ -22,12 +22,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const AddUserForm = ({searchedUsers, handleClose, handleSubmit}) => {
+const AddUserForm = ({handleClose, handleSubmit}) => {
     const classes = useStyles();
     return (
         <form onSubmit={handleSubmit} className={classes.container}>
             <div className={classes.userList}>
-                <UserSelect searchedUsers={searchedUsers} />
+                <UserSelect />
             </div>
             <div className={classes.roleList}>
                 <RoleSelect />

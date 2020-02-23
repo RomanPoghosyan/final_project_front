@@ -1,6 +1,8 @@
-import React from "react";
-import AddUser from "./AddUser/AddUser";
+import React, {Suspense} from "react";
 import {makeStyles} from "@material-ui/core/styles";
+const AddUser = React.lazy(() => import("./AddUser/AddUser"));
+
+
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -16,7 +18,7 @@ const Panel = () => {
 
     return (
         <div className={classes.container}>
-            <AddUser />
+            <Suspense fallback={"Getting Roles"}><AddUser /></Suspense>
         </div>
     )
 };

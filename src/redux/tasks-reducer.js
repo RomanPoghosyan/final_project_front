@@ -1,4 +1,5 @@
 import {taskAPI} from "../API/api";
+import {addTaskToColumnSuccess} from "./board-reducer";
 
 const SET_TASKS = "SET_TASKS";
 const ADD_TASK_SUCCESS = "ADD_TASK_SUCCESS";
@@ -50,7 +51,7 @@ export const addTask = (title, columnId) => (dispatch, getState) => {
         .then(({data}) => {
             if (data.resultCode === 0) {
                 dispatch(addTaskSuccess(data.body));
-                // dispatch(addTaskToColumnSuccess(data.body, columnId));
+                dispatch(addTaskToColumnSuccess(data.body, columnId));
             }
         })
         .catch(({response: {data}}) => {

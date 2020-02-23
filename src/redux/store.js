@@ -3,7 +3,7 @@ import {reducer as formReducer} from "redux-form";
 import thunkMiddleware from "redux-thunk";
 import appReducer from "./app-reducer";
 import homeReducer from "./home-reducer";
-import userReducer from "./user-reducer";
+import userReducer, {USER_LOGOUT} from "./user-reducer";
 import notifyReducer from "./notify-reducer";
 import dndMiddleware from "./dnd-middleware";
 
@@ -15,8 +15,16 @@ let reducers = combineReducers({
     notify: notifyReducer
 });
 
+const rootReducer = (state, action) => {
+    if (action.type === USER_LOGOUT) {
+        state = undefined
+    }
+
+    return reducers(state, action)
+}
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducers, composeEnhancers(
+const store = createStore(rootReducer, composeEnhancers(
     applyMiddleware(dndMiddleware),
     applyMiddleware(thunkMiddleware),
 ));

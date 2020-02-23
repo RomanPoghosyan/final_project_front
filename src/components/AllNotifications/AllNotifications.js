@@ -5,6 +5,9 @@ import withAuthRedirect from "../../hoc/withAuthRedirect";
 import List from "@material-ui/core/List";
 import NotificationItems from "./NotificationItems/NotificationItems";
 
+/**
+ * @return {null}
+ */
 function AllNotifications () {
     const dispatch = useDispatch();
     const notifications = useSelector(state => state.home.notification);

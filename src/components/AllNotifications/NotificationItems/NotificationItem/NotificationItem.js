@@ -28,11 +28,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function NotificationItem({notification}) {
-        const isInvitation = Boolean(notification.invitationStatus);
+    const isInvitation = Boolean(notification.invitationStatus);
     const content = isInvitation ?
         ` has invited you to the ${notification.projectName} project!` : ` assigned you ${notification.taskTitle} task`;
     const isSeen = notification.status === 'SEEN';
-    const props = { isSeen };
+    const props = {isSeen};
     const classes = useStyles(props);
     const fullName = [notification.notifiedByFirstName, notification.notifiedByLastName];
     return (
@@ -56,7 +56,8 @@ function NotificationItem({notification}) {
                 </Typography>
                 {content}
             </CardContent>
-            <NotificationItemActions classes={classes} isSeen={isSeen} isInvitation ={isInvitation} id={notification.id} />
+            <NotificationItemActions classes={classes} isSeen={isSeen} isInvitation={isInvitation}
+                                     invitationStatus={notification.invitationStatus} id={notification.id}/>
         </Card>
     );
 }

@@ -16,7 +16,7 @@ const dndMiddleware = store => next => action => {
             newColumnOrder.splice(source.index, 1);
             newColumnOrder.splice(destination.index, 0, Number(draggableId.replace("column", "")));
             next(columnReordered(newColumnOrder));
-            reorder("setColumnOrder", {projectId: state.id, columnOrder: newColumnOrder});
+            next(reorder("setColumnOrder", {projectId: state.id, columnOrder: newColumnOrder}));
             return;
         }
 

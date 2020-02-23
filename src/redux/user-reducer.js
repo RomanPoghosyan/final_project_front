@@ -1,9 +1,11 @@
 import {authAPI, userAPI} from "../API/api";
 import {stopSubmit} from "redux-form";
 import {setNotify} from "./notify-reducer";
+import {initialize, initializedSuccess} from "./app-reducer";
 
 const SET_USER_FULL_DATA = "SET_USER_FULL_DATA";
 const SET_SEARCHED_USERS = "SET_SEARCHED_USERS";
+export const USER_LOGOUT = "USER_LOGOUT";
 
 const initialState = {
     searchedUsers: [
@@ -11,6 +13,7 @@ const initialState = {
         // {id: 13, username: "white", first_name: "Kaia"},
         // {id: 14, username: "yellow", first_name: "Olivia"},
     ],
+    boardUsers: [],
     currentUser: {
         id: null,
         email: null,
@@ -95,8 +98,7 @@ export const getUserData = () => dispatch => {
             .then(({data}) => {
                 if (data.resultCode === 0) {
                     const {id, email, username, first_name, last_name, location, created_at, updated_at, phone_number} = data.body;
-                    dispatch(setUserData(id, email, username, first_name, last_name,
-                        location, created_at, updated_at, phone_number, true));
+                    dispatch(setUserData(id, email, username, first_name, last_name, location, created_at, updated_at, phone_number, true));
                 }
             })
             .catch ( () => {
@@ -143,7 +145,7 @@ export const login = (email, password) => (dispatch) => {
         .then(({data}) => {
             if (data.resultCode === 0) {
                 window.localStorage.setItem('token', data.body.token);
-                dispatch(getUserData());
+                dispatch(initialize());
             }
         })
         .catch(({response: {data}}) => {
@@ -165,7 +167,7 @@ export const signup = formData => dispatch => {
         .then(({data}) => {
             if (data.resultCode === 0) {
                 localStorage.setItem('token', data.body.token);
-                dispatch(getUserData());
+                dispatch(initialize());
             }
         })
         .catch(({response: {data}}) => {
@@ -174,24 +176,27 @@ export const signup = formData => dispatch => {
         });
 };
 
+
+export const logoutSuccess = () => ({type: USER_LOGOUT});
+
 /**
  *
  * logout ( should call to the server for logout and dispatch setUserData action )
  *
- * @returns {{payload: {isAuth: *, updated_at: *, last_name: *, created_at: *, location: *, phone_number: *, id: *, first_name: *, email: *, username: *}, type: string}}
+ * @returns {{type: *}}
  */
-export const logout = () => {
+export const logout = () => dispatch => {
     window.localStorage.removeItem('token');
     authAPI.logout();
-    return setUserData(null, null, null, null, null, null, null, null, null, false);
+    dispatch(logoutSuccess());
+    dispatch(initializedSuccess());
 };
 
 export const setSearchedUsers = (searchedUsers) => ({type: SET_SEARCHED_USERS, payload: searchedUsers});
 
-export const search = username => dispatch => {
-    dispatch(setSearchedUsers([]));
+export const search = username => async (dispatch, getState) => {
     if(username.length > 3) {
-        userAPI.search(username)
+        userAPI.search(username, getState().home.currentBoard.id)
             .then(({data}) => {
                 if (data.resultCode === 0) {
                     dispatch(setSearchedUsers(data.body));
@@ -201,6 +206,8 @@ export const search = username => dispatch => {
                 console.log("error in search");
                 // let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
             });
+    } else {
+        dispatch(setSearchedUsers([]));
     }
 };
 

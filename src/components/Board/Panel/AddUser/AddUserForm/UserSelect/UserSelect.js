@@ -4,19 +4,20 @@ import {Field} from "redux-form";
 import {renderTextField} from "../../../../../common/FormControlls/FormControlls";
 import {required} from "../../../../../../utils/validators/validators";
 import FormLabel from "@material-ui/core/FormLabel";
+import {connect} from "react-redux";
 
 const UserSelect = ({searchedUsers}) => {
     return (
         <>
             <FormLabel component="legend">Username</FormLabel>
             <Autocomplete
-                id="combo-box-demo"
+                id="grouped-demo"
                 options={searchedUsers}
                 getOptionLabel={option => option.username}
                 renderOption={option => (
                     <React.Fragment>
                         <span>{option.username}</span>
-                        {option.first_name} ({option.id})
+                        {`${option.first_name} (${option.id})`}
                     </React.Fragment>
                 )}
                 renderInput={params => (
@@ -28,4 +29,11 @@ const UserSelect = ({searchedUsers}) => {
     );
 };
 
-export default UserSelect;
+
+
+const mapStateToProps = (state) => ({
+    searchedUsers: state.user.searchedUsers,
+});
+
+
+export default connect(mapStateToProps, null)(UserSelect);

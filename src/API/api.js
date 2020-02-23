@@ -158,8 +158,8 @@ export const userAPI = {
             }
         });
     },
-    search(username) {
-        return instance.get (`users/search/${username}`, {
+    search(username, boardId) {
+        return instance.get (`users/search/${username}/${boardId}`, {
             headers: {
                 [AUTHORIZATION]: getToken(),
             }
@@ -205,5 +205,24 @@ export const notificationAPI = {
                 [AUTHORIZATION]: getToken(),
             }
         })
-    }
+    },
+
+    replyToInvitation (notificationId, isAccepted) {
+        return instance.put ( `notifications/reply`, { notificationId, isAccepted }, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        })
+    },
+};
+
+
+export const rolesAPI = {
+    getRoles (boardId) {
+        return instance.get (`roles/${boardId}`, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        });
+    },
 };
