@@ -14,17 +14,10 @@ const useStyles = makeStyles ( theme => ({
         gridTemplateRows: "repeat(auto-fill, minmax(110px, 1fr))",
         gridGap: '10px',
         "& > *": {
-            cursor: "pointer"
+            cursor: "pointer",
+            backgroundColor: theme.palette.primary.main
         }
     },
-    board : {
-        display: "grid",
-        justifyItems: "center",
-        alignItems: "center",
-        backgroundColor: "f###",
-        cursor: "pointer",
-        borderRadius: "3px",
-    }
 }));
 
 function Boards({userId, boards, getBoards}) {

@@ -32,6 +32,9 @@ const useStyles = makeStyles(theme => ({
     notificationItems: {
         width: '80%',
         margin: 'auto',
+    },
+    notificationIcon: {
+        color: theme.palette.secondary.dark
     }
 }));
 
@@ -62,7 +65,7 @@ function Notification() {
                 onClick={handleClick}
                 className={classes.notificationButton}
             >
-                <NotificationsNone/>
+                <NotificationsNone className={classes.notificationIcon}/>
             </Button>
             </Badge>
             <NotificationMenu anchorEl={anchorEl} handleClose={handleClose} notifications={notifications} classes={classes}/>

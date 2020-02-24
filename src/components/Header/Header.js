@@ -9,11 +9,12 @@ import {connect} from "react-redux";
 import {logout} from "../../redux/user-reducer";
 import HeaderRightHand from "./HeaderRightSide/HeaderRightSide";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
     header: {
         display: "grid",
         gridTemplateColumns: "50px minmax(200px, 1fr)",
         padding: '5px',
+        backgroundColor: theme.palette.secondary.light
     },
     auth: {
         justifySelf: "end",

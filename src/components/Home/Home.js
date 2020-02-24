@@ -7,7 +7,7 @@ const useStyles = makeStyles ( (theme) => ({
             display: "grid",
             gridTemplateColumns: "1fr 3fr 1fr",
             height: '100%',
-            backgroundColor: theme.palette.primary.main
+            backgroundColor: theme.palette.secondary.dark
         }
 }));
 

@@ -1,6 +1,6 @@
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     container: {
         display: "grid",
         justifyItems: "center",
@@ -18,7 +18,14 @@ const useStyles = makeStyles({
         display: "grid",
         alignContent: "start",
         gridRowGap: "7px",
+        '& > button': {
+            backgroundColor: theme.palette.auth.secondary.main,
+            color: "#fff",
+            '&:hover': {
+                backgroundColor: theme.palette.auth.secondary.dark,
+            }
+        }
     },
-});
+}));
 
 export default useStyles;

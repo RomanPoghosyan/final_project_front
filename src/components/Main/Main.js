@@ -12,6 +12,7 @@ import AllNotifications from "../AllNotifications/AllNotifications";
 
 const BoardContainer = React.lazy(() => import("../Board/BoardContainer"));
 const Roles = React.lazy(() => import("../Roles/Roles"));
+const AllNotifications = React.lazy(() => import("../AllNotifications/AllNotifications"));
 
 const useStyles = makeStyles({
     mainWrapper: {
@@ -27,7 +28,7 @@ const Main = ({isAuth}) => {
     return (
         <div className={classes.mainWrapper}>
             <Header/>
-            <div className={classes.content}>
+            <div>
                 <Switch>
                     <Route exact path={"/"} component={MainContent}/>
                     <Route path={'/account-settings'} component={AccountSettings}/>

@@ -6,15 +6,16 @@ import {addColumn} from "../../../redux/board-reducer";
 import PropTypes from 'prop-types';
 
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
     container: {
         margin: "8px",
-        border: "1px solid lightgrey",
+        border: `1px solid ${theme.palette.primary.main}`,
         borderRadius: "2px",
         width: "220px",
         height: 37,
         display: "flex",
         flexDirection: "column",
+        backgroundColor: theme.palette.primary.main,
     },
     title: {
         padding: "8px",
