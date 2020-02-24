@@ -12,7 +12,7 @@ import PropTypes from "prop-types";
 import {makeStyles} from "@material-ui/core/styles";
 
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
     board: {
         borderRadius: "3px",
         cursor: "pointer",
@@ -27,6 +27,9 @@ const useStyles = makeStyles(() => ({
     },
     icons: {
         justifyContent: "flex-end"
+    },
+    addIcon: {
+        backgroundColor: theme.palette.secondary.light
     }
 }));
 
@@ -53,7 +56,7 @@ const AddBoard = (props) => {
             <Card onClick={handleClickOpen} className={classes.board}>
                 {/*<CardActionArea className={classes.area}>*/}
                     <CardContent className={classes.content}>
-                        <Fab color="secondary" aria-label="add">
+                        <Fab className={classes.addIcon} aria-label="add">
                             <AddIcon/>
                         </Fab>
                     </CardContent>

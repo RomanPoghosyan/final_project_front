@@ -5,11 +5,12 @@ import ListItem from "@material-ui/core/ListItem";
 import {makeStyles} from "@material-ui/styles";
 import PropTypes from "prop-types";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
    item: {
-       width: '100%'
+       width: '100%',
+       backgroundColor: theme.palette.secondary.dark,
    }
-});
+}));
 
 function NotificationItems({notifications}) {
     const classes = useStyles();

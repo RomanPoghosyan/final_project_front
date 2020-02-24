@@ -3,7 +3,7 @@ import {Card, CardActionArea, CardContent, makeStyles, Typography} from '@materi
 import {PropTypes} from "prop-types";
 import {Link} from "react-router-dom";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
     board: {
         borderRadius: "3px",
         cursor: "pointer",
@@ -13,7 +13,7 @@ const useStyles = makeStyles(() => ({
     },
     title: {
         padding: "7px",
-        color: "#000",
+        color: theme.palette.secondary.dark,
     },
     icons: {
         justifyContent: "flex-end"

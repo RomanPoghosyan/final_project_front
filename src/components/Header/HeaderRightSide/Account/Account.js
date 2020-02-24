@@ -28,7 +28,9 @@ const useStyles = makeStyles(theme => ({
     accountIcon: {
         width: '40px',
         minWidth: '0px',
-        padding: '6px 0'
+        padding: '6px 0',
+        fontWeight: "bold",
+        color: theme.palette.secondary.dark,
     }
 }));
 
@@ -51,8 +53,8 @@ function Account () {
             <Button
                 className={classes.accountIcon}
                 onClick={handleClick}
-                color="primary"
                 variant="contained"
+                color={"primary"}
                 aria-label="add">
                 {fullName[0][0].concat(fullName[1][0])}
             </Button>

@@ -5,7 +5,7 @@ import {Button, makeStyles} from "@material-ui/core";
 import {PropTypes} from "prop-types";
 import Logo from "../../common/Logo/Logo";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
     root: {
         display: "grid",
         justifyItems: "center",
@@ -19,14 +19,21 @@ const useStyles = makeStyles(() => ({
             textDecoration: "none"
         },
     },
+    switcher: {
+        backgroundColor: theme.palette.auth.secondary.main,
+        color: "#fff",
+        '&:hover': {
+            backgroundColor: theme.palette.auth.secondary.dark,
+        }
+    }
 }));
 
 
 const SignInUpSwitcher = ({location}) => {
     const inSignIn = location === '/sign-in';
-    const button = <Button children={inSignIn ? 'To Sign Up' : 'To Sign In'} variant={"contained"} color={"secondary"}/>;
     const logoElement =  <Link to={'/'}><Logo /></Link>;
     const classes = useStyles();
+    const button = <Button children={inSignIn ? 'To Sign Up' : 'To Sign In'} variant={"contained"} className={classes.switcher}/>;
     return (
         <div className={classes.root}>
             <HeaderText element={logoElement}/>

@@ -1,12 +1,12 @@
 import React, {memo} from 'react';
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles(( () => ({
+const useStyles = makeStyles(( theme => ({
     root: {
         display: "grid",
         justifyItems: "center",
         height: '100%',
-        background: 'linear-gradient(135deg, #0079bf, #5067c5)'
+        background: theme.palette.primary.main
     },
     content: {
         display: "grid",
@@ -24,7 +24,8 @@ const useStyles = makeStyles(( () => ({
         }
     },
     left: {
-        display: "grid"
+        display: "grid",
+        color: theme.palette.secondary.dark,
     }
 })));
 

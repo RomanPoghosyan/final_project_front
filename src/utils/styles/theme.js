@@ -6,11 +6,11 @@ const theme = createMuiTheme({
             color: '#fff',
         },
         primary: {
-            main: "#dedede",
+            main: "#89989d",
         },
         secondary: {
-            main: "#3f3f4b",
-            dark: "#3f51b5",
+            main: "#886d64",
+            dark: "#3f2727",
         },
         text: {
             color: '#fff',
@@ -18,6 +18,15 @@ const theme = createMuiTheme({
         textColor: '#fff',
         root: {
             textDecoration: 'none',
+        },
+        auth: {
+            secondary: {
+                main: "#3f3f4b",
+                dark: "#3f51b5",
+            },
+            primary: {
+                main: "#dedede"
+            }
         },
     }
 });

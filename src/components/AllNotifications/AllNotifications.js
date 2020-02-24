@@ -4,22 +4,35 @@ import {getNotifications} from "../../redux/notification-reducer";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import List from "@material-ui/core/List";
 import NotificationItems from "./NotificationItems/NotificationItems";
+import NoNotifications from "./NoNotifications/NoNotifications";
+import {makeStyles} from "@material-ui/styles";
+
+const useStyles = makeStyles(theme => ({
+    notifications: {
+        backgroundColor: theme.palette.primary.main,
+        width: "100%",
+        height: "100%",
+    },
+}));
 
 /**
  * @return {null}
  */
-function AllNotifications () {
+function AllNotifications() {
     const dispatch = useDispatch();
     const notifications = useSelector(state => state.home.notification);
+    const classes = useStyles();
     useEffect(() => {
         dispatch(getNotifications());
     }, [dispatch]);
 
     return (
-        notifications.length > 0 ?
-            <List>
-                <NotificationItems notifications={notifications} />
-            </List> : null
+        <div className={classes.notifications}>
+            {notifications.length > 0 ?
+                <List color={"primary"}>
+                    <NotificationItems notifications={notifications}/>
+                </List> : <NoNotifications/>}
+        </div>
     )
 }
 

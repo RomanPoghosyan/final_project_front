@@ -6,23 +6,23 @@ import PropTypes from "prop-types";
 import AddTask from "./AddTask/AddTask";
 
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
     container: {
-        border: "1px solid lightgrey",
+        border: `1px solid ${theme.palette.primary.main}`,
         borderRadius: "2px",
         margin: "8px",
         width: "220px",
         display: "flex",
         flexDirection: "column",
-        backgroundColor: "white",
+        backgroundColor: theme.palette.primary.main,
     },
     title: {
-        padding: "8px"
+        padding: "8px",
+        color: theme.palette.secondary.dark
     },
     taskList: {
         padding: "8px",
         transition: "background-color 0.2s ease",
-        backgroundColor: "white",
         flexGrow: "1",
         minHeight: "100px"
     },

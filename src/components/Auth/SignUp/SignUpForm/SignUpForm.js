@@ -18,7 +18,7 @@ const SignUpForm = ({className, handleSubmit, error}) => {
             <Field label={"Password"} id="standard-password-input" name={"password"} component={renderTextField}
                    validate={[required, maxLength15]}/>
             <FormHelperText error={!!error}>{error}</FormHelperText>
-            <Button type={"submit"} variant={"contained"} color={"secondary"}>Sign Up</Button>
+            <Button type={"submit"} variant={"contained"}>Sign Up</Button>
         </form>
     );
 };
