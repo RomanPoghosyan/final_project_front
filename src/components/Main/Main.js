@@ -8,9 +8,12 @@ import withAuthentication from "../../hoc/withAuthentication";
 import PropTypes from 'prop-types';
 import AccountSettings from "../AccountSettings/AccountSettings";
 import Notify from "../Notify/Notify";
+import AllNotifications from "../AllNotifications/AllNotifications";
 
 const BoardContainer = React.lazy(() => import("../Board/BoardContainer"));
 const AllNotifications = React.lazy(() => import("../AllNotifications/AllNotifications"));
+const Roles = React.lazy(() => import("../Roles/Roles"));
+
 const useStyles = makeStyles({
     mainWrapper: {
         display: "grid",
@@ -25,12 +28,13 @@ const Main = ({isAuth}) => {
     return (
         <div className={classes.mainWrapper}>
             <Header/>
-            <div>
+            <div className={classes.content}>
                 <Switch>
                     <Route exact path={"/"} component={MainContent}/>
                     <Route path={'/account-settings'} component={AccountSettings}/>
-                    <Route path={"/board/:boardId"} render={() => <Suspense fallback={"loadingggg"}><BoardContainer /></Suspense>}/>
-                    <Route path={"/notifications"} render={() => <Suspense fallback={"loading"}><AllNotifications/></Suspense> }/>
+                    <Route path={"/roles/:boardId"} render={() => <Suspense fallback={"loadingggg"}><Roles /></Suspense>}/>
+                    <Route exact path={"/board/:boardId"} boardId="Number" render={() => <Suspense fallback={"loadingggg"}><BoardContainer /></Suspense>}/>
+                    <Route path={"/notifications"} component={AllNotifications}/>
                 </Switch>
             </div>
             <Notify />
