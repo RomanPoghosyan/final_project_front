@@ -1,8 +1,8 @@
 import {search} from "../../redux/user-reducer";
 
-export const required = (input) => {
+export const requiredFieldCreator = label => input => {
     if (!input)
-        return "Field is required";
+        return `${label} is required`;
 };
 
 export const regexChecker = (input, REGEX, message) => {
