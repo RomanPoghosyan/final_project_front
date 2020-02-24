@@ -2,16 +2,30 @@ import {rolesAPI} from "../API/api";
 
 
 const SET_ROLES = "SET_ROLES";
+const SET_PRIVILEGES = "SET_PRIVILEGES";
 
 
-const initialState = [];
+const initialState = {
+    privileges: [],
+    roles: []
+};
 
-const roleReducer = (state = initialState, action) => {
+export const roleReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_ROLES:
-            return [
-                ...action.payload,
-            ]
+            return {
+                ...state,
+                roles: [
+                    ...action.payload,
+                ]
+            };
+        case SET_PRIVILEGES:
+            return {
+                ...state,
+                privileges: [
+                    ...action.payload,
+                ]
+            };
         default:
             return state;
     }
@@ -28,5 +42,15 @@ export const getBoardRoles = boardId => dispatch => {
         })
 };
 
+export const setPrivileges = roles => ({type: SET_PRIVILEGES, payload: roles});
 
-export default roleReducer;
+export const getPrivileges = () => dispatch => {
+    rolesAPI.getPrivileges()
+        .then(({data}) => {
+            if (data.resultCode === 0) {
+                dispatch(setPrivileges(data.body));
+            }
+        })
+};
+
+

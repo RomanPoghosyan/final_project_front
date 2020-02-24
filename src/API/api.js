@@ -225,4 +225,11 @@ export const rolesAPI = {
             }
         });
     },
+    getPrivileges() {
+        return instance.get (`roles/privileges`, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        });
+    }
 };

@@ -11,6 +11,7 @@ import Notify from "../Notify/Notify";
 import AllNotifications from "../AllNotifications/AllNotifications";
 
 const BoardContainer = React.lazy(() => import("../Board/BoardContainer"));
+const Roles = React.lazy(() => import("../Roles/Roles"));
 
 const useStyles = makeStyles({
     mainWrapper: {
@@ -30,7 +31,8 @@ const Main = ({isAuth}) => {
                 <Switch>
                     <Route exact path={"/"} component={MainContent}/>
                     <Route path={'/account-settings'} component={AccountSettings}/>
-                    <Route path={"/board/:boardId"} render={() => <Suspense fallback={"loadingggg"}><BoardContainer /></Suspense>}/>
+                    <Route path={"/roles/:boardId"} render={() => <Suspense fallback={"loadingggg"}><Roles /></Suspense>}/>
+                    <Route exact path={"/board/:boardId"} boardId="Number" render={() => <Suspense fallback={"loadingggg"}><BoardContainer /></Suspense>}/>
                     <Route path={"/notifications"} component={AllNotifications}/>
                 </Switch>
             </div>
