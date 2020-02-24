@@ -28,7 +28,6 @@ const AddUser = ({searchedUsers, boardId, getBoardRoles, sendInvitationNotificat
     };
 
     const onSubmit = (formData) => {
-        console.log({...formData, projectId: boardId});
         inviteUser({...formData, projectId: boardId});
         setOpen(false);
     };

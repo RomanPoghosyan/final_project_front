@@ -8,7 +8,6 @@ import withAuthentication from "../../hoc/withAuthentication";
 import PropTypes from 'prop-types';
 import AccountSettings from "../AccountSettings/AccountSettings";
 import Notify from "../Notify/Notify";
-import AllNotifications from "../AllNotifications/AllNotifications";
 
 const BoardContainer = React.lazy(() => import("../Board/BoardContainer"));
 const Roles = React.lazy(() => import("../Roles/Roles"));
@@ -34,7 +33,7 @@ const Main = ({isAuth}) => {
                     <Route path={'/account-settings'} component={AccountSettings}/>
                     <Route path={"/roles/:boardId"} render={() => <Suspense fallback={"loadingggg"}><Roles /></Suspense>}/>
                     <Route exact path={"/board/:boardId"} boardId="Number" render={() => <Suspense fallback={"loadingggg"}><BoardContainer /></Suspense>}/>
-                    <Route path={"/notifications"} component={AllNotifications}/>
+                    <Route path={"/notifications"} render={() => <Suspense fallback={"loading"}><AllNotifications/></Suspense> }/>
                 </Switch>
             </div>
             <Notify />

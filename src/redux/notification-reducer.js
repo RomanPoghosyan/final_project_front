@@ -46,7 +46,8 @@ export const notificationReducer = (state = initialState, action) => {
                 if (notification.id === action.payload.notificationId) {
                     return {
                         ...notification,
-                        invitationStatus: action.payload.status,
+                        status: action.payload.status,
+                        invitationStatus: action.payload.invitationStatus,
                     };
                 }
                 return notification;
@@ -146,15 +147,18 @@ export const sendInvitationNotification = (notification) => (dispatch, getState)
 
 
 
-export const setInvitationStatus = (notificationId, status) => ({
+export const setInvitationStatus = (notificationId, invitationStatus, status) => ({
     type: SET_INVITATION_SUCCESS,
-    payload: {notificationId, status}
+    payload: {notificationId, invitationStatus, status}
 });
 
 export const replyToInvitation = (notificationId, isAccepted) => (dispatch) => {
     return notificationAPI.replyToInvitation(notificationId, isAccepted)
         .then(({data}) => {
-            dispatch(setInvitationStatus(notificationId, data.body.invitationStatus));
+            dispatch(setInvitationStatus(notificationId, data.body.invitationStatus, "SEEN"));
+            if(data.body.invitationStatus === "ACCEPTED"){
+                // dispatch(getBoards())
+            }
             setNotify({open: true, type: "success", content: `Invitation ${isAccepted? "accept" : "reject"}ed!`});
         }).catch(({response: {data}}) => {
             dispatch(setNotify({

@@ -11,7 +11,7 @@ let maxLength15 = maxLengthCreator(15);
 const SignUpForm = ({className, handleSubmit, error}) => {
     return (
         <form onSubmit={handleSubmit} className={className}>
-            <Field label={"First name"} name={"first_name"} component={renderTextField} validate={[required, onlyCharacters, maxLength15]}/>
+            <Field label={"First name"} name={"first_name"} component={renderTextField} validate={[(i) => required(i, 'First Name'), onlyCharacters, maxLength15]}/>
             <Field label={"Last name"} name={"last_name"} component={renderTextField} validate={[required, onlyCharacters,maxLength15]}/>
             <Field label={"Username"} name={"username"} component={renderTextField} validate={[required]}/>
             <Field label={"Email"} name={"email"} component={renderTextField} validate={[required, emailChecker]}/>

@@ -22,7 +22,7 @@ const CustomRolesTable = () => {
 
     return (
         <DataTable
-            title="Initial Roles"
+            title="Custom Roles"
             columns={privileges}
             data={initialRoles}
             selectableRows // add for checkbox selection

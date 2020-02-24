@@ -231,5 +231,12 @@ export const rolesAPI = {
                 [AUTHORIZATION]: getToken(),
             }
         });
+    },
+    addRole (role) {
+        return instance.post(`roles`, {...role}, {
+            headers: {
+                [AUTHORIZATION]: getToken()
+            }
+        })
     }
 };
