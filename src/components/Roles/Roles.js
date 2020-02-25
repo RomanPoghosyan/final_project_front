@@ -24,7 +24,7 @@ const Roles = ({match}) => {
         <div>
             <InitialRolesTable />
             <CustomRolesTable />
-            <AddRole />
+            <AddRole boardId={boardId} />
         </div>
     )
 };

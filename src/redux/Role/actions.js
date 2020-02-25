@@ -27,15 +27,15 @@ export const getPrivileges = () => dispatch => {
 
 export const addRoleSuccess = (role) => ({type: ADD_ROLE_SUCCESS, payload: role})
 
-export const addRole = formData => (dispatch, getState) => {
+export const addRole = (boardId, formData) => (dispatch, getState) => {
     const formDataValues = Object.values(formData);
-    /* Check if at least one privilege is selected */
-    if (formDataValues.length < 2) {
-        return dispatch(stopSubmit("addRole", {_error: "Please select at least one privilege!"}));
-    }
 
     const roles = getState().home.role.roles;
     const privilegesIds = formDataValues.filter(v => typeof v === "number" && v !== 0);
+    /* Check if at least one privilege is selected */
+    if (privilegesIds.length < 1) {
+        return dispatch(stopSubmit("addRole", {_error: "Please select at least one privilege!"}));
+    }
     /* Check if current role already exists */
     if(isRoleExists(roles, privilegesIds)){
         return dispatch(stopSubmit("addRole", {_error: "Role with current privileges already exists!"}));
@@ -44,7 +44,7 @@ export const addRole = formData => (dispatch, getState) => {
     /* Adding new role */
     const role = {
         name: formData.role_name,
-        projectId: getState().home.currentBoard.id,
+        projectId: boardId,
         privilegesIds
     };
     rolesAPI.addRole(role)
