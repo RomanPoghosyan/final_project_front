@@ -1,4 +1,4 @@
-import {search} from "../../redux/user-reducer";
+import {search} from "../../redux/User/actions";
 
 export const required = (input) => {
     if (!input)

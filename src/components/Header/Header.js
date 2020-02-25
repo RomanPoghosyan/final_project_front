@@ -6,7 +6,6 @@ import Logo from "../common/Logo/Logo";
 import PropTypes from 'prop-types';
 import {compose} from "redux";
 import {connect} from "react-redux";
-import {logout} from "../../redux/user-reducer";
 import HeaderRightHand from "./HeaderRightSide/HeaderRightSide";
 
 const useStyles = makeStyles(theme => ({
@@ -60,5 +59,5 @@ let mapStateToProps = (state) => {
 };
 
 export default compose(
-    connect(mapStateToProps, {logout})
+    connect(mapStateToProps, null)
 )(Header);

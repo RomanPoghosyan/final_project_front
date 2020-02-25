@@ -4,8 +4,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 import {connect} from "react-redux";
 import AddUserForm from "./AddUserForm/AddUserForm";
-import {getBoardRoles} from "../../../../redux/role-reducer";
-import {sendInvitationNotification} from "../../../../redux/notification-reducer";
+import {getBoardRoles} from "../../../../redux/Role/actions";
+import {sendInvitationNotification} from "../../../../redux/Notification/actions";
 
 
 const AddUser = ({searchedUsers, boardId, getBoardRoles, sendInvitationNotification: inviteUser}) => {

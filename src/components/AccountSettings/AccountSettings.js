@@ -2,7 +2,7 @@ import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import AccountSettingsForm from "./AccountSettingsForm/AccountSettingsForm";
 import {useDispatch, useSelector} from "react-redux";
-import {updateUser} from "../../redux/user-reducer";
+import {updateUser} from "../../redux/User/actions";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 
 const useStyles = makeStyles(theme => ({

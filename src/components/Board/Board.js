@@ -3,7 +3,7 @@ import AddColumn from "./AddColumn/AddColumn";
 import {DragDropContext, Droppable} from "react-beautiful-dnd";
 import {connect} from "react-redux";
 import {compose} from "redux";
-import {taskMoved} from "../../redux/board-reducer";
+import {taskMoved} from "../../redux/Board/actions";
 import {makeStyles} from "@material-ui/core";
 import MemoizedColumn from "./MemoizedColumn/MemoizedColumn";
 import {PropTypes} from "prop-types";

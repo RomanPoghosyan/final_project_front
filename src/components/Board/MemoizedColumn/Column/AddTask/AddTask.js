@@ -2,10 +2,9 @@ import React, {useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import {Button} from "@material-ui/core";
 import AddTaskForm from "./AddTaskForm/AddTaskForm";
-// import {addTask} from "../../../../../redux/board-reducer";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {addTask} from "../../../../../redux/tasks-reducer";
+import {addTask} from "../../../../../redux/Tasks/actions";
 
 
 const useStyles = makeStyles(() => ({

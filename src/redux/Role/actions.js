@@ -1,48 +1,7 @@
-import {rolesAPI, taskAPI} from "../API/api";
+import {ADD_ROLE_SUCCESS, SET_PRIVILEGES, SET_ROLES} from "./action-types";
+import {rolesAPI} from "../../API/api";
 import {stopSubmit} from "redux-form";
-import arraysEqual from "../utils/helpers/arraysEqual";
-import {addTaskToColumnSuccess} from "./board-reducer";
-import {addTaskSuccess} from "./tasks-reducer";
-
-
-const SET_ROLES = "SET_ROLES";
-const SET_PRIVILEGES = "SET_PRIVILEGES";
-const ADD_ROLE_SUCCESS = "ADD_ROLE_SUCCESS";
-
-
-const initialState = {
-    privileges: [],
-    roles: []
-};
-
-export const roleReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case SET_ROLES:
-            return {
-                ...state,
-                roles: [
-                    ...action.payload,
-                ]
-            };
-        case SET_PRIVILEGES:
-            return {
-                ...state,
-                privileges: [
-                    ...action.payload,
-                ]
-            };
-        case ADD_ROLE_SUCCESS:
-            return {
-                ...state,
-                roles: [
-                    ...state.roles,
-                    action.payload
-                ]
-            }
-        default:
-            return state;
-    }
-};
+import arraysEqual from "../../utils/helpers/arraysEqual";
 
 export const setBoardRoles = roles => ({type: SET_ROLES, payload: roles});
 

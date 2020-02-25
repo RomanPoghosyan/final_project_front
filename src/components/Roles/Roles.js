@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getBoardRoles, getPrivileges} from "../../redux/role-reducer";
+import {getBoardRoles, getPrivileges} from "../../redux/Role/actions";
 import {compose} from "redux";
 import {withRouter} from "react-router-dom";
 import InitialRolesTable from "./InitialRolesTable/InitialRolesTable";

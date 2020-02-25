@@ -1,4 +1,4 @@
-import {boardAPI} from "../API/api";
+import {boardAPI} from "../../API/api";
 import {stopSubmit} from "redux-form";
 
 const SET_BOARDS = "SET_BOARDS";

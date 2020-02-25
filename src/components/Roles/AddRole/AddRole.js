@@ -1,7 +1,7 @@
 import React from "react";
 import AddRoleForm from "./AddRoleForm/AddRoleForm";
 import {useDispatch, useSelector} from "react-redux";
-import {addRole} from "../../../redux/role-reducer";
+import {addRole} from "../../../redux/Role/actions";
 
 
 const AddRole = () => {
@@ -10,8 +10,6 @@ const AddRole = () => {
 
 
     const onSubmit = (formData) => {
-        console.log("Roles",formData)
-        console.log("Roles length",Object.keys(formData).length)
         dispatch(addRole(formData));
     };
 

@@ -7,7 +7,7 @@ import {connect, Provider} from "react-redux";
 import store from "./redux/store";
 import {compose} from "redux";
 import theme from "./utils/styles/theme";
-import {initialize} from './redux/app-reducer';
+import {initialize} from './redux/App/actions';
 import PropTypes from 'prop-types';
 
 

@@ -1,61 +1,6 @@
-import {notificationAPI} from "../API/api";
-import {setNotify} from "./notify-reducer";
-
-export const SET_NOTIFICATIONS = 'SET_NOTIFICATIONS';
-export const SET_NOTIFICATION_STATUS_SUCCESS = 'SET_NOTIFICATION_STATUS_SUCCESS';
-export const SET_INVITATION_SUCCESS = 'SET_INVITATION_SUCCESS';
-
-const initialState = [
-    // {
-    //     "id": 1,
-    //     "status": "NOT_SEEN",
-    //     "type": "INVITATION",
-    //     "notifiedByFirstName": "roman",
-    //     "notifiedByLastName": "roman",
-    //     "projectName": "First Project",
-    //     "taskTitle": null,
-    //     "invitationStatus": "PENDING"
-    // }
-];
-
-/**
- *
- * notificationReducer ( should return new state for notificationReducer )
- *
- * @param {Array} state
- * @param {Object} action
- * @returns {{}}
- */
-
-export const notificationReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case SET_NOTIFICATIONS:
-            return action.payload;
-        case SET_NOTIFICATION_STATUS_SUCCESS:
-            return state.map(notification => {
-                if (notification.id === action.payload.notificationId) {
-                    return {
-                        ...notification,
-                        status: action.payload.status,
-                    };
-                }
-                return notification;
-            });
-        case SET_INVITATION_SUCCESS:
-            return state.map(notification => {
-                if (notification.id === action.payload.notificationId) {
-                    return {
-                        ...notification,
-                        status: action.payload.status,
-                        invitationStatus: action.payload.invitationStatus,
-                    };
-                }
-                return notification;
-            });
-        default:
-            return state;
-    }
-};
+import {notificationAPI} from "../../API/api";
+import {setNotify} from "../Notify/notify-reducer";
+import {SET_INVITATION_SUCCESS, SET_NOTIFICATION_STATUS_SUCCESS, SET_NOTIFICATIONS} from "./action-types";
 
 /**
  *
