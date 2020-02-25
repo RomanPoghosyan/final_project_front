@@ -5,9 +5,7 @@ import {renderCheckbox} from "../../../../common/FormControlls/FormControlls";
 
 const MemoizedCheckboxes = React.memo(({privileges}) => {
     return privileges.map(p => (
-        <span key={p.id}>
-            <Field normalize={v => v ? p.id : 0} name={`${p.name}`} component={renderCheckbox}/>
-        </span>
+        <Field key={p.id} normalize={v => v ? p.id : 0} name={`${p.name}`} component={renderCheckbox}/>
     ))
 });
 

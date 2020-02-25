@@ -31,8 +31,8 @@ const Main = ({isAuth}) => {
                 <Switch>
                     <Route exact path={"/"} component={MainContent}/>
                     <Route path={'/account-settings'} component={AccountSettings}/>
-                    <Route path={"/roles/:boardId"} render={() => <Suspense fallback={"loadingggg"}><Roles /></Suspense>}/>
-                    <Route exact path={"/board/:boardId"} boardId="Number" render={() => <Suspense fallback={"loadingggg"}><BoardContainer /></Suspense>}/>
+                    <Route path={"/roles/:boardId"} render={() => <Suspense fallback={"loading"}><Roles /></Suspense>}/>
+                    <Route exact path={"/board/:boardId"} boardId="Number" render={() => <Suspense fallback={"loading"}><BoardContainer /></Suspense>}/>
                     <Route path={"/notifications"} render={() => <Suspense fallback={"loading"}><AllNotifications/></Suspense> }/>
                 </Switch>
             </div>
