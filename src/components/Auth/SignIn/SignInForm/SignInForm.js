@@ -1,4 +1,4 @@
-import {maxLengthCreator, required} from "../../../../utils/validators/validators";
+import {maxLengthCreator} from "../../../../utils/validators/validators";
 import {Field, reduxForm} from "redux-form";
 import {renderTextField} from "../../../common/FormControlls/FormControlls";
 import FormHelperText from "@material-ui/core/FormHelperText";
@@ -13,6 +13,7 @@ const requiredUsername = requiredFieldCreator("Username");
 const requiredPassword = requiredFieldCreator("Password");
 
 const SignInForm = (props) => {
+    console.log(props);
     return (
         <form onSubmit={props.handleSubmit} className={props.className}>
             <Field label={"Login"} id="standard-basic" name={"login"} component={renderTextField}

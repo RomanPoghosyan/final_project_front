@@ -58,9 +58,16 @@ export const addRole = (boardId, formData) => (dispatch, getState) => {
         .then(({data}) => {
             if (data.resultCode === 0) {
                 dispatch(addRoleSuccess(data.body));
+                dispatch(setNotify({
+                    open: true, type: 'success', content: `Role added successfully!`
+                }));
             }
         })
         .catch(({response: {data}}) => {
+            dispatch(setNotify({
+                open: true, type: 'error', content: `${data.message.length ? data.message :
+                    "Something went wrong"}`
+            }));
             // dispatch(stopSubmit("addTask", {_error: message}));
         });
 };
@@ -93,6 +100,9 @@ export const editRolePrivilege = (role, privilegeId, isAddition) => (dispatch, g
             if (data.resultCode === 0) {
                 if(isAddition) {dispatch(addPrivilegeToRole(role.id, privilegesIds))}
                 else {dispatch(removePrivilegeFromRole(role.id, privilegesIds))}
+                dispatch(setNotify({
+                    open: true, type: 'success', content: `Role updated successfully!`
+                }));
             }
         })
         .catch(({response: {data}}) => {
