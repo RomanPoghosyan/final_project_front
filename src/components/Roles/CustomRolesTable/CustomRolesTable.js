@@ -8,7 +8,7 @@ const CustomRolesTable = () => {
 
     const privileges = useSelector(getMappedCustomPrivilegesSelect);
 
-    const initialRoles = useSelector(getCustomRolesSelect);
+    const customRoles = useSelector(getCustomRolesSelect);
 
     const handleChange = (state) => {
         console.log('Selected Rows: ', state.selectedRows);
@@ -19,7 +19,7 @@ const CustomRolesTable = () => {
         <DataTable
             title="Custom Roles"
             columns={privileges}
-            data={initialRoles}
+            data={customRoles}
             selectableRows // add for checkbox selection
             selectableRowsComponent={Checkbox}
             onSelectedRowsChange={handleChange}
