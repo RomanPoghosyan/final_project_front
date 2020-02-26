@@ -3,9 +3,7 @@ import {makeStyles} from "@material-ui/styles";
 import {Button} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import Logo from "../common/Logo/Logo";
-import PropTypes from 'prop-types';
-import {compose} from "redux";
-import {connect} from "react-redux";
+import {useSelector} from "react-redux";
 import HeaderRightHand from "./HeaderRightSide/HeaderRightSide";
 
 const useStyles = makeStyles(theme => ({
@@ -24,19 +22,22 @@ const useStyles = makeStyles(theme => ({
         gridGap: '10px',
     },
     link: {
-      textDecoration: "none"
+        textDecoration: "none"
     },
 }));
 
-const Header = ({isAuth}) => {
+const Header = () => {
+    const isAuth = useSelector(state => state.user.currentUser.isAuth);
     const classes = useStyles();
     return (
         <header className={classes.header}>
-            <Link to={"/"}><Logo /></Link>
+            <Link to={"/"}><Logo/></Link>
             <div className={classes.auth}>
                 {!isAuth && <>
-                    <Link className={classes.link} to={"/sign-in"}><Button variant={"contained"} color={"primary"} >Sign in</Button></Link>
-                    <Link className={classes.link} to={'/sign-up'}><Button variant={"contained"} color={"primary"}>Sign up</Button></Link>
+                    <Link className={classes.link} to={"/sign-in"}><Button variant={"contained"} color={"primary"}>Sign
+                        in</Button></Link>
+                    <Link className={classes.link} to={'/sign-up'}><Button variant={"contained"} color={"primary"}>Sign
+                        up</Button></Link>
                 </>}
                 {isAuth && (
                     <HeaderRightHand/>
@@ -47,17 +48,4 @@ const Header = ({isAuth}) => {
     );
 };
 
-Header.propTypes = {
-    isAuth: PropTypes.bool.isRequired,
-};
-
-
-let mapStateToProps = (state) => {
-    return {
-        isAuth: state.user.currentUser.isAuth
-    };
-};
-
-export default compose(
-    connect(mapStateToProps, null)
-)(Header);
+export default Header;

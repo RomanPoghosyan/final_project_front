@@ -1,17 +1,16 @@
 import React from "react";
 import HeaderText from "../../common/HeaderText/HeaderText";
 import useStyles from "../../../utils/styles/useHeaderTextStyle";
-import {connect} from "react-redux";
+import {useDispatch} from "react-redux";
 import {login} from "../../../redux/User/actions";
-import PropTypes from "prop-types";
 import SignInForm from "./SignInForm/SignInForm";
 
 
-const SignIn = (props) => {
+const SignIn = () => {
     const classes = useStyles();
-
+    const dispatch = useDispatch();
     const onSubmit = (formData) => {
-        props.login(formData.login, formData.password);
+        dispatch(login(formData.login, formData.password));
     };
 
     return (
@@ -22,12 +21,4 @@ const SignIn = (props) => {
     );
 };
 
-SignIn.propTypes = {
-    login: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-    isAuth: state.user.currentUser.isAuth
-});
-
-export default connect(mapStateToProps, {login})(SignIn);
+export default SignIn;

@@ -4,15 +4,14 @@ import CardContent from "@material-ui/core/CardContent";
 import {Fab} from "@material-ui/core";
 import {Add as AddIcon} from "@material-ui/icons";
 import {addBoard} from "../../../../../redux/Boards/boards-reducer";
-import {connect} from "react-redux";
+import {useDispatch} from "react-redux";
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import AddBoardForm from "./AddBoardForm/AddBoardForm";
-import PropTypes from "prop-types";
 import {makeStyles} from "@material-ui/core/styles";
 
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     board: {
         borderRadius: "3px",
         cursor: "pointer",
@@ -34,10 +33,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const AddBoard = (props) => {
+const AddBoard = () => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
-
+    const dispatch = useDispatch();
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -47,7 +46,7 @@ const AddBoard = (props) => {
     };
 
     const onSubmit = (formData) => {
-        props.addBoard(formData);
+        dispatch(addBoard(formData));
         setOpen(false);
     };
 
@@ -55,24 +54,19 @@ const AddBoard = (props) => {
         <>
             <Card onClick={handleClickOpen} className={classes.board}>
                 {/*<CardActionArea className={classes.area}>*/}
-                    <CardContent className={classes.content}>
-                        <Fab className={classes.addIcon} aria-label="add">
-                            <AddIcon/>
-                        </Fab>
-                    </CardContent>
+                <CardContent className={classes.content}>
+                    <Fab className={classes.addIcon} aria-label="add">
+                        <AddIcon/>
+                    </Fab>
+                </CardContent>
                 {/*</CardActionArea>*/}
             </Card>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">New Board</DialogTitle>
-                <AddBoardForm onSubmit={onSubmit} handleClose={handleClose} />
+                <AddBoardForm onSubmit={onSubmit} handleClose={handleClose}/>
             </Dialog>
         </>
     );
 };
 
-AddBoard.propTypes = {
-    addBoard: PropTypes.func.isRequired,
-};
-
-
-export default connect(null, {addBoard})(AddBoard);
+export default AddBoard;
