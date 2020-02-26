@@ -7,16 +7,22 @@ import {
     maxLengthCreator,
     onlyCharacters,
     phoneNumberChecker,
-    required
+    requiredFieldCreator
 } from "../../../utils/validators/validators";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import PropTypes from 'prop-types';
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControl from "@material-ui/core/FormControl";
 
+
+const requiredFirstName = requiredFieldCreator("First name");
+const requiredLastName = requiredFieldCreator("Last name");
+const requiredUsername = requiredFieldCreator("Username");
+const requiredEmail = requiredFieldCreator("Email");
+
 let maxLength15 = maxLengthCreator(15);
 
-const AccountSettingsForm = ({classes, handleSubmit, error, initialize, user}) => {
+const AccountSettingsForm = ({classes, handleSubmit, error, initialize, user, submitSucceeded}) => {
 
     const memoizedCallback  = useCallback((user) => initialize(user), [initialize]);
 
@@ -29,17 +35,18 @@ const AccountSettingsForm = ({classes, handleSubmit, error, initialize, user}) =
             <FormControl className={classes.formControl}>
                 <FormGroup className={classes.formGroup}>
                     <Field label={"First name:"} name={"first_name"} component={renderTextField}
-                           validate={[required, onlyCharacters, maxLength15]}/>
+                           validate={[requiredFirstName, onlyCharacters, maxLength15]}/>
                     <Field label={"Last name:"} name={"last_name"} component={renderTextField}
-                           validate={[required, onlyCharacters, maxLength15]}/>
-                    <Field label={"Username:"} name={"username"} component={renderTextField} validate={[required]}/>
+                           validate={[requiredLastName, onlyCharacters, maxLength15]}/>
+                    <Field label={"Username:"} name={"username"} component={renderTextField}
+                           validate={[requiredUsername]}/>
                     <Field label={"Phone number:"} name={"phone_number"} component={renderTextField}
                            validate={[phoneNumberChecker]}/>
                 </FormGroup>
                 <FormGroup className={classes.formGroup}>
                     <Field label={"Location:"} name={"location"} component={renderTextField} validate={[]}/>
                     <Field label={"Email:"} name={"email"} component={renderTextField}
-                           validate={[required, emailChecker]}/>
+                           validate={[requiredEmail, emailChecker]}/>
                     <Field input={{disabled: true, defaultValue: user.created_at}} label={"Created at:"}
                            name={"created_at"}
                            component={renderTextField} validate={[]}/>
@@ -49,7 +56,8 @@ const AccountSettingsForm = ({classes, handleSubmit, error, initialize, user}) =
                 </FormGroup>
             </FormControl>
             <FormHelperText error={Boolean(error)}>{error}</FormHelperText>
-            <Button type={"submit"} variant={"contained"} color={"secondary"} className={classes.button}>Change information</Button>
+            <Button type={"submit"} variant={"contained"} color={"secondary"} disabled={submitSucceeded}
+                    className={classes.button}>Change information</Button>
         </form>
     )
 };
@@ -59,7 +67,8 @@ AccountSettingsForm.propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     error: PropTypes.string,
     initialize: PropTypes.func.isRequired,
-    user: PropTypes.object.isRequired
+    user: PropTypes.object.isRequired,
+    submitSucceeded: PropTypes.bool.isRequired,
 };
 
 export default reduxForm({form: "settings"})(AccountSettingsForm);

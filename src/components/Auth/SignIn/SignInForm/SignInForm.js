@@ -5,16 +5,22 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import {Button} from "@material-ui/core";
 import PropTypes from "prop-types";
 import React from "react";
+import {requiredFieldCreator} from "../../../../utils/validators/validators";
 
 let maxLength15 = maxLengthCreator(15);
+
+const requiredUsername = requiredFieldCreator("Username");
+const requiredPassword = requiredFieldCreator("Password");
 
 const SignInForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit} className={props.className}>
-            <Field label={"Login"} id="standard-basic" name={"login"} component={renderTextField} validate={[required]} />
-            <Field label={"Password"} id="standard-password" name={"password"} component={renderTextField} validate={[required, maxLength15]} />
-            <FormHelperText error={!!props.error}>{props.error}</FormHelperText>
-            <Button type={"submit"} variant={"contained"}>Sign In</Button>
+            <Field label={"Login"} id="standard-basic" name={"login"} component={renderTextField}
+                   validate={requiredUsername} />
+            <Field label={"Password"} id="standard-password" name={"password"}
+                   component={renderTextField} validate={[requiredPassword, maxLength15]} />
+            <FormHelperText error={Boolean(props.error)}>{props.error}</FormHelperText>
+            <Button type={"submit"} variant={"contained"} disabled={props.submitSucceeded}>Sign In</Button>
         </form>
     );
 };
@@ -23,6 +29,7 @@ SignInForm.propTypes = {
     className: PropTypes.string.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     error: PropTypes.string,
+    submitSucceeded: PropTypes.bool.isRequired,
 };
 
 export default reduxForm({form: "login"})(SignInForm);
