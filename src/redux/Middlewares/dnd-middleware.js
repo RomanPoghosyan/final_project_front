@@ -53,8 +53,10 @@ const dndMiddleware = store => next => action => {
 const reorder = (apiMethodName, requestBody) => dispatch => {
     return boardAPI[apiMethodName](requestBody)
         .catch(({response: {data}}) => {
-            let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
-            dispatch(setNotify({open: true, type: 'error', content: message}));
+            dispatch(setNotify({
+                open: true, type: 'error', content: `${data.message.length ? data.message :
+                    "Something went wrong"}`
+            }));
         });
 };
 
