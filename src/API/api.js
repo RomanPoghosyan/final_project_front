@@ -238,5 +238,12 @@ export const rolesAPI = {
                 [AUTHORIZATION]: getToken()
             }
         })
-    }
+    },
+    editRolePrivilege (data) {
+        return instance.put(`roles/privilege`, {...data}, {
+            headers: {
+                [AUTHORIZATION]: getToken()
+            }
+        })
+    },
 };
