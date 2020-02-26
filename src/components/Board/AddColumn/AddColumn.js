@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import AddColumnForm from "./AddColumnForm/AddColumnForm";
 import {makeStyles} from "@material-ui/core/styles";
 import {connect} from "react-redux";
-import {addColumn} from "../../../redux/board-reducer";
+import {addColumn} from "../../../redux/Board/actions";
 import PropTypes from 'prop-types';
 
 

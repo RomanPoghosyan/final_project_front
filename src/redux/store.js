@@ -1,11 +1,12 @@
 import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import {reducer as formReducer} from "redux-form";
 import thunkMiddleware from "redux-thunk";
-import appReducer from "./app-reducer";
-import homeReducer from "./home-reducer";
-import userReducer, {USER_LOGOUT} from "./user-reducer";
-import notifyReducer from "./notify-reducer";
-import dndMiddleware from "./dnd-middleware";
+import appReducer from "./App/app-reducer";
+import homeReducer from "./Home/home-reducer";
+import userReducer from "./User/user-reducer";
+import notifyReducer from "./Notify/notify-reducer";
+import dndMiddleware from "./Middlewares/dnd-middleware";
+import {USER_LOGOUT} from "./User/action-types";
 
 let reducers = combineReducers({
     app: appReducer,

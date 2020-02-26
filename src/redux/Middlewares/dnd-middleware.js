@@ -1,10 +1,11 @@
-import {isEqual} from "../utils/helpers/isEqual";
-import {columnReordered, taskReordered} from "./board-reducer";
-import {boardAPI} from "../API/api";
-import {setNotify} from "./notify-reducer";
+import {isEqual} from "../../utils/helpers/isEqual";
+import {columnReordered, taskReordered} from "../Board/actions";
+import {boardAPI} from "../../API/api";
+import {setNotify} from "../Notify/notify-reducer";
+import {TASK_MOVED} from "../Board/action-types";
 
 const dndMiddleware = store => next => action => {
-    if (action.type === "TASK_MOVED") {
+    if (action.type === TASK_MOVED) {
         const state = store.getState().home.currentBoard;
         const {destination, source, draggableId, type} = action.payload;
 

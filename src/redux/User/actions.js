@@ -1,62 +1,8 @@
-import {authAPI, userAPI} from "../API/api";
+import {SET_SEARCHED_USERS, SET_USER_FULL_DATA, USER_LOGOUT} from "./action-types";
+import {authAPI, userAPI} from "../../API/api";
+import {initialize, initializedSuccess} from "../App/actions";
+import {setNotify} from "../Notify/notify-reducer";
 import {stopSubmit} from "redux-form";
-import {setNotify} from "./notify-reducer";
-import {initialize, initializedSuccess} from "./app-reducer";
-
-const SET_USER_FULL_DATA = "SET_USER_FULL_DATA";
-const SET_SEARCHED_USERS = "SET_SEARCHED_USERS";
-export const USER_LOGOUT = "USER_LOGOUT";
-
-const initialState = {
-    searchedUsers: [
-        // {id: 12, username: "black", first_name: "John"},
-        // {id: 13, username: "white", first_name: "Kaia"},
-        // {id: 14, username: "yellow", first_name: "Olivia"},
-    ],
-    boardUsers: [],
-    currentUser: {
-        id: null,
-        email: null,
-        username: null,
-        first_name: null,
-        last_name: null,
-        location: null,
-        created_at: null,
-        updated_at: null,
-        phone_number: null,
-        isAuth: false,
-    }
-};
-
-/**
- *
- * userReducer ( should return new state for userReducer )
- *
- * @param {Object} state
- * @param {Object} action
- * @returns {{isAuth: boolean, phoneNumber: null || string, updated_at: null || string,
- * last_name: null || string, created_at: null || string, location: null || string,
- * first_name: null || string, email: null || string, username: null || string }}
- */
-
-const userReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case SET_USER_FULL_DATA:
-            return {
-                ...state,
-                currentUser: {...action.payload}
-            };
-        case SET_SEARCHED_USERS:
-            return {
-                ...state,
-                searchedUsers: [
-                    ...action.payload,
-                ]
-            };
-        default:
-            return state;
-    }
-};
 
 
 /**
@@ -101,7 +47,7 @@ export const getUserData = () => dispatch => {
                     dispatch(setUserData(id, email, username, first_name, last_name, location, created_at, updated_at, phone_number, true));
                 }
             })
-            .catch ( () => {
+            .catch(() => {
                 logout();
             });
     }
@@ -195,7 +141,7 @@ export const logout = () => dispatch => {
 export const setSearchedUsers = (searchedUsers) => ({type: SET_SEARCHED_USERS, payload: searchedUsers});
 
 export const search = username => async (dispatch, getState) => {
-    if(username.length > 3) {
+    if (username.length > 3) {
         userAPI.search(username, getState().home.currentBoard.id)
             .then(({data}) => {
                 if (data.resultCode === 0) {
@@ -210,5 +156,3 @@ export const search = username => async (dispatch, getState) => {
         dispatch(setSearchedUsers([]));
     }
 };
-
-export default userReducer;

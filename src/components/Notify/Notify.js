@@ -2,7 +2,7 @@ import React from "react";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 import {useDispatch, useSelector} from "react-redux";
-import {setNotify} from "../../redux/notify-reducer";
+import {setNotify} from "../../redux/Notify/notify-reducer";
 
 function Notify() {
     const notification = useSelector(state => state.notify);

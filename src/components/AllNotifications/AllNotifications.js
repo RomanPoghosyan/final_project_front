@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {getNotifications} from "../../redux/notification-reducer";
+import {getNotifications} from "../../redux/Notification/actions";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import List from "@material-ui/core/List";
 import NotificationItems from "./NotificationItems/NotificationItems";

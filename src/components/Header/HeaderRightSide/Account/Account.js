@@ -6,7 +6,7 @@ import {makeStyles} from "@material-ui/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import {logout} from "../../../../redux/user-reducer";
+import {logout} from "../../../../redux/User/actions";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import Button from "@material-ui/core/Button";

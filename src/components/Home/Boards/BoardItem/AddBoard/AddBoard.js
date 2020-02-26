@@ -3,7 +3,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import {Fab} from "@material-ui/core";
 import {Add as AddIcon} from "@material-ui/icons";
-import {addBoard} from "../../../../../redux/boards-reducer";
+import {addBoard} from "../../../../../redux/Boards/boards-reducer";
 import {connect} from "react-redux";
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';

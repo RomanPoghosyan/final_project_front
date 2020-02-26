@@ -1,10 +1,11 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getBoardRoles, getPrivileges} from "../../redux/role-reducer";
+import {getBoardRoles, getPrivileges} from "../../redux/Role/actions";
 import {compose} from "redux";
 import {withRouter} from "react-router-dom";
 import InitialRolesTable from "./InitialRolesTable/InitialRolesTable";
 import CustomRolesTable from "./CustomRolesTable/CustomRolesTable";
+import AddRole from "./AddRole/AddRole";
 
 const Roles = ({match}) => {
     const boardId = match.params.boardId;
@@ -23,6 +24,7 @@ const Roles = ({match}) => {
         <div>
             <InitialRolesTable />
             <CustomRolesTable />
+            <AddRole boardId={boardId} />
         </div>
     )
 };

@@ -231,5 +231,19 @@ export const rolesAPI = {
                 [AUTHORIZATION]: getToken(),
             }
         });
-    }
+    },
+    addRole (role) {
+        return instance.post(`roles`, {...role}, {
+            headers: {
+                [AUTHORIZATION]: getToken()
+            }
+        })
+    },
+    editRolePrivilege (data) {
+        return instance.put(`roles/privilege`, {...data}, {
+            headers: {
+                [AUTHORIZATION]: getToken()
+            }
+        })
+    },
 };
