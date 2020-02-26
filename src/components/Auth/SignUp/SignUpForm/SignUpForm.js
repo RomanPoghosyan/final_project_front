@@ -1,4 +1,9 @@
-import {emailChecker, maxLengthCreator, onlyCharacters, required} from "../../../../utils/validators/validators";
+import {
+    emailChecker,
+    maxLengthCreator,
+    onlyCharacters, requiredEmail,
+    requiredFirstName, requiredLastName, requiredPassword, requiredUsername
+} from "../../../../utils/validators/validators";
 import {Field, reduxForm} from "redux-form";
 import {renderTextField} from "../../../common/FormControlls/FormControlls";
 import {Button} from "@material-ui/core";
@@ -6,11 +11,6 @@ import PropTypes from "prop-types";
 import React, {memo} from "react";
 import FormHelperText from "@material-ui/core/FormHelperText";
 
-const requiredFirstName = requiredFieldCreator("First name");
-const requiredLastName = requiredFieldCreator("Last name");
-const requiredUsername = requiredFieldCreator("Username");
-const requiredEmail = requiredFieldCreator("Email");
-const requiredPassword = requiredFieldCreator("Password");
 
 let maxLength15 = maxLengthCreator(15);
 

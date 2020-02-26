@@ -6,9 +6,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import {Button} from "@material-ui/core";
 import PropTypes from "prop-types";
 import FormHelperText from "@material-ui/core/FormHelperText";
-import {requiredFieldCreator} from "../../../../../../utils/validators/validators";
+import {requiredProjectName} from "../../../../../../utils/validators/validators";
 
-const requiredProjectName = requiredFieldCreator("Project name");
 
 const AddBoardForm = (props) => {
     return (

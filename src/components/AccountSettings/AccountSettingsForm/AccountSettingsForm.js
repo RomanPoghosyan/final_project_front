@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect} from "react";
-import {reduxForm, Field} from "redux-form";
+import {Field, reduxForm} from "redux-form";
 import {renderTextField} from "../../common/FormControlls/FormControlls";
 import {Button} from "@material-ui/core";
 import {
@@ -7,18 +7,16 @@ import {
     maxLengthCreator,
     onlyCharacters,
     phoneNumberChecker,
-    requiredFieldCreator
+    requiredEmail,
+    requiredFirstName,
+    requiredLastName,
+    requiredUsername
 } from "../../../utils/validators/validators";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import PropTypes from 'prop-types';
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControl from "@material-ui/core/FormControl";
 
-
-const requiredFirstName = requiredFieldCreator("First name");
-const requiredLastName = requiredFieldCreator("Last name");
-const requiredUsername = requiredFieldCreator("Username");
-const requiredEmail = requiredFieldCreator("Email");
 
 let maxLength15 = maxLengthCreator(15);
 

@@ -4,9 +4,8 @@ import {Field} from "redux-form";
 import {renderTextField} from "../../../../../common/FormControlls/FormControlls";
 import FormLabel from "@material-ui/core/FormLabel";
 import {connect} from "react-redux";
-import {requiredFieldCreator} from "../../../../../../utils/validators/validators";
+import {requiredUsername} from "../../../../../../utils/validators/validators";
 
-const requiredUsername = requiredFieldCreator("Username");
 
 const UserSelect = ({searchedUsers}) => {
     return (
