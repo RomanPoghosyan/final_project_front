@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 import {Redirect} from "react-router-dom";
 
 const withAuthRedirect = (allowUnAuthorized) => (Component) => (props) => {
-    const isAuth = useSelector(state => state.user.isAuth);
+    const isAuth = useSelector(state => state.user.currentUser.isAuth);
     if((allowUnAuthorized && !isAuth) || (!allowUnAuthorized && isAuth)) return <Component {...props} />;
     return <Redirect to={"/"} />;
 

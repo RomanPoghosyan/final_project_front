@@ -3,7 +3,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import {Fab} from "@material-ui/core";
 import {Add as AddIcon} from "@material-ui/icons";
-import {addBoard} from "../../../../../redux/boards-reducer";
+import {addBoard} from "../../../../../redux/Boards/boards-reducer";
 import {connect} from "react-redux";
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -12,7 +12,7 @@ import PropTypes from "prop-types";
 import {makeStyles} from "@material-ui/core/styles";
 
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
     board: {
         borderRadius: "3px",
         cursor: "pointer",
@@ -27,6 +27,9 @@ const useStyles = makeStyles(() => ({
     },
     icons: {
         justifyContent: "flex-end"
+    },
+    addIcon: {
+        backgroundColor: theme.palette.secondary.light
     }
 }));
 
@@ -53,7 +56,7 @@ const AddBoard = (props) => {
             <Card onClick={handleClickOpen} className={classes.board}>
                 {/*<CardActionArea className={classes.area}>*/}
                     <CardContent className={classes.content}>
-                        <Fab color="secondary" aria-label="add">
+                        <Fab className={classes.addIcon} aria-label="add">
                             <AddIcon/>
                         </Fab>
                     </CardContent>

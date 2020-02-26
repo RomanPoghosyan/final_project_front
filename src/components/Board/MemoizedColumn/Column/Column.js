@@ -3,25 +3,26 @@ import {makeStyles} from "@material-ui/core/styles";
 import {Draggable, Droppable} from "react-beautiful-dnd";
 import MemoizedTask from "./MemoizedTask/MemoizedTask";
 import PropTypes from "prop-types";
+import AddTask from "./AddTask/AddTask";
 
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
     container: {
-        border: "1px solid lightgrey",
+        border: `1px solid ${theme.palette.primary.main}`,
         borderRadius: "2px",
         margin: "8px",
         width: "220px",
         display: "flex",
         flexDirection: "column",
-        backgroundColor: "white",
+        backgroundColor: theme.palette.primary.main,
     },
     title: {
-        padding: "8px"
+        padding: "8px",
+        color: theme.palette.secondary.dark
     },
     taskList: {
         padding: "8px",
         transition: "background-color 0.2s ease",
-        backgroundColor: "white",
         flexGrow: "1",
         minHeight: "100px"
     },
@@ -37,7 +38,7 @@ const Column = (props) => {
     const classes = useStyles();
 
     return (
-        <Draggable draggableId={props.column.id} index={props.index}>
+        <Draggable draggableId={"column" + props.column.id} index={props.index}>
             {(provided) => (
                 <div className={classes.container}
                      {...provided.draggableProps}
@@ -47,7 +48,7 @@ const Column = (props) => {
                         {props.column.title}
                     </h3>
                     {/*TODO renderProps pattern to allow you create your own nodes*/}
-                    <Droppable  droppableId={props.column.id}
+                    <Droppable  droppableId={String(props.column.id)}
                                 type={"task"}
                         // type={props.column.id === "column-3" ? "done" : "active"}
                         // isDropDisabled={props.isDropDisabled}
@@ -62,6 +63,7 @@ const Column = (props) => {
                             </div>
                         )}
                     </Droppable>
+                    <AddTask columnId={props.column.id}/>
                 </div>
             )}
         </Draggable>

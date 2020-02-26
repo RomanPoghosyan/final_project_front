@@ -1,4 +1,4 @@
-import {boardAPI} from "../API/api";
+import {boardAPI} from "../../API/api";
 import {stopSubmit} from "redux-form";
 
 const SET_BOARDS = "SET_BOARDS";
@@ -51,7 +51,9 @@ export const setBoards = (boards) => ({type: SET_BOARDS, payload: boards});
 export const getBoards = (userId) => (dispatch) => {
     boardAPI.getAllByUserId(userId)
         .then(({data}) => {
-            dispatch(setBoards(data.body));
+            if (data.resultCode === 0) {
+                dispatch(setBoards(data.body));
+            }
         })
         .catch(({response: {data}}) => {
             // TODO notify that user doesn't have any projects

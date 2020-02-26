@@ -6,14 +6,14 @@ import Logo from "../common/Logo/Logo";
 import PropTypes from 'prop-types';
 import {compose} from "redux";
 import {connect} from "react-redux";
-import {logout} from "../../redux/user-reducer";
 import HeaderRightHand from "./HeaderRightSide/HeaderRightSide";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
     header: {
         display: "grid",
         gridTemplateColumns: "50px minmax(200px, 1fr)",
         padding: '5px',
+        backgroundColor: theme.palette.secondary.light
     },
     auth: {
         justifySelf: "end",
@@ -54,10 +54,10 @@ Header.propTypes = {
 
 let mapStateToProps = (state) => {
     return {
-        isAuth: state.user.isAuth
+        isAuth: state.user.currentUser.isAuth
     };
 };
 
 export default compose(
-    connect(mapStateToProps, {logout})
+    connect(mapStateToProps, null)
 )(Header);

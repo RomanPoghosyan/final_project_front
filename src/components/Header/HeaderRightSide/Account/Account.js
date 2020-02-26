@@ -6,7 +6,7 @@ import {makeStyles} from "@material-ui/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import {logout} from "../../../../redux/user-reducer";
+import {logout} from "../../../../redux/User/actions";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import Button from "@material-ui/core/Button";
@@ -28,7 +28,9 @@ const useStyles = makeStyles(theme => ({
     accountIcon: {
         width: '40px',
         minWidth: '0px',
-        padding: '6px 0'
+        padding: '6px 0',
+        fontWeight: "bold",
+        color: theme.palette.secondary.dark,
     }
 }));
 
@@ -44,15 +46,15 @@ function Account () {
         setAnchorEl(event.currentTarget);
     }
 
-    const fullName = useSelector(state => [state.user.first_name, state.user.last_name]);
+    const fullName = useSelector(state => [state.user.currentUser.first_name, state.user.currentUser.last_name]);
 
     return (
         <>
             <Button
                 className={classes.accountIcon}
                 onClick={handleClick}
-                color="primary"
                 variant="contained"
+                color={"primary"}
                 aria-label="add">
                 {fullName[0][0].concat(fullName[1][0])}
             </Button>

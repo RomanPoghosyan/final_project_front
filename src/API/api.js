@@ -4,10 +4,22 @@ let TOKEN = "";
 const AUTHORIZATION = "Authorization";
 
 
-
+/**
+ *
+ * getToken ( returns TOKEN with Bearer keyword )
+ *
+ * @returns {string}
+ */
 const getToken = () => {
     return `Bearer ${TOKEN}`;
 };
+
+/**
+ *
+ * setToken ( setter for token )
+ *
+ * @param t
+ */
 const setToken = (t) => {
     TOKEN = t;
 };
@@ -19,7 +31,12 @@ const instance = axios.create({
     }
 });
 
-
+/**
+ *
+ * authAPI ( authentication api calls )
+ *
+ * @type {{logout(): void, me(*=): *, login(*=, *): *, signup(*): *}}
+ */
 export const authAPI = {
     me(token) {
         setToken(token);
@@ -40,6 +57,12 @@ export const authAPI = {
     },
 };
 
+/**
+ *
+ * boardAPI ( board API calls )
+ *
+ * @type {{getAllByUserId(*): *, addColumn(*): *, addBoard(*): *}}
+ */
 export const boardAPI = {
     getAllByUserId(userId) {
         return instance.get(`projects/all/${userId}`, {
@@ -47,6 +70,14 @@ export const boardAPI = {
                 [AUTHORIZATION]: getToken(),
             }
         });
+    },
+    getBoard(boardId) {
+        return instance.get(`projects/${boardId}`, {
+                headers: {
+                    [AUTHORIZATION]: getToken(),
+                }
+            }
+        );
     },
     addBoard(board) {
         return instance.post(`projects`, {
@@ -58,6 +89,24 @@ export const boardAPI = {
             }
         );
     },
+    setColumnOrder(body) {
+        return instance.put(`projects/column-reorder`, {
+            ...body
+        }, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        })
+    },
+    setTaskOrder(body) {
+        return instance.put(`statuses/task-reorder`, {
+            ...body
+        }, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        })
+    },
     addColumn(status) {
         return instance.post(`statuses`, {
             ...status
@@ -66,8 +115,16 @@ export const boardAPI = {
                 "Authorization": getToken(),
             }
         } )
-    }
+    },
 };
+
+
+/**
+ *
+ * taskAPI ( task API calls )
+ *
+ * @type {{addTask(*): *}}
+ */
 
 export const taskAPI = {
     addTask (task) {
@@ -79,20 +136,107 @@ export const taskAPI = {
     }
 };
 
+/**
+ *
+ * userAPI ( user API calls )
+ *
+ * @type {{getUser(*=): *, updateUser(*): *}}
+ */
 export const userAPI = {
     getUser(token) {
         setToken(token);
-        return instance.get ('', {
+        return instance.get ('users', {
             headers: {
                 [AUTHORIZATION]: getToken(),
             }
         });
     },
     updateUser (user) {
-        return instance.put ('',  {...user}, {
+        return instance.put ('users',  {...user}, {
             headers: {
                 [AUTHORIZATION]: getToken(),
             }
         });
+    },
+    search(username, boardId) {
+        return instance.get (`users/search/${username}/${boardId}`, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        });
+    }
+};
+
+
+/**
+ *
+ * notificationAPI ( notification API calls )
+ *
+ * @type {{sendInvitationNotification(*): *, getNotifications(): *}}
+ */
+export const notificationAPI = {
+    sendInvitationNotification (notification) {
+        return instance.post(`notifications/invite`, {...notification}, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        });
+    },
+
+    getNotifications () {
+        return instance.get ('notifications', {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        });
+    },
+
+    putNotificationStatus ( notificationId, isSeen ) {
+        return instance.put ( `notifications/set-status`, { notificationId, isSeen }, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        })
+    },
+
+    getLastFiveNotifications () {
+        return instance.get ( `notifications/last-notifications`, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        })
+    },
+
+    replyToInvitation (notificationId, isAccepted) {
+        return instance.put ( `notifications/reply`, { notificationId, isAccepted }, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        })
+    },
+};
+
+
+export const rolesAPI = {
+    getRoles (boardId) {
+        return instance.get (`roles/${boardId}`, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        });
+    },
+    getPrivileges() {
+        return instance.get (`roles/privileges`, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        });
+    },
+    addRole (role) {
+        return instance.post(`roles`, {...role}, {
+            headers: {
+                [AUTHORIZATION]: getToken()
+            }
+        })
     }
 };

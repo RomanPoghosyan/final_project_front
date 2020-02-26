@@ -2,7 +2,7 @@ import React from "react";
 import HeaderText from "../../common/HeaderText/HeaderText";
 import useStyles from "../../../utils/styles/useHeaderTextStyle";
 import {connect} from "react-redux";
-import {login} from "../../../redux/user-reducer";
+import {login} from "../../../redux/User/actions";
 import PropTypes from "prop-types";
 import SignInForm from "./SignInForm/SignInForm";
 
@@ -27,7 +27,7 @@ SignIn.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    isAuth: state.user.isAuth
+    isAuth: state.user.currentUser.isAuth
 });
 
 export default connect(mapStateToProps, {login})(SignIn);

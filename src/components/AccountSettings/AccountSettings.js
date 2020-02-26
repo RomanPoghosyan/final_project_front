@@ -2,10 +2,15 @@ import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import AccountSettingsForm from "./AccountSettingsForm/AccountSettingsForm";
 import {useDispatch, useSelector} from "react-redux";
-import {updateUser} from "../../redux/user-reducer";
+import {updateUser} from "../../redux/User/actions";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
+    wrapper: {
+      width: "100%",
+      height: "100%",
+      backgroundColor: theme.palette.primary.main,
+    },
     form: {
         display: 'grid',
         margin: 'auto',
@@ -13,18 +18,20 @@ const useStyles = makeStyles(() => ({
         minWidth: '300px',
         maxWidth: "550px",
     },
-    formGroup: {
+    formControl: {
         display: 'grid',
         gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
         gridGap: '15px'
-    },
-    formGroupChild: {
-        margin: '10px 0'
     },
     button: {
         width: '50%',
         justifySelf: 'center',
         minWidth: '200px'
+    },
+    formGroup: {
+        '& > *': {
+            margin: '15px 0'
+        }
     }
 }));
 
@@ -32,16 +39,17 @@ const useStyles = makeStyles(() => ({
 const AccountSettings = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const {id, isAuth, ...user} = useSelector(state => state.user);
+    const {id, isAuth, ...user} = useSelector(state => state.user.currentUser);
 
     const onSubmit = formData => {
-        debugger;
         dispatch(updateUser(formData));
     };
 
     if(!isAuth) return <p>Loading...</p>;
     return (
-        <AccountSettingsForm onSubmit={onSubmit} user={user} classes={classes}/>
+        <div className={classes.wrapper}>
+            <AccountSettingsForm onSubmit={onSubmit} user={user} classes={classes}/>
+        </div>
     )
 };
 

@@ -9,7 +9,9 @@ import PropTypes from 'prop-types';
 import AccountSettings from "../AccountSettings/AccountSettings";
 import Notify from "../Notify/Notify";
 
-const Board = React.lazy(() => import("../Board/Board"));
+const BoardContainer = React.lazy(() => import("../Board/BoardContainer"));
+const Roles = React.lazy(() => import("../Roles/Roles"));
+const AllNotifications = React.lazy(() => import("../AllNotifications/AllNotifications"));
 
 const useStyles = makeStyles({
     mainWrapper: {
@@ -25,11 +27,13 @@ const Main = ({isAuth}) => {
     return (
         <div className={classes.mainWrapper}>
             <Header/>
-            <div className={classes.content}>
+            <div>
                 <Switch>
                     <Route exact path={"/"} component={MainContent}/>
                     <Route path={'/account-settings'} component={AccountSettings}/>
-                    <Route path={"/board/:boardId"} render={() => <Suspense fallback={"loadingggg"}><Board/></Suspense>}/>
+                    <Route path={"/roles/:boardId"} render={() => <Suspense fallback={"loading"}><Roles /></Suspense>}/>
+                    <Route exact path={"/board/:boardId"} boardId="Number" render={() => <Suspense fallback={"loading"}><BoardContainer /></Suspense>}/>
+                    <Route path={"/notifications"} render={() => <Suspense fallback={"loading"}><AllNotifications/></Suspense> }/>
                 </Switch>
             </div>
             <Notify />

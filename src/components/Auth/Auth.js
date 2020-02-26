@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
         display: "grid",
         gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
         gridGap: "1rem",
-        background: theme.palette.primary.main,
+        background: theme.palette.auth.primary.main,
         height: "100%",
     },
 }));

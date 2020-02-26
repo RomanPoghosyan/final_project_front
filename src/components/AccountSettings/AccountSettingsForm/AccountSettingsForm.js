@@ -26,8 +26,8 @@ const AccountSettingsForm = ({classes, handleSubmit, error, initialize, user}) =
 
     return (
         <form onSubmit={handleSubmit} className={classes.form}>
-            <FormControl className={classes.formGroup}>
-                <FormGroup>
+            <FormControl className={classes.formControl}>
+                <FormGroup className={classes.formGroup}>
                     <Field label={"First name:"} name={"first_name"} component={renderTextField}
                            validate={[required, onlyCharacters, maxLength15]}/>
                     <Field label={"Last name:"} name={"last_name"} component={renderTextField}
@@ -36,7 +36,7 @@ const AccountSettingsForm = ({classes, handleSubmit, error, initialize, user}) =
                     <Field label={"Phone number:"} name={"phone_number"} component={renderTextField}
                            validate={[phoneNumberChecker]}/>
                 </FormGroup>
-                <FormGroup>
+                <FormGroup className={classes.formGroup}>
                     <Field label={"Location:"} name={"location"} component={renderTextField} validate={[]}/>
                     <Field label={"Email:"} name={"email"} component={renderTextField}
                            validate={[required, emailChecker]}/>
