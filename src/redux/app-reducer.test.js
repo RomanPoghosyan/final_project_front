@@ -1,5 +1,7 @@
 import React from "react";
-import appReducer, {initializedSuccess} from "./app-reducer";
+import appReducer from "./App/app-reducer";
+import {initializedSuccess} from "./App/actions";
+
 
 describe('app-reducer tests', () => {
     let initialState = {

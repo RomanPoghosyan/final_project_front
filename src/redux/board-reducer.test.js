@@ -1,13 +1,14 @@
 import React from "react";
+import {boardReducer} from "./Board/board-reducer";
 import {
     addColumnSuccess,
     addTaskToColumnSuccess,
-    boardReducer,
     columnReordered,
+    dataFetched,
     setBoardData,
-    taskReordered,
-    dataFetched
-} from "./board-reducer";
+    taskReordered
+} from "./Board/actions";
+;
 
 describe('board-reducer tests', () => {
     const initialState = {
