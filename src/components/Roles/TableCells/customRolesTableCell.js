@@ -1,9 +1,9 @@
-import Checkbox from "@material-ui/core/Checkbox";
 import React from "react";
+import Checkbox from "@material-ui/core/Checkbox";
 import {useDispatch} from "react-redux";
 import {editRolePrivilege} from "../../../redux/Role/actions";
 
-const tableCell = privilege => row => {
+const customRolesTableCell = privilege => row => {
     const dispatch = useDispatch();
 
     return privilege.name === "Role" ?
@@ -11,4 +11,4 @@ const tableCell = privilege => row => {
         <div><Checkbox onChange={(e) => dispatch(editRolePrivilege(row, privilege.id, e.target.checked))} checked={row.privilegesIds.includes(privilege.id)}/></div>
 };
 
-export default tableCell;
+export default customRolesTableCell;

@@ -9,7 +9,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import {logout} from "../../../../redux/User/actions";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import Button from "@material-ui/core/Button";
+import AccountIcon from "../../../common/AccountIcon/AccountIcon";
 
 const useStyles = makeStyles(theme => ({
     header: {
@@ -25,13 +25,6 @@ const useStyles = makeStyles(theme => ({
         textDecoration: 'none',
         color: '#000'
     },
-    accountIcon: {
-        width: '40px',
-        minWidth: '0px',
-        padding: '6px 0',
-        fontWeight: "bold",
-        color: theme.palette.secondary.dark,
-    }
 }));
 
 function Account () {
@@ -46,18 +39,10 @@ function Account () {
         setAnchorEl(event.currentTarget);
     }
 
-    const fullName = useSelector(state => [state.user.currentUser.first_name, state.user.currentUser.last_name]);
-
+    const [firstName, lastName] = useSelector(state => [state.user.currentUser.first_name, state.user.currentUser.last_name]);
     return (
         <>
-            <Button
-                className={classes.accountIcon}
-                onClick={handleClick}
-                variant="contained"
-                color={"primary"}
-                aria-label="add">
-                {fullName[0][0].concat(fullName[1][0])}
-            </Button>
+            <AccountIcon onClick={handleClick} firstName={firstName} lastName={lastName} backgroundColor={"primary"} />
             <StyledMenu
                 id="customized-menu"
                 anchorEl={anchorEl}
@@ -67,7 +52,7 @@ function Account () {
             >
                 <div className={classes.header}>
                     <Typography variant="h6" component="h6" align={"right"}>
-                        {`${fullName[0]} ${fullName[1]}`}
+                        {`${firstName} ${lastName}`}
                     </Typography>
                     <Close cursor={"pointer"} className={classes.close} onClick={handleClose}/>
                 </div>

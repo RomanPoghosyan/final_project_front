@@ -2,7 +2,7 @@ import React, {useCallback, useEffect} from 'react';
 import {connect} from "react-redux";
 import BoardItem from "./BoardItem/BoardItem";
 import {List, makeStyles} from "@material-ui/core";
-import {getBoards} from "../../../redux/Boards/boards-reducer";
+import {getBoards} from "../../../redux/Boards/actions";
 import {PropTypes} from "prop-types";
 import AddBoard from "./BoardItem/AddBoard/AddBoard";
 

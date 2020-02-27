@@ -27,7 +27,7 @@ const Main = ({isAuth}) => {
     return (
         <div className={classes.mainWrapper}>
             <Header/>
-            <div>
+            {/*<div style={{overflowX: "auto"}}>*/}
                 <Switch>
                     <Route exact path={"/"} component={MainContent}/>
                     <Route path={'/account-settings'} component={AccountSettings}/>
@@ -35,7 +35,7 @@ const Main = ({isAuth}) => {
                     <Route exact path={"/board/:boardId"} boardId="Number" render={() => <Suspense fallback={"loading"}><BoardContainer /></Suspense>}/>
                     <Route path={"/notifications"} render={() => <Suspense fallback={"loading"}><AllNotifications/></Suspense> }/>
                 </Switch>
-            </div>
+            {/*</div>*/}
             <Notify />
         </div>
     );

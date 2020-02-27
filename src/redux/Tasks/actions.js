@@ -25,7 +25,7 @@ export const addTask = (title, columnId) => (dispatch, getState) => {
         })
         .catch(({response: {data}}) => {
             dispatch(setNotify({
-                open: true, type: 'error', content: `${data.message.length ? data.message :
+                open: true, type: 'error', content: `${data.messages.length ? data.messages[0] :
                     "Something went wrong"}`
             }));
             // let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";

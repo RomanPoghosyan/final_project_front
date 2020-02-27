@@ -10,8 +10,8 @@ import {PropTypes} from "prop-types";
 
 const useStyles = makeStyles(theme => ({
     container: {
-        display: "flex"
-    }
+        display: "flex",
+    },
 }));
 
 

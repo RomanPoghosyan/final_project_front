@@ -9,7 +9,6 @@ import React from "react";
 let maxLength15 = maxLengthCreator(15);
 
 const SignInForm = (props) => {
-    console.log(props);
     return (
         <form onSubmit={props.handleSubmit} className={props.className}>
             <Field label={"Login"} id="standard-basic" name={"login"} component={renderTextField}
