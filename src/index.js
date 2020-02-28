@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom';
 import "./index.css";
 import * as serviceWorker from './serviceWorker';
 import AppContainer from "./App";
+import {registerServiceWorker} from "./register-sw";
 
+debugger;
+registerServiceWorker();
 ReactDOM.render(<AppContainer />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

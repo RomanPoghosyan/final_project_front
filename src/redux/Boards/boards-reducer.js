@@ -1,5 +1,6 @@
 import {boardAPI} from "../../API/api";
 import {stopSubmit} from "redux-form";
+import {setNotify} from "../Notify/notify-reducer";
 
 const SET_BOARDS = "SET_BOARDS";
 const ADD_BOARD = "ADD_BOARD";
@@ -56,6 +57,10 @@ export const getBoards = (userId) => (dispatch) => {
             }
         })
         .catch(({response: {data}}) => {
+            dispatch(setNotify({
+                open: true, type: 'error', content: `${data.messages.length ? data.messages[0] :
+                    "Something went wrong"}`
+            }));
             // TODO notify that user doesn't have any projects
         });
 };
@@ -82,11 +87,16 @@ export const addBoard = (project) => (dispatch) => {
         .then(({data}) => {
             if (data.resultCode === 0) {
                 dispatch(addBoardSuccess(data.body));
+                dispatch(setNotify({
+                    open: true, type: 'success', content: `Board added successfully!`
+                }));
             }
         })
         .catch(({response: {data}}) => {
-            let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
-            dispatch(stopSubmit("addBoard", {_error: message}));
+            dispatch(setNotify({
+                open: true, type: 'error', content: `${data.message.length ? data.message :
+                    "Something went wrong"}`
+            }));
         });
 };
 

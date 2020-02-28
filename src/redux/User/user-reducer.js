@@ -1,4 +1,4 @@
-import {SET_SEARCHED_USERS, SET_USER_FULL_DATA} from "./action-types";
+import {SET_SEARCHED_USERS, SET_USER_FULL_DATA, SET_FB_TOKEN} from "./action-types";
 
 
 const initialState = {
@@ -18,6 +18,7 @@ const initialState = {
         created_at: null,
         updated_at: null,
         phone_number: null,
+        fbToken: null,
         isAuth: false,
     }
 };
@@ -36,9 +37,18 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_USER_FULL_DATA:
+            console.log(action.payload);
             return {
                 ...state,
                 currentUser: {...action.payload}
+            };
+        case SET_FB_TOKEN:
+            return {
+                ...state,
+                currentUser: {
+                    ...state.currentUser,
+                    fbToken: action.payload
+                }
             };
         case SET_SEARCHED_USERS:
             return {
@@ -51,7 +61,6 @@ const userReducer = (state = initialState, action) => {
             return state;
     }
 };
-
 
 
 export default userReducer;

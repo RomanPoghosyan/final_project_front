@@ -1,9 +1,9 @@
-import {SET_SEARCHED_USERS, SET_USER_FULL_DATA, USER_LOGOUT} from "./action-types";
+import {SET_FB_TOKEN, SET_SEARCHED_USERS, SET_USER_FULL_DATA, USER_LOGOUT} from "./action-types";
 import {authAPI, userAPI} from "../../API/api";
 import {initialize, initializedSuccess} from "../App/actions";
 import {setNotify} from "../Notify/notify-reducer";
 import {stopSubmit} from "redux-form";
-
+import {messaging} from "../../init-firebase";
 
 /**
  *
@@ -155,4 +155,38 @@ export const search = username => async (dispatch, getState) => {
     } else {
         dispatch(setSearchedUsers([]));
     }
+};
+
+export const setFbToken = token => {
+    return {type: SET_FB_TOKEN, payload: token};
+};
+
+
+export const getCurrentFbToken = () => dispatch => {
+    messaging.getToken()
+        .then ( token => {
+           userAPI.setFbToken(token)
+               .then ( token => {
+                   console.log(token);
+                   dispatch(setFbToken(token))
+               })
+        });
+};
+
+export const requestPermission = () => dispatch => {
+    Notification.requestPermission().then((permission) => {
+        console.log(permission);
+        if (permission === 'granted') {
+            console.log('Notification permission granted.');
+            debugger;
+            // TODO(developer): Retrieve an Instance ID token for use with FCM.
+            dispatch(getCurrentFbToken());
+            // [START_EXCLUDE]
+            // In many cases once an app has been granted notification permission,
+            // it should update its UI reflecting this.
+            // [END_EXCLUDE]
+        } else {
+            console.log('Unable to get permission to notify.');
+        }
+    });
 };

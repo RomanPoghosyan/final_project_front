@@ -2,9 +2,10 @@ import React from "react";
 import Autocomplete from "@material-ui/lab/Autocomplete/Autocomplete";
 import {Field} from "redux-form";
 import {renderTextField} from "../../../../../common/FormControlls/FormControlls";
-import {required} from "../../../../../../utils/validators/validators";
 import FormLabel from "@material-ui/core/FormLabel";
 import {connect} from "react-redux";
+import {requiredUsername} from "../../../../../../utils/validators/validators";
+
 
 const UserSelect = ({searchedUsers}) => {
     return (
@@ -22,7 +23,8 @@ const UserSelect = ({searchedUsers}) => {
                 )}
                 renderInput={params => (
                     <Field {...params} id="standard-basic" name={"username"}
-                           component={renderTextField} margin="dense" variant="outlined" validate={[required]}/>
+                           component={renderTextField} margin="dense" variant="outlined"
+                           validate={[requiredUsername]}/>
                 )}
             />
         </>

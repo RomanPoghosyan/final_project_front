@@ -9,6 +9,7 @@ import {
     TASK_MOVED,
     TASK_REORDER
 } from "./action-types";
+import {setNotify} from "../Notify/notify-reducer";
 
 export const dataFetched = (isFetched) => ({type: DATA_FETCHED, payload: isFetched});
 
@@ -29,6 +30,12 @@ export const getBoardData = (boardId) => (dispatch) => {
                 });
             }
         })
+        .catch(({response: {data}}) => {
+            dispatch(setNotify({
+                open: true, type: 'error', content: `${data.message.length ? data.message :
+                    "Something went wrong"}`
+            }));
+        });
     // .catch(({response: {data}}) => {
     //     console.log(data);
     //     // TODO notify that user doesn't have any projects
@@ -46,11 +53,16 @@ export const addColumn = (name) => (dispatch, getState) => {
         .then(({data}) => {
             if (data.resultCode === 0) {
                 dispatch(addColumnSuccess(data.body));
+                dispatch(setNotify({
+                    open: true, type: 'success', content: `Column added successfully!`
+                }));
             }
         })
         .catch(({response: {data}}) => {
-            let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
-            dispatch(stopSubmit("addColumn", {_error: message}));
+            dispatch(setNotify({
+                open: true, type: 'error', content: `${data.message.length ? data.message :
+                    "Something went wrong"}`
+            }));
         });
 };
 
