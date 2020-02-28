@@ -29,12 +29,13 @@ export const getBoardData = (boardId) => (dispatch) => {
                     dispatch(dataFetched(true))
                 });
             }
-        }).catch(({response: {data}}) => {
-        dispatch(setNotify({
-            open: true, type: 'error', content: `${data.message.length ? data.message :
-                "Something went wrong"}`
-        }));
-    });
+        })
+        .catch(({response: {data}}) => {
+            dispatch(setNotify({
+                open: true, type: 'error', content: `${data.message.length ? data.message :
+                    "Something went wrong"}`
+            }));
+        });
     // .catch(({response: {data}}) => {
     //     console.log(data);
     //     // TODO notify that user doesn't have any projects

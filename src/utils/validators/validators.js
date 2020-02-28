@@ -29,3 +29,17 @@ export const phoneNumberChecker = input => {
 export const asyncValidate = async (values, dispatch) => {
     return dispatch(search(values.username))
 };
+
+export const requiredProjectName = requiredFieldCreator("Project name");
+export const requiredUsername = requiredFieldCreator("Username");
+export const requiredPassword = requiredFieldCreator("Password");
+
+export const requiredFirstName = requiredFieldCreator("First name");
+export const requiredLastName = requiredFieldCreator("Last name");
+export const requiredEmail = requiredFieldCreator("Email");
+
+export const requiredTaskName = requiredFieldCreator("Task name");
+
+export const roleNameRequired = requiredFieldCreator("Role name");
+export const maxLength15 = maxLengthCreator(15);
+

@@ -1,6 +1,6 @@
 import {Field, reduxForm} from "redux-form";
 import {renderTextField} from "../../../common/FormControlls/FormControlls";
-import {maxLengthCreator, requiredFieldCreator} from "../../../../utils/validators/validators";
+import {maxLength15, roleNameRequired} from "../../../../utils/validators/validators";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import {Button} from "@material-ui/core";
 import React, {memo} from "react";
@@ -26,8 +26,6 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const maxLength15 = maxLengthCreator(15);
-const requiredRoleName = requiredFieldCreator("Role name");
 
 const AddRoleForm = ({handleSubmit, error, privileges}) => {
     const classes = useStyles();
@@ -36,10 +34,9 @@ const AddRoleForm = ({handleSubmit, error, privileges}) => {
         <form onSubmit={handleSubmit} className={classes.form}>
             <div className={classes.fields}>
                 <span>
-                    <Field label={"Role name"} name={"role_name"} component={renderTextField}
-                           validate={[requiredRoleName, maxLength15]}/>
+                    <Field label={"Role name"} name={"role_name"} component={renderTextField} validate={[roleNameRequired, maxLength15]}/>
                 </span>
-                {privileges.length > 0 && <MemoizedCheckboxes privileges={privileges}/>}
+                {privileges.length > 0 && <MemoizedCheckboxes privileges={privileges} />}
             </div>
             <FormHelperText error={!!error}>{error}</FormHelperText>
             <Button className={classes.submitButton} type={"submit"} variant={"contained"}>Add Role</Button>

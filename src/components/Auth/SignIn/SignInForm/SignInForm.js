@@ -1,16 +1,12 @@
-import {maxLengthCreator} from "../../../../utils/validators/validators";
+import {maxLengthCreator, requiredPassword, requiredUsername} from "../../../../utils/validators/validators";
 import {Field, reduxForm} from "redux-form";
 import {renderTextField} from "../../../common/FormControlls/FormControlls";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import {Button} from "@material-ui/core";
 import PropTypes from "prop-types";
 import React from "react";
-import {requiredFieldCreator} from "../../../../utils/validators/validators";
 
 let maxLength15 = maxLengthCreator(15);
-
-const requiredUsername = requiredFieldCreator("Username");
-const requiredPassword = requiredFieldCreator("Password");
 
 const SignInForm = (props) => {
     return (
