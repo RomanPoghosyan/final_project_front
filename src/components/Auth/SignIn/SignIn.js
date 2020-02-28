@@ -3,6 +3,7 @@ import HeaderText from "../../common/HeaderText/HeaderText";
 import useStyles from "../../../utils/styles/useHeaderTextStyle";
 import {useDispatch} from "react-redux";
 import {login} from "../../../redux/User/actions";
+import PropTypes from "prop-types";
 import SignInForm from "./SignInForm/SignInForm";
 
 
