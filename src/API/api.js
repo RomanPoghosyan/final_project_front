@@ -134,6 +134,14 @@ export const taskAPI = {
             }
         })
     },
+    getTaskInfo (taskId) {
+        return instance.get(`tasks/${taskId}`, {
+                headers: {
+                    [AUTHORIZATION]: getToken(),
+                }
+            }
+        );
+    },
     getDailyTasks() {
         return instance.get(`tasks/daily`, {
             headers: {
@@ -167,6 +175,20 @@ export const userAPI = {
     },
     search(username, boardId) {
         return instance.get (`users/search/${username}/${boardId}`, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        });
+    },
+    getBoardUsers(boardId){
+        return instance.get (`users/all/${boardId}`, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        });
+    },
+    changeUserRole(data){
+        return instance.put ('users/role',  {...data}, {
             headers: {
                 [AUTHORIZATION]: getToken(),
             }

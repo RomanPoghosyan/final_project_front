@@ -26,9 +26,11 @@ export const phoneNumberChecker = input => {
     return regexChecker(input, REGEX, "Enter valid phone number");
 };
 
-export const asyncValidate = async (values, dispatch) => {
+export const asyncValidate = (values, dispatch) => {
     return dispatch(search(values.username))
 };
+
+// export const debounceAsyncValidate = debounce(asyncValidate, 450);
 
 export const requiredProjectName = requiredFieldCreator("Project name");
 export const requiredUsername = requiredFieldCreator("Username");

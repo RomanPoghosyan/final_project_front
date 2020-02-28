@@ -1,4 +1,4 @@
-import {ADD_TASK_SUCCESS, SET_DAILY_TASKS, SET_TASKS} from "./action-types";
+import {ADD_TASK_SUCCESS, SET_CURRENT_TASK_INFO, SET_DAILY_TASKS, SET_TASKS} from "./action-types";
 
 
 const initialState = {
@@ -21,7 +21,7 @@ export const tasksReducer = (state = initialState, action) => {
                     ...action.payload,
                 }
             };
-        case ADD_TASK_SUCCESS:
+        case ADD_TASK_SUCCESS: {
             const {task} = action.payload;
             return {
                 ...state,
@@ -38,6 +38,21 @@ export const tasksReducer = (state = initialState, action) => {
                     ...action.payload,
                 ]
             };
+        }
+        case SET_CURRENT_TASK_INFO: {
+            const task = action.payload;
+            return {
+                ...state,
+                tasks: {
+                    ...state.tasks,
+                    [task.id]: {
+                        ...task,
+                        isFetched: true,
+                    }
+                },
+                current: task.id
+            };
+        }
         default:
             return state;
     }

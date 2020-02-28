@@ -19,6 +19,12 @@ export const getBoardRoles = boardId => dispatch => {
                 dispatch(setBoardRoles(data.body));
             }
         })
+        .catch(({response: {data}}) => {
+            dispatch(setNotify({
+                open: true, type: 'error', content: `${data.messages.length ? data.messages[0] :
+                    "Something went wrong"}`
+            }));
+        });
 };
 
 export const setPrivileges = roles => ({type: SET_PRIVILEGES, payload: roles});
@@ -65,7 +71,7 @@ export const addRole = (boardId, formData) => (dispatch, getState) => {
         })
         .catch(({response: {data}}) => {
             dispatch(setNotify({
-                open: true, type: 'error', content: `${data.message.length ? data.message :
+                open: true, type: 'error', content: `${data.messages.length ? data.messages[0] :
                     "Something went wrong"}`
             }));
             // dispatch(stopSubmit("addTask", {_error: message}));

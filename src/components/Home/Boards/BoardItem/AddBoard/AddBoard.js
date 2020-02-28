@@ -3,12 +3,14 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import {Fab} from "@material-ui/core";
 import {Add as AddIcon} from "@material-ui/icons";
-import {addBoard} from "../../../../../redux/Boards/boards-reducer";
-import {useDispatch} from "react-redux";
+import {addBoard} from "../../../../../redux/Boards/actions";
+import {connect} from "react-redux";
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import AddBoardForm from "./AddBoardForm/AddBoardForm";
+import PropTypes from "prop-types";
 import {makeStyles} from "@material-ui/core/styles";
+import {useDispatch} from "react-redux";
 
 
 const useStyles = makeStyles(theme => ({
@@ -68,5 +70,10 @@ const AddBoard = () => {
         </>
     );
 };
+
+AddBoard.propTypes = {
+    addBoard: PropTypes.func.isRequired,
+};
+
 
 export default AddBoard;
