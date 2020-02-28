@@ -1,7 +1,8 @@
 import {taskAPI} from "../../API/api";
 import {addTaskToColumnSuccess} from "../Board/actions";
-import {ADD_TASK_SUCCESS, SET_TASKS} from "./action-types";
+import {ADD_TASK_SUCCESS, SET_CURRENT_TASK_INFO, SET_TASKS} from "./action-types";
 import {setNotify} from "../Notify/notify-reducer";
+import {push} from "connected-react-router";
 
 export const setTasks = (tasks) => ({type: SET_TASKS, payload: tasks});
 
@@ -30,5 +31,22 @@ export const addTask = (title, columnId) => (dispatch, getState) => {
             }));
             // let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
             // dispatch(stopSubmit("addTask", {_error: message}));
+        });
+};
+
+
+export const setCurrentTaskInfo = (taskInfo) => ({type: SET_CURRENT_TASK_INFO, payload: taskInfo});
+
+export const getCurrentTaskInfo = taskId => (dispatch, getState) => {
+    if(getState().home.tasks.tasks[taskId].isFetched) return;
+
+    taskAPI.getTaskInfo(taskId)
+        .then(({data}) => {
+            dispatch(setCurrentTaskInfo(data.body));
+        })
+        .catch(({response: {data}}) => {
+            const boardId = getState().home.currentBoard.id;
+            dispatch(setNotify({ open: true, type: 'error', content: "Something went wrong! Task info not found!"}));
+            dispatch(push(`/board/${boardId}`));
         });
 };

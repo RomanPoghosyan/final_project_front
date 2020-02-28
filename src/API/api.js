@@ -133,6 +133,14 @@ export const taskAPI = {
                 [AUTHORIZATION]: getToken()
             }
         })
+    },
+    getTaskInfo (taskId) {
+        return instance.get(`tasks/${taskId}`, {
+                headers: {
+                    [AUTHORIZATION]: getToken(),
+                }
+            }
+        );
     }
 };
 

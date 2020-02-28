@@ -6,7 +6,8 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import EditUserRoleForm from "./EditUserRoleForm/EditUserRoleForm";
 import {changeUserRole} from "../../../../redux/User/actions";
-import {getBoardUsersSelect} from "../../../../redux/Board/selectors";
+import {getBoardIdSelect} from "../../../../redux/Board/selectors";
+import {getBoardUsersSelect} from "../../../../redux/User/selectors";
 
 
 const useStyles = makeStyles(theme => ({
@@ -24,7 +25,7 @@ const BoardUsers = () => {
     const [userId, setUserId] = React.useState(null);
     const [roleId, setRoleId] = React.useState(null);
     const boardUsers = useSelector(getBoardUsersSelect);
-    const boardId = useSelector(state => state.home.currentBoard.id);
+    const boardId = useSelector(getBoardIdSelect);
     const classes = useStyles();
     const dispatch = useDispatch();
 

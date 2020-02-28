@@ -1,2 +1,1 @@
-export const getBoardUsersSelect = state => state.user.boardUsers;
-
+export const getBoardIdSelect = state => state.home.currentBoard.id;
