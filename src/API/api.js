@@ -133,6 +133,13 @@ export const taskAPI = {
                 [AUTHORIZATION]: getToken()
             }
         })
+    },
+    getDailyTasks() {
+        return instance.get(`tasks/daily`, {
+            headers: {
+                [AUTHORIZATION]: getToken()
+            }
+        })
     }
 };
 

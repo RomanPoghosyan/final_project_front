@@ -1,5 +1,5 @@
-import React, {useCallback, useEffect} from 'react';
-import {connect} from "react-redux";
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from "react-redux";
 import BoardItem from "./BoardItem/BoardItem";
 import {List, makeStyles} from "@material-ui/core";
 import {getBoards} from "../../../redux/Boards/boards-reducer";
@@ -20,17 +20,18 @@ const useStyles = makeStyles ( theme => ({
     },
 }));
 
-function Boards({userId, boards, getBoards}) {
+function Boards() {
     const classes = useStyles();
-    const memoizedGetBoards = useCallback(() => getBoards(userId), [userId, getBoards]);
-
+    const boards = useSelector(state => state.home.boards);
+    const userId = useSelector(state => state.user.currentUser.id);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        if(userId) memoizedGetBoards(userId);
-    }, [userId, memoizedGetBoards]);
+        if (userId) dispatch(getBoards(userId));
+    }, [userId, dispatch]);
 
 
-    const boardList = boards.map ( (b) => {
+    const boardList = boards.map((b) => {
         return <BoardItem key={b.id} board={b}/>
     });
 
@@ -42,18 +43,7 @@ function Boards({userId, boards, getBoards}) {
     );
 }
 
-Boards.propTypes = {
-    getBoards: PropTypes.func,
-    boards: PropTypes.array,
-    userId: PropTypes.number,
-};
-
-let mapStateToProps = (state) => ({
-    boards: state.home.boards,
-    userId: state.user.currentUser.id,
-});
-
-export default connect(mapStateToProps, {getBoards})(Boards);
+export default Boards;
 
 
 
