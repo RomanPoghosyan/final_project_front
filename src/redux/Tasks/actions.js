@@ -42,4 +42,6 @@ export const getDailyTasks = () => (dispatch) => {
                 dispatch(setDailyTasks(data.body));
             }
         })
+        .catch(() => {
+        });
 };

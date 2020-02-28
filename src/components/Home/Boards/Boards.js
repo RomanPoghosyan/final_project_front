@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from "react-redux";
 import BoardItem from "./BoardItem/BoardItem";
 import {List, makeStyles} from "@material-ui/core";
 import {getBoards} from "../../../redux/Boards/boards-reducer";
-import {PropTypes} from "prop-types";
 import AddBoard from "./BoardItem/AddBoard/AddBoard";
 
 

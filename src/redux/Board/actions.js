@@ -1,10 +1,10 @@
 import {boardAPI} from "../../API/api";
 import {setTasks} from "../Tasks/actions";
-import {stopSubmit} from "redux-form";
 import {
     ADD_COLUMN_SUCCESS,
     ADD_TASK_TO_COLUMN_SUCCESS,
-    COLUMN_REORDER, DATA_FETCHED,
+    COLUMN_REORDER,
+    DATA_FETCHED,
     SET_BOARD_DATA,
     TASK_MOVED,
     TASK_REORDER
