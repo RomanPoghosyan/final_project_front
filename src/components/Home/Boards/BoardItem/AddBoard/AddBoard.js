@@ -8,10 +8,11 @@ import {useDispatch} from "react-redux";
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import AddBoardForm from "./AddBoardForm/AddBoardForm";
+import PropTypes from "prop-types";
 import {makeStyles} from "@material-ui/core/styles";
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
     board: {
         borderRadius: "3px",
         cursor: "pointer",
@@ -54,16 +55,16 @@ const AddBoard = () => {
         <>
             <Card onClick={handleClickOpen} className={classes.board}>
                 {/*<CardActionArea className={classes.area}>*/}
-                <CardContent className={classes.content}>
-                    <Fab className={classes.addIcon} aria-label="add">
-                        <AddIcon/>
-                    </Fab>
-                </CardContent>
+                    <CardContent className={classes.content}>
+                        <Fab className={classes.addIcon} aria-label="add">
+                            <AddIcon/>
+                        </Fab>
+                    </CardContent>
                 {/*</CardActionArea>*/}
             </Card>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">New Board</DialogTitle>
-                <AddBoardForm onSubmit={onSubmit} handleClose={handleClose}/>
+                <AddBoardForm onSubmit={onSubmit} handleClose={handleClose} />
             </Dialog>
         </>
     );

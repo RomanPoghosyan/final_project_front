@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 import UserSelect from "./UserSelect/UserSelect";
 import RoleSelect from "./RoleSelect/RoleSelect";
 import {makeStyles} from "@material-ui/core/styles";
-
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const AddUserForm = ({handleClose, handleSubmit}) => {
+const AddUserForm = ({handleClose, handleSubmit, submitSucceeded}) => {
     const classes = useStyles();
     return (
         <form onSubmit={handleSubmit} className={classes.container}>
@@ -33,11 +33,19 @@ const AddUserForm = ({handleClose, handleSubmit}) => {
                 <RoleSelect />
             </div>
             <div className={classes.buttonGroup}>
-                <Button type={"submit"} color={"secondary"} variant={"contained"}>Add</Button>
-                <Button onClick={handleClose} type={"button"} color={"secondary"} variant={"contained"}>Cancel</Button>
+                <Button type={"submit"} color={"secondary"} variant={"contained"}
+                disabled={submitSucceeded}>Add</Button>
+                <Button onClick={handleClose} type={"button"} color={"secondary"}
+                 disabled={submitSucceeded} variant={"contained"}>Cancel</Button>
             </div>
         </form>
     )
+};
+
+AddUserForm.propTypes = {
+    handleClose: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    submitSucceeded: PropTypes.bool.isRequired
 };
 
 export default reduxForm({

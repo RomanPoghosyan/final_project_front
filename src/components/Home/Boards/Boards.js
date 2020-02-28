@@ -3,10 +3,11 @@ import {useDispatch, useSelector} from "react-redux";
 import BoardItem from "./BoardItem/BoardItem";
 import {List, makeStyles} from "@material-ui/core";
 import {getBoards} from "../../../redux/Boards/boards-reducer";
+import {PropTypes} from "prop-types";
 import AddBoard from "./BoardItem/AddBoard/AddBoard";
 
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles ( theme => ({
     boards: {
         display: "grid",
         gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
