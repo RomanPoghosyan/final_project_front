@@ -18,8 +18,9 @@ export const initializedSuccess = () => ({type: INITIALIZED_SUCCESS});
  * @returns {function(...[*]=)} (from thunk)
  */
 
-export const initialize = () => async (dispatch) => {
+export const initialize = () => async (dispatch, getState) => {
     await dispatch(getUserData());
-    await dispatch(getLastNotifications());
+    if (getState().user.currentUser.isAuth && !getState().home.notification.length)
+        await dispatch(getLastNotifications());
     dispatch(initializedSuccess());
 };

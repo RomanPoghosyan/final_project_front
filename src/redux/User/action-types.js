@@ -1,3 +1,4 @@
 export const SET_USER_FULL_DATA = "SET_USER_FULL_DATA";
 export const SET_SEARCHED_USERS = "SET_SEARCHED_USERS";
 export const USER_LOGOUT = "USER_LOGOUT";
+export const SET_FB_TOKEN = 'SET_FB_TOKEN';

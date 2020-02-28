@@ -58,7 +58,7 @@ export const getBoards = (userId) => (dispatch) => {
         })
         .catch(({response: {data}}) => {
             dispatch(setNotify({
-                open: true, type: 'error', content: `${data.message.length ? data.message :
+                open: true, type: 'error', content: `${data.messages.length ? data.messages[0] :
                     "Something went wrong"}`
             }));
             // TODO notify that user doesn't have any projects

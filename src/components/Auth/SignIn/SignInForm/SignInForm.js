@@ -13,7 +13,6 @@ const requiredUsername = requiredFieldCreator("Username");
 const requiredPassword = requiredFieldCreator("Password");
 
 const SignInForm = (props) => {
-    console.log(props);
     return (
         <form onSubmit={props.handleSubmit} className={props.className}>
             <Field label={"Login"} id="standard-basic" name={"login"} component={renderTextField}

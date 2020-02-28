@@ -1,4 +1,4 @@
-import {emailChecker, maxLengthCreator, onlyCharacters, required} from "../../../../utils/validators/validators";
+import {emailChecker, maxLengthCreator, onlyCharacters, requiredFieldCreator} from "../../../../utils/validators/validators";
 import {Field, reduxForm} from "redux-form";
 import {renderTextField} from "../../../common/FormControlls/FormControlls";
 import {Button} from "@material-ui/core";
