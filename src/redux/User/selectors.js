@@ -1,5 +1,4 @@
 import {createSelector} from "reselect";
-import {getRolesSelect} from "../Role/selectors";
 
 export const getIsAuthSelect = state => state.user.currentUser.isAuth;
 

@@ -1,6 +1,6 @@
 import {taskAPI} from "../../API/api";
 import {addTaskToColumnSuccess} from "../Board/actions";
-import {ADD_TASK_SUCCESS, SET_CURRENT_TASK_INFO, SET_DAILY_TASKS SET_TASKS} from "./action-types";
+import {ADD_TASK_SUCCESS, SET_CURRENT_TASK_INFO, SET_DAILY_TASKS, SET_TASKS} from "./action-types";
 import {setNotify} from "../Notify/notify-reducer";
 import {push} from "connected-react-router";
 

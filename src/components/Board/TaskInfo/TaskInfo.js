@@ -25,7 +25,6 @@ const TaskInfo = ({taskInfo}) => {
     const classes = useStyles();
     const users = useSelector(getBoardUsersSelect);
     const assignor = useSelector(getUserSelect(taskInfo.assignorId));
-    console.log(assignor);
 
     if(!taskInfo.isFetched) return <p>Patience...</p>;
 
