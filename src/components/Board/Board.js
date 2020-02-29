@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Suspense} from "react";
 import AddColumn from "./AddColumn/AddColumn";
 import {DragDropContext, Droppable} from "react-beautiful-dnd";
 import {connect} from "react-redux";
@@ -7,11 +7,14 @@ import {taskMoved} from "../../redux/Board/actions";
 import {makeStyles} from "@material-ui/core";
 import MemoizedColumn from "./MemoizedColumn/MemoizedColumn";
 import {PropTypes} from "prop-types";
+import {Route} from "react-router-dom";
+const TaskInfoContainer = React.lazy(() => import("./TaskInfo/TaskInfoContainer"));
+
 
 const useStyles = makeStyles(theme => ({
     container: {
-        display: "flex"
-    }
+        display: "flex",
+    },
 }));
 
 
@@ -47,6 +50,7 @@ const Board = ({board, tasks, taskMoved}) => {
                 </Droppable>
             </DragDropContext>
             <AddColumn boardId={board.id}/>
+            <Route path={"/board/:boardId/task/:taskId"} render={() => <Suspense fallback={""}><TaskInfoContainer /></Suspense>}/>
         </div>
     );
 };

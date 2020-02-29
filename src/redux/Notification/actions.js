@@ -27,7 +27,7 @@ export const getNotifications = () => dispatch => {
             dispatch(setNotifications(data.body));
         }).catch(({response: {data}}) => {
             dispatch(setNotify({
-                open: true, type: 'error', content: `${data.message.length ? data.message :
+                open: true, type: 'error', content: `${data.messages.length ? data.messages[0] :
                     "Something went wrong"}`
             }));
         })
@@ -40,7 +40,7 @@ export const getLastNotifications = () => (dispatch) => {
                 dispatch(setNotifications(data.body));
         }).catch(({response: {data}}) => {
             dispatch(setNotify({
-                open: true, type: 'error', content: `${data.message.length ? data.message :
+                open: true, type: 'error', content: `${data.messages.length ? data.messages[0] :
                     "Something went wrong"}`
             }));
         });
@@ -61,7 +61,7 @@ export const setNotificationStatus = (notificationId, isSeen = false) => (dispat
             }
         }).catch(({response: {data}}) => {
             dispatch(setNotify({
-                open: true, type: 'error', content: `${data.message.length ? data.message :
+                open: true, type: 'error', content: `${data.messages.length ? data.messages[0] :
                     "Something went wrong"}`
             }));
         });
@@ -109,7 +109,7 @@ export const replyToInvitation = (notificationId, isAccepted) => (dispatch) => {
             setNotify({open: true, type: "success", content: `Invitation ${isAccepted? "accept" : "reject"}ed!`});
         }).catch(({response: {data}}) => {
             dispatch(setNotify({
-                open: true, type: 'error', content: `${data.message.length ? data.message :
+                open: true, type: 'error', content: `${data.messages.length ? data.messages[0] :
                     "Something went wrong"}`
             }));
         });

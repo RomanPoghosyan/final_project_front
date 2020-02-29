@@ -1,4 +1,4 @@
-import {ADD_TASK_SUCCESS, SET_DAILY_TASKS, SET_TASKS} from "./action-types";
+import {ADD_TASK_SUCCESS, SET_CURRENT_TASK_INFO, SET_DAILY_TASKS, SET_TASKS} from "./action-types";
 
 
 const initialState = {
@@ -13,33 +13,49 @@ const initialState = {
 };
 
 export const tasksReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case SET_TASKS:
-            return {
-                ...state,
-                tasks: {
-                    ...action.payload,
-                }
-            };
-        case ADD_TASK_SUCCESS:
-            const {task} = action.payload;
-            return {
-                ...state,
-                tasks: {
-                    ...state.tasks,
-                    ...task,
-                },
-            };
-        case SET_DAILY_TASKS:
-            return {
-                ...state,
-                dailyTasks: [
-                    // ...state.dailyTasks,
-                    ...action.payload,
-                ]
-            };
-        default:
-            return state;
+        switch (action.type) {
+            case SET_TASKS:
+                return {
+                    ...state,
+                    tasks: {
+                        ...action.payload,
+                    }
+                };
+            case ADD_TASK_SUCCESS: {
+                const {task} = action.payload;
+                return {
+                    ...state,
+                    tasks: {
+                        ...state.tasks,
+                        ...task,
+                    },
+                };
+            }
+            case SET_DAILY_TASKS:
+                return {
+                    ...state,
+                    dailyTasks: [
+                        // ...state.dailyTasks,
+                        ...action.payload,
+                    ]
+                };
+            case SET_CURRENT_TASK_INFO: {
+                const task = action.payload;
+                return {
+                    ...state,
+                    tasks: {
+                        ...state.tasks,
+                        [task.id]: {
+                            ...task,
+                            isFetched: true,
+                        }
+                    },
+                    current: task.id
+                };
+            }
+            default:
+                return state;
+        }
     }
-};
+;
 

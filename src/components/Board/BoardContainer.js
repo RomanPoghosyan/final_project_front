@@ -1,6 +1,6 @@
-import React, {useCallback, useEffect} from "react";
+import React, {useEffect} from "react";
 import {withRouter} from "react-router-dom";
-import {connect} from "react-redux";
+import {useDispatch} from "react-redux";
 import {compose} from "redux";
 import {getBoardData} from "../../redux/Board/actions";
 import {makeStyles} from "@material-ui/core";
@@ -8,6 +8,8 @@ import {PropTypes} from "prop-types";
 import Board from "./Board";
 import Panel from "./Panel/Panel";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
+import {getBoardUsers} from "../../redux/User/actions";
+import {getBoardRoles} from "../../redux/Role/actions";
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -15,19 +17,22 @@ const useStyles = makeStyles(theme => ({
         flexDirection: "column",
         height: "100%",
         backgroundColor: theme.palette.secondary.dark,
+        overflowX: "auto"
     }
 }));
 
 
-const BoardContainer = ({match, getBoardData}) => {
+const BoardContainer = ({match}) => {
     const classes = useStyles();
     const boardId = match.params.boardId;
-
-    const memoizedCallback  = useCallback((boardId) => getBoardData(boardId), [getBoardData]);
+    const dispatch = useDispatch();
+    // const memoizedCallback  = useCallback((boardId) => getBoardData(boardId), [getBoardData]);
 
     useEffect(() => {
-        memoizedCallback(boardId);
-    }, [memoizedCallback, boardId]);
+        dispatch(getBoardData(boardId));
+        dispatch(getBoardUsers(boardId));
+        dispatch(getBoardRoles(boardId));
+    }, [dispatch, boardId]);
 
     return (
         <div className={classes.container}>
@@ -44,6 +49,6 @@ BoardContainer.propTypes = {
 
 export default compose(
     withRouter,
-    connect(null, {getBoardData}),
+    // connect(null, {getBoardData}),
     withAuthRedirect(false)
 )(BoardContainer);

@@ -1,5 +1,5 @@
 import React from "react";
-import {boardReducer} from "./Board/board-reducer";
+import {boardReducer} from "./board-reducer";
 import {
     addColumnSuccess,
     addTaskToColumnSuccess,
@@ -7,7 +7,7 @@ import {
     dataFetched,
     setBoardData,
     taskReordered
-} from "./Board/actions";
+} from "./actions";
 ;
 
 describe('board-reducer tests', () => {

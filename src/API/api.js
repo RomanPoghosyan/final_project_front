@@ -114,7 +114,7 @@ export const boardAPI = {
             headers: {
                 "Authorization": getToken(),
             }
-        })
+        } )
     },
 };
 
@@ -127,12 +127,20 @@ export const boardAPI = {
  */
 
 export const taskAPI = {
-    addTask(task) {
+    addTask (task) {
         return instance.post(`tasks`, {...task}, {
             headers: {
                 [AUTHORIZATION]: getToken()
             }
         })
+    },
+    getTaskInfo (taskId) {
+        return instance.get(`tasks/${taskId}`, {
+                headers: {
+                    [AUTHORIZATION]: getToken(),
+                }
+            }
+        );
     },
     getDailyTasks() {
         return instance.get(`tasks/daily`, {
@@ -152,21 +160,35 @@ export const taskAPI = {
 export const userAPI = {
     getUser(token) {
         setToken(token);
-        return instance.get('users', {
+        return instance.get ('users', {
             headers: {
                 [AUTHORIZATION]: getToken(),
             }
         });
     },
-    updateUser(user) {
-        return instance.put('users', {...user}, {
+    updateUser (user) {
+        return instance.put ('users',  {...user}, {
             headers: {
                 [AUTHORIZATION]: getToken(),
             }
         });
     },
     search(username, boardId) {
-        return instance.get(`users/search/${username}/${boardId}`, {
+        return instance.get (`users/search/${username}/${boardId}`, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        });
+    },
+    getBoardUsers(boardId){
+        return instance.get (`users/all/${boardId}`, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        });
+    },
+    changeUserRole(data){
+        return instance.put ('users/role',  {...data}, {
             headers: {
                 [AUTHORIZATION]: getToken(),
             }
@@ -189,7 +211,7 @@ export const userAPI = {
  * @type {{sendInvitationNotification(*): *, getNotifications(): *}}
  */
 export const notificationAPI = {
-    sendInvitationNotification(notification) {
+    sendInvitationNotification (notification) {
         return instance.post(`notifications/invite`, {...notification}, {
             headers: {
                 [AUTHORIZATION]: getToken(),
@@ -197,32 +219,32 @@ export const notificationAPI = {
         });
     },
 
-    getNotifications() {
-        return instance.get('notifications', {
+    getNotifications () {
+        return instance.get ('notifications', {
             headers: {
                 [AUTHORIZATION]: getToken(),
             }
         });
     },
 
-    putNotificationStatus(notificationId, isSeen) {
-        return instance.put(`notifications/set-status`, {notificationId, isSeen}, {
+    putNotificationStatus ( notificationId, isSeen ) {
+        return instance.put ( `notifications/set-status`, { notificationId, isSeen }, {
             headers: {
                 [AUTHORIZATION]: getToken(),
             }
         })
     },
 
-    getLastFiveNotifications() {
-        return instance.get(`notifications/last-notifications`, {
+    getLastFiveNotifications () {
+        return instance.get ( `notifications/last-notifications`, {
             headers: {
                 [AUTHORIZATION]: getToken(),
             }
         })
     },
 
-    replyToInvitation(notificationId, isAccepted) {
-        return instance.put(`notifications/reply`, {notificationId, isAccepted}, {
+    replyToInvitation (notificationId, isAccepted) {
+        return instance.put ( `notifications/reply`, { notificationId, isAccepted }, {
             headers: {
                 [AUTHORIZATION]: getToken(),
             }
@@ -232,28 +254,28 @@ export const notificationAPI = {
 
 
 export const rolesAPI = {
-    getRoles(boardId) {
-        return instance.get(`roles/${boardId}`, {
+    getRoles (boardId) {
+        return instance.get (`roles/${boardId}`, {
             headers: {
                 [AUTHORIZATION]: getToken(),
             }
         });
     },
     getPrivileges() {
-        return instance.get(`roles/privileges`, {
+        return instance.get (`roles/privileges`, {
             headers: {
                 [AUTHORIZATION]: getToken(),
             }
         });
     },
-    addRole(role) {
+    addRole (role) {
         return instance.post(`roles`, {...role}, {
             headers: {
                 [AUTHORIZATION]: getToken()
             }
         })
     },
-    editRolePrivilege(data) {
+    editRolePrivilege (data) {
         return instance.put(`roles/privilege`, {...data}, {
             headers: {
                 [AUTHORIZATION]: getToken()

@@ -1,68 +1,68 @@
-import React, {useCallback, useEffect} from 'react';
-import {BrowserRouter as Router, Route, Switch, withRouter} from "react-router-dom";
+import React, {useEffect} from 'react';
+import {Route, Switch} from "react-router-dom";
 import {makeStyles, ThemeProvider} from "@material-ui/styles";
 import Auth from "./components/Auth/Auth";
 import Main from "./components/Main/Main";
-import {connect, Provider} from "react-redux";
-import store from "./redux/store";
-import {compose} from "redux";
+import {Provider, useDispatch, useSelector} from "react-redux";
+import store, {history} from "./redux/store";
 import theme from "./utils/styles/theme";
 import {initialize} from './redux/App/actions';
-import PropTypes from 'prop-types';
+import {ConnectedRouter} from 'connected-react-router'
 
 
 const useStyles = makeStyles({
     wrapper: {
         display: "grid",
-        height: "100%"
+        height: "100%",
+        minWidth: 0
     }
 });
 
 
-const App = ({initialized, initialize}) => {
+const App = () => {
     const classes = useStyles();
-    const memoizedCallback  = useCallback(() => initialize(), [initialize]);
-    useEffect(() => {
-        memoizedCallback();
-    }, [memoizedCallback]);
+    const dispatch = useDispatch();
+    const initialized = useSelector(state => state.app.initialized);
 
-    if(!initialized) return <div>Loading...</div>;
+    useEffect(() => {
+        dispatch(initialize());
+    }, [dispatch]);
+
+    if (!initialized) return <div>Loading...</div>;
 
     return (
         <div className={classes.wrapper}>
             <Switch>
-                <Route path={"/(sign-in|sign-up)"} component={Auth} />
-                <Route component={Main} />
+                <Route path={"/(sign-in|sign-up)"} component={Auth}/>
+                <Route component={Main}/>
             </Switch>
         </div>
     );
 };
 
-App.propTypes = {
-    initialized: PropTypes.bool.isRequired,
-    initialize: PropTypes.func.isRequired,
-};
-
-let mapStateToProps = (state) => ({
-    initialized: state.app.initialized
-});
-
-const AppWithData = compose(
-    withRouter,
-    connect(mapStateToProps, {initialize})
-)(App);
 
 const AppContainer = () => {
     return (
-        <Router>
+        <Provider store={store}>
             <ThemeProvider theme={theme}>
-                <Provider store={store}>
-                    <AppWithData/>
-                </Provider>
+                <ConnectedRouter history={history}>
+                    <App/>
+                </ConnectedRouter>
             </ThemeProvider>
-        </Router>
+        </Provider>
     );
 };
+// const AppContainer = () => {
+//     return (
+//         <Router>
+//             <ThemeProvider theme={theme}>
+//                 <Provider store={store}>
+//                     <App />
+//                 </Provider>
+//             </ThemeProvider>
+//         </Router>
+//     );
+// };
 
 
 export default AppContainer;

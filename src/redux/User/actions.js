@@ -1,9 +1,15 @@
-import {SET_FB_TOKEN, SET_SEARCHED_USERS, SET_USER_FULL_DATA, USER_LOGOUT} from "./action-types";
+import {
+    CHANGE_USER_ROLE_SUCCESS,
+    SET_BOARD_USERS,
+    SET_SEARCHED_USERS,
+    SET_USER_FULL_DATA,
+    USER_LOGOUT
+} from "./action-types";
 import {authAPI, userAPI} from "../../API/api";
 import {initialize, initializedSuccess} from "../App/actions";
 import {setNotify} from "../Notify/notify-reducer";
 import {stopSubmit} from "redux-form";
-import {messaging} from "../../init-firebase";
+
 
 /**
  *
@@ -157,36 +163,30 @@ export const search = username => async (dispatch, getState) => {
     }
 };
 
-export const setFbToken = token => {
-    return {type: SET_FB_TOKEN, payload: token};
-};
+export const setBoardUsers = (users) => ({type: SET_BOARD_USERS, payload: users});
 
-
-export const getCurrentFbToken = () => dispatch => {
-    messaging.getToken()
-        .then ( token => {
-           userAPI.setFbToken(token)
-               .then ( token => {
-                   console.log(token);
-                   dispatch(setFbToken(token))
-               })
+export const getBoardUsers = boardId => async dispatch => {
+    userAPI.getBoardUsers(boardId)
+        .then(({data}) => {
+            if (data.resultCode === 0) {
+                dispatch(setBoardUsers(data.body));
+            }
+        })
+        .catch(({response: {data}}) => {
+            // let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
         });
 };
 
-export const requestPermission = () => dispatch => {
-    Notification.requestPermission().then((permission) => {
-        console.log(permission);
-        if (permission === 'granted') {
-            console.log('Notification permission granted.');
-            debugger;
-            // TODO(developer): Retrieve an Instance ID token for use with FCM.
-            dispatch(getCurrentFbToken());
-            // [START_EXCLUDE]
-            // In many cases once an app has been granted notification permission,
-            // it should update its UI reflecting this.
-            // [END_EXCLUDE]
-        } else {
-            console.log('Unable to get permission to notify.');
-        }
-    });
+export const changeUserRoleSuccess = (boardId, userId, roleId) => ({type: CHANGE_USER_ROLE_SUCCESS, payload: {boardId, userId, roleId}});
+
+export const changeUserRole = (boardId, userId, roleId) => async (dispatch) => {
+    userAPI.changeUserRole({projectId: boardId, userId, roleId})
+        .then(({data}) => {
+            if (data.resultCode === 0) {
+                dispatch(changeUserRoleSuccess(boardId, userId, roleId));
+            }
+        })
+        .catch(({response: {data}}) => {
+            // let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
+        });
 };

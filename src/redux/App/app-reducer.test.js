@@ -1,6 +1,6 @@
 import React from "react";
-import appReducer from "./App/app-reducer";
-import {initializedSuccess} from "./App/actions";
+import appReducer from "./app-reducer";
+import {initializedSuccess} from "./actions";
 
 
 describe('app-reducer tests', () => {

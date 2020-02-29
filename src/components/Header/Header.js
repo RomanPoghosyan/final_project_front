@@ -31,13 +31,11 @@ const Header = () => {
     const classes = useStyles();
     return (
         <header className={classes.header}>
-            <Link to={"/"}><Logo/></Link>
+            <Link to={"/"}><Logo /></Link>
             <div className={classes.auth}>
                 {!isAuth && <>
-                    <Link className={classes.link} to={"/sign-in"}><Button variant={"contained"} color={"primary"}>Sign
-                        in</Button></Link>
-                    <Link className={classes.link} to={'/sign-up'}><Button variant={"contained"} color={"primary"}>Sign
-                        up</Button></Link>
+                    <Link className={classes.link} to={"/sign-in"}><Button variant={"contained"} color={"primary"} >Sign in</Button></Link>
+                    <Link className={classes.link} to={'/sign-up'}><Button variant={"contained"} color={"primary"}>Sign up</Button></Link>
                 </>}
                 {isAuth && (
                     <HeaderRightHand/>
