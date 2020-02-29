@@ -1,9 +1,11 @@
 import React from "react";
-import userReducer, {setSearchedUsers, setUserData} from "./user-reducer";
+import userReducer from "./user-reducer";
+import {changeUserRoleSuccess, setBoardUsers, setSearchedUsers, setUserData} from "./actions";
 
 describe('testing user-reducer', () => {
     const initialState = {
         searchedUsers: [],
+        boardUsers: [{id: 1, username: 'username', first_name: 'John', roleId: 1}],
         currentUser: {
             id: null,
             email: null,
@@ -26,6 +28,8 @@ describe('testing user-reducer', () => {
 
     test('SET_USER_FULL_DATA', () => {
         const mockData = {
+            searchedUsers: [],
+            boardUsers: [{id: 1, username: 'username', first_name: 'John', roleId: 1}],
             currentUser: {
                 id: 1,
                 email: 'user@user.net',
@@ -49,14 +53,81 @@ describe('testing user-reducer', () => {
             '21/02/2020',
             '+37477401271',
             true);
-        let newState = userReducer(initialState.currentUser, action);
+        let newState = userReducer(initialState, action);
         expect(newState).toMatchObject(mockData);
     });
 
     test('SET_SEARCHED_USERS', () => {
-        const mockData = {searchedUsers: [{id: 1, username: 'username', first_name: 'John',}]};
+        const mockData = {
+            searchedUsers: [{id: 1, username: 'username', first_name: 'John',}],
+            boardUsers: [{id: 1, username: 'username', first_name: 'John', roleId: 1}],
+            currentUser: {
+                id: null,
+                email: null,
+                username: null,
+                first_name: null,
+                last_name: null,
+                location: null,
+                created_at: null,
+                updated_at: null,
+                phone_number: null,
+                isAuth: false,
+            }
+        };
         let action = setSearchedUsers([{id: 1, username: 'username', first_name: 'John'}]);
-        let newState = userReducer(initialState.searchedUsers, action);
+        let newState = userReducer(initialState, action);
+        expect(newState).toMatchObject(mockData);
+    });
+
+    test('SET_BOARD_USERS', () => {
+        const mockData = {
+            searchedUsers: [],
+            boardUsers: [
+                {id: 1, username: 'username', first_name: 'John'},
+                {id: 2, username: 'username2', first_name: 'James'}
+            ],
+            currentUser: {
+                id: null,
+                email: null,
+                username: null,
+                first_name: null,
+                last_name: null,
+                location: null,
+                created_at: null,
+                updated_at: null,
+                phone_number: null,
+                isAuth: false,
+            }
+        };
+        let action = setBoardUsers([
+            {id: 1, username: 'username', first_name: 'John'},
+            {id: 2, username: 'username2', first_name: 'James'}
+        ]);
+        let newState = userReducer(initialState, action);
+        expect(newState).toMatchObject(mockData);
+    });
+
+    test('CHANGE_USER_ROLE_SUCCESS', () => {
+        const mockData = {
+            searchedUsers: [],
+            boardUsers: [
+                {id: 1, username: 'username', first_name: 'John', roleId: 2}
+            ],
+            currentUser: {
+                id: null,
+                email: null,
+                username: null,
+                first_name: null,
+                last_name: null,
+                location: null,
+                created_at: null,
+                updated_at: null,
+                phone_number: null,
+                isAuth: false,
+            }
+        };
+        let action = changeUserRoleSuccess(1, 1, 2);
+        let newState = userReducer(initialState, action);
         expect(newState).toMatchObject(mockData);
     })
 });

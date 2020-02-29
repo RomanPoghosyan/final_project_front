@@ -6,13 +6,12 @@ import {
     SET_ROLES
 } from "./action-types";
 
-
 const initialState = {
     privileges: [],
     roles: []
 };
 
-export const roleReducer = (state = initialState, action) => {
+const roleReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_ROLES:
             return {
@@ -64,3 +63,4 @@ export const roleReducer = (state = initialState, action) => {
             return state;
     }
 };
+export default roleReducer;

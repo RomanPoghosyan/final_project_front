@@ -1,5 +1,6 @@
-import {addBoardSuccess, boardsReducer, setBoards} from "./boards-reducer";
+import {boardsReducer} from "./boards-reducer";
 import React from "react";
+import {addBoardSuccess, setBoards} from "./actions";
 
 describe('boards reducer', () => {
     test('if state is undefined return initial state', () => {

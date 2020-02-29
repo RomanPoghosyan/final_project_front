@@ -27,7 +27,7 @@ export const getBoardRoles = boardId => dispatch => {
         });
 };
 
-export const setPrivileges = roles => ({type: SET_PRIVILEGES, payload: roles});
+export const setPrivileges = privileges => ({type: SET_PRIVILEGES, payload: privileges});
 
 export const getPrivileges = () => dispatch => {
     rolesAPI.getPrivileges()
