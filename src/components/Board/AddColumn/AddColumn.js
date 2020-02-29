@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
         margin: "8px",
         border: `1px solid ${theme.palette.primary.main}`,
         borderRadius: "2px",
-        width: "220px",
+        minWidth: "220px",
         height: 37,
         display: "flex",
         flexDirection: "column",

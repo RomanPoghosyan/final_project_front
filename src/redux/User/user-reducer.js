@@ -1,4 +1,5 @@
 import {SET_SEARCHED_USERS, SET_USER_FULL_DATA, SET_FB_TOKEN} from "./action-types";
+import {CHANGE_USER_ROLE_SUCCESS, SET_BOARD_USERS, SET_SEARCHED_USERS, SET_USER_FULL_DATA} from "./action-types";
 
 
 const initialState = {
@@ -29,9 +30,7 @@ const initialState = {
  *
  * @param {Object} state
  * @param {Object} action
- * @returns {{isAuth: boolean, phoneNumber: null || string, updated_at: null || string,
- * last_name: null || string, created_at: null || string, location: null || string,
- * first_name: null || string, email: null || string, username: null || string }}
+ * @returns {{boardUsers: ...*[], currentUser: {}, searchedUsers: ...*[]}}
  */
 
 const userReducer = (state = initialState, action) => {
@@ -55,6 +54,26 @@ const userReducer = (state = initialState, action) => {
                 searchedUsers: [
                     ...action.payload,
                 ]
+            };
+        case SET_BOARD_USERS:
+            return {
+                ...state,
+                boardUsers: [...action.payload]
+            };
+        case CHANGE_USER_ROLE_SUCCESS:
+            return {
+                ...state,
+                boardUsers: state.boardUsers.map(u => {
+                    console.log(u.id);
+                    console.log(action.payload.userId);
+                    if (u.id === +action.payload.userId) {
+                        return {
+                            ...u,
+                            roleId: action.payload.roleId,
+                        }
+                    }
+                    return u;
+                })
             };
         default:
             return state;

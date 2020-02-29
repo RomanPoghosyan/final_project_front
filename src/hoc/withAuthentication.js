@@ -1,10 +1,10 @@
 import React from "react";
 import {useSelector} from "react-redux";
-import {getIsAuth} from "../redux/User/user-selectors";
+import {getIsAuthSelect} from "../redux/User/selectors";
 
 const withAuthentication = (Component) => {
     return function () {
-        const isAuth = useSelector(getIsAuth);
+        const isAuth = useSelector(getIsAuthSelect);
         return <Component isAuth={isAuth}/>
     }
 };

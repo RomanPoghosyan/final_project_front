@@ -1,4 +1,11 @@
 import {SET_FB_TOKEN, SET_SEARCHED_USERS, SET_USER_FULL_DATA, USER_LOGOUT} from "./action-types";
+import {
+    CHANGE_USER_ROLE_SUCCESS,
+    SET_BOARD_USERS,
+    SET_SEARCHED_USERS,
+    SET_USER_FULL_DATA,
+    USER_LOGOUT
+} from "./action-types";
 import {authAPI, userAPI} from "../../API/api";
 import {initialize, initializedSuccess} from "../App/actions";
 import {setNotify} from "../Notify/notify-reducer";
@@ -137,7 +144,6 @@ export const logout = () => dispatch => {
     authAPI.logout();
     dispatch(logoutSuccess());
     dispatch(initializedSuccess());
-    messaging.deleteToken('').then(() => setFbToken(''));
 };
 
 export const setSearchedUsers = (searchedUsers) => ({type: SET_SEARCHED_USERS, payload: searchedUsers});
@@ -151,6 +157,7 @@ export const search = username => async (dispatch, getState) => {
                 }
             })
             .catch(({response: {data}}) => {
+                console.log("error in search");
                 // let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
             });
     } else {
@@ -186,4 +193,31 @@ export const requestPermission = () => dispatch => {
         dispatch(setNotify({open: true, content:  "You have new notification", type: "warning"}));
     }));
     messaging.onMessage((payload) => console.log('Message received. ', payload));
+};
+export const setBoardUsers = (users) => ({type: SET_BOARD_USERS, payload: users});
+
+export const getBoardUsers = boardId => async dispatch => {
+    userAPI.getBoardUsers(boardId)
+        .then(({data}) => {
+            if (data.resultCode === 0) {
+                dispatch(setBoardUsers(data.body));
+            }
+        })
+        .catch(({response: {data}}) => {
+            // let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
+        });
+};
+
+export const changeUserRoleSuccess = (boardId, userId, roleId) => ({type: CHANGE_USER_ROLE_SUCCESS, payload: {boardId, userId, roleId}});
+
+export const changeUserRole = (boardId, userId, roleId) => async (dispatch) => {
+    userAPI.changeUserRole({projectId: boardId, userId, roleId})
+        .then(({data}) => {
+            if (data.resultCode === 0) {
+                dispatch(changeUserRoleSuccess(boardId, userId, roleId));
+            }
+        })
+        .catch(({response: {data}}) => {
+            // let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
+        });
 };

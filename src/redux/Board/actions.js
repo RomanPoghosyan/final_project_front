@@ -3,12 +3,15 @@ import {setTasks} from "../Tasks/actions";
 import {
     ADD_COLUMN_SUCCESS,
     ADD_TASK_TO_COLUMN_SUCCESS,
-    COLUMN_REORDER, DATA_FETCHED,
+    COLUMN_REORDER,
+    DATA_FETCHED,
     SET_BOARD_DATA,
     TASK_MOVED,
     TASK_REORDER
 } from "./action-types";
 import {setNotify} from "../Notify/notify-reducer";
+import { push } from 'connected-react-router';
+
 
 export const dataFetched = (isFetched) => ({type: DATA_FETCHED, payload: isFetched});
 
@@ -31,9 +34,10 @@ export const getBoardData = (boardId) => (dispatch) => {
         })
         .catch(({response: {data}}) => {
             dispatch(setNotify({
-                open: true, type: 'error', content: `${data.message.length ? data.message :
+                open: true, type: 'error', content: `${data.messages.length ? data.messages[0] :
                     "Something went wrong"}`
             }));
+            dispatch(push('/not-found'));
         });
     // .catch(({response: {data}}) => {
     //     console.log(data);
@@ -59,7 +63,7 @@ export const addColumn = (name) => (dispatch, getState) => {
         })
         .catch(({response: {data}}) => {
             dispatch(setNotify({
-                open: true, type: 'error', content: `${data.message.length ? data.message :
+                open: true, type: 'error', content: `${data.messages.length ? data.messages[0] :
                     "Something went wrong"}`
             }));
         });

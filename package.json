@@ -13,6 +13,8 @@
     "axios": "^0.19.2",
     "fcm-notification": "^2.0.0",
     "firebase": "^7.9.1",
+    "connected-react-router": "^6.7.0",
+    "history": "^4.10.1",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
     "prop-types": "^15.7.2",
