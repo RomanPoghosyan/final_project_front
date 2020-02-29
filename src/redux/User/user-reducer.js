@@ -37,7 +37,6 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_USER_FULL_DATA:
-            console.log(action.payload);
             return {
                 ...state,
                 currentUser: {...action.payload}

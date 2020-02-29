@@ -1,5 +1,4 @@
 import {boardAPI} from "../../API/api";
-import {stopSubmit} from "redux-form";
 import {setNotify} from "../Notify/notify-reducer";
 
 const SET_BOARDS = "SET_BOARDS";

@@ -4,6 +4,7 @@ import AccountSettingsForm from "./AccountSettingsForm/AccountSettingsForm";
 import {useDispatch, useSelector} from "react-redux";
 import {updateUser} from "../../redux/User/actions";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
+import {getCurrentUser} from "../../redux/User/user-selectors";
 
 const useStyles = makeStyles(theme => ({
     wrapper: {
@@ -39,7 +40,7 @@ const useStyles = makeStyles(theme => ({
 const AccountSettings = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const {id, isAuth, ...user} = useSelector(state => state.user.currentUser);
+    const {id, isAuth, ...user} = useSelector(getCurrentUser);
 
     const onSubmit = formData => {
         dispatch(updateUser(formData));

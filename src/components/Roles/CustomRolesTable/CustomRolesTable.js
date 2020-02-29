@@ -11,7 +11,6 @@ const CustomRolesTable = () => {
     const customRoles = useSelector(getCustomRolesSelect);
 
     const handleChange = (state) => {
-        console.log('Selected Rows: ', state.selectedRows);
     };
 
 

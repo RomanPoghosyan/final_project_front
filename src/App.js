@@ -9,7 +9,7 @@ import {compose} from "redux";
 import theme from "./utils/styles/theme";
 import {initialize} from './redux/App/actions';
 import PropTypes from 'prop-types';
-
+// import {messaging} from './init-firebase';
 
 const useStyles = makeStyles({
     wrapper: {
@@ -25,6 +25,21 @@ const App = ({initialized, initialize}) => {
     useEffect(() => {
         memoizedCallback();
     }, [memoizedCallback]);
+
+
+    // useEffect(()=>{
+    //     messaging.onTokenRefresh(()=>{
+    //         console.log('bbbbbbbbbbbbbbbbbb')
+    //     });
+    //     messaging.onMessage((payload) => {
+    //         console.log('aaaaaaaaaaaaaaaaaaaaaaaaa');
+    //         console.log('Message received. ', payload);
+    //         // [START_EXCLUDE]
+    //         // Update the UI to include the received message.
+    //         // [END_EXCLUDE]
+    //     });
+    //     console.log(messaging);
+    // }, []);
 
     if(!initialized) return <div>Loading...</div>;
 

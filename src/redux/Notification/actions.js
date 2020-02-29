@@ -79,8 +79,6 @@ export const sendInvitationNotification = (notification) => (dispatch, getState)
     if (getState().user.searchedUsers.some(u => u.username === notification.username)) {
         return notificationAPI.sendInvitationNotification(notification)
             .then(({data}) => {
-                console.log(data);
-                console.log(notification);
                 dispatch(setNotify({
                     open: true, type: 'success', content: "Invitation sent!"
                 }));

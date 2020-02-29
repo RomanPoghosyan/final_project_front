@@ -5,7 +5,6 @@ import * as serviceWorker from './serviceWorker';
 import AppContainer from "./App";
 import {registerServiceWorker} from "./register-sw";
 
-debugger;
 registerServiceWorker();
 ReactDOM.render(<AppContainer />, document.getElementById('root'));
 

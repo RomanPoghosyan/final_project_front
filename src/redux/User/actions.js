@@ -3,7 +3,8 @@ import {authAPI, userAPI} from "../../API/api";
 import {initialize, initializedSuccess} from "../App/actions";
 import {setNotify} from "../Notify/notify-reducer";
 import {stopSubmit} from "redux-form";
-import {messaging} from "../../init-firebase";
+import {messaging} from "../../init-fcm";
+import {getNotifications} from "../Notification/actions";
 
 /**
  *
@@ -136,6 +137,7 @@ export const logout = () => dispatch => {
     authAPI.logout();
     dispatch(logoutSuccess());
     dispatch(initializedSuccess());
+    messaging.deleteToken('').then(() => setFbToken(''));
 };
 
 export const setSearchedUsers = (searchedUsers) => ({type: SET_SEARCHED_USERS, payload: searchedUsers});
@@ -149,7 +151,6 @@ export const search = username => async (dispatch, getState) => {
                 }
             })
             .catch(({response: {data}}) => {
-                console.log("error in search");
                 // let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
             });
     } else {
@@ -167,26 +168,22 @@ export const getCurrentFbToken = () => dispatch => {
         .then ( token => {
            userAPI.setFbToken(token)
                .then ( token => {
-                   console.log(token);
                    dispatch(setFbToken(token))
                })
-        });
+        }).catch(err => console.log('There are no token',err));
 };
 
 export const requestPermission = () => dispatch => {
-    Notification.requestPermission().then((permission) => {
-        console.log(permission);
-        if (permission === 'granted') {
-            console.log('Notification permission granted.');
-            debugger;
-            // TODO(developer): Retrieve an Instance ID token for use with FCM.
+    messaging.requestPermission()
+        .then(async function() {
             dispatch(getCurrentFbToken());
-            // [START_EXCLUDE]
-            // In many cases once an app has been granted notification permission,
-            // it should update its UI reflecting this.
-            // [END_EXCLUDE]
-        } else {
-            console.log('Unable to get permission to notify.');
-        }
-    });
+        })
+        .catch(function(err) {
+            console.log("Unable to get permission to notify. ", err);
+        });
+    navigator.serviceWorker.addEventListener("message", ((message) => {
+        dispatch(getNotifications());
+        dispatch(setNotify({open: true, content:  "You have new notification", type: "warning"}));
+    }));
+    messaging.onMessage((payload) => console.log('Message received. ', payload));
 };

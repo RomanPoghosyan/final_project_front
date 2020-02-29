@@ -10,6 +10,7 @@ import {logout} from "../../../../redux/User/actions";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import Button from "@material-ui/core/Button";
+import {getFullName} from "../../../../redux/User/user-selectors";
 
 const useStyles = makeStyles(theme => ({
     header: {
@@ -46,7 +47,7 @@ function Account () {
         setAnchorEl(event.currentTarget);
     }
 
-    const fullName = useSelector(state => [state.user.currentUser.first_name, state.user.currentUser.last_name]);
+    const fullName = useSelector(getFullName);
 
     return (
         <>

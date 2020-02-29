@@ -11,7 +11,6 @@ const AddRole = ({boardId}) => {
 
 
     const onSubmit = (formData) => {
-        console.log(formData);
         dispatch(addRole(boardId,formData));
     };
 
