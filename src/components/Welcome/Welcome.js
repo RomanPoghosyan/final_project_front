@@ -1,7 +1,7 @@
 import React, {memo} from 'react';
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles(( theme => ({
+export const useStyles = makeStyles((theme => ({
     root: {
         display: "grid",
         justifyItems: "center",
@@ -43,7 +43,6 @@ const Welcome = () => {
             <div />
         </div>
     );
-
 };
 
 export default memo(Welcome);

@@ -1,9 +1,11 @@
 importScripts("https://www.gstatic.com/firebasejs/5.9.4/firebase-app.js");
 importScripts("https://www.gstatic.com/firebasejs/5.9.4/firebase-messaging.js");
-firebase.initializeApp({
-    // Project Settings => Add Firebase to your web app
-    messagingSenderId: "1062407524656"
-});
+if ( firebase.messaging.isSupported() ) {
+    firebase.initializeApp({
+        // Project Settings => Add Firebase to your web app
+        messagingSenderId: "1062407524656"
+    });
+}
 const messaging = firebase.messaging();
 messaging.setBackgroundMessageHandler(function(payload) {
     const promiseChain = clients

@@ -10,10 +10,12 @@ const initializedFirebaseApp = firebase.initializeApp({
     appId: "1:689974140243:web:a29d1da610ce95ce42d5a6",
     measurementId: "G-M7TCB8MFHP",
 });
-const messaging = initializedFirebaseApp.messaging();
-messaging.usePublicVapidKey(
-    "BBNh7AItKPSl1l4xkwkAi01FLHn-2QyxlPn4ZnSGrXMU1B45XCKHAkd1A4siur37gx-g4TRo32O09fpUUV3SuGs"
-);
-
+let messaging;
+if ( firebase.messaging.isSupported() ) {
+    messaging = initializedFirebaseApp.messaging();
+    messaging.usePublicVapidKey(
+        "BBNh7AItKPSl1l4xkwkAi01FLHn-2QyxlPn4ZnSGrXMU1B45XCKHAkd1A4siur37gx-g4TRo32O09fpUUV3SuGs"
+    );
+}
 
 export { messaging };
