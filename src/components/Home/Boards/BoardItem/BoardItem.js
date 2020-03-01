@@ -13,7 +13,8 @@ const useStyles = makeStyles(theme => ({
     },
     title: {
         padding: "7px",
-        color: theme.palette.secondary.dark,
+        color: theme.palette.typography.color,
+        // textDecorationColor: "underline red"
     },
     icons: {
         justifyContent: "flex-end"

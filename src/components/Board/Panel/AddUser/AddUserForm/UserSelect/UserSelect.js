@@ -17,8 +17,8 @@ const UserSelect = ({searchedUsers}) => {
                 getOptionLabel={option => option.username}
                 renderOption={option => (
                     <React.Fragment>
-                        <span>{option.username}</span>
-                        {`${option.first_name} (${option.id})`}
+                        <span>{option.username} </span>
+                        ({`${option.first_name})`}
                     </React.Fragment>
                 )}
                 renderInput={params => (

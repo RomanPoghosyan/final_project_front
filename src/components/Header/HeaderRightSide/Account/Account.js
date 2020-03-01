@@ -26,6 +26,9 @@ const useStyles = makeStyles(theme => ({
         textDecoration: 'none',
         color: '#000'
     },
+    styledMenu: {
+        backgroundColor: theme.palette.popup.main,
+    }
 }));
 
 function Account () {
@@ -43,7 +46,7 @@ function Account () {
     const [firstName, lastName] = useSelector(getFullName);
     return (
         <>
-            <AccountIcon onClick={handleClick} firstName={firstName} lastName={lastName} backgroundColor={"primary"} />
+            <AccountIcon onClick={handleClick} firstName={firstName} lastName={lastName} backgroundColor={"secondary"} />
             <StyledMenu
                 id="customized-menu"
                 anchorEl={anchorEl}
@@ -57,7 +60,7 @@ function Account () {
                     </Typography>
                     <Close cursor={"pointer"} className={classes.close} onClick={handleClose}/>
                 </div>
-                <List dense={false}>
+                <List dense={false} className={classes.styledMenu}>
                     <ListItem>
                         <Link to={"/account-settings"} onClick={handleClose}>
                             <ListItemText className={classes.link} primary={"Account"} />
