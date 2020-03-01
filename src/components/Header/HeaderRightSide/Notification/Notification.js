@@ -5,7 +5,7 @@ import {makeStyles} from "@material-ui/styles";
 import { useSelector} from "react-redux";
 import Badge from "@material-ui/core/Badge";
 import NotificationMenu from "./NotificationMenu/NotificationMenu";
-import {getAllNotifications} from "../../../../redux/Notification/notification-selectors";
+import {getAllNotificationsSelect} from "../../../../redux/Notification/notification-selectors";
 
 const useStyles = makeStyles(theme => ({
     notifications: {
@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
 function Notification() {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
-    let notifications = useSelector(getAllNotifications);
+    let notifications = useSelector(getAllNotificationsSelect);
     function handleClose() {
         setAnchorEl(null);
     }

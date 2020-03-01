@@ -6,13 +6,13 @@ import {withRouter} from "react-router-dom";
 import InitialRolesTable from "./InitialRolesTable/InitialRolesTable";
 import CustomRolesTable from "./CustomRolesTable/CustomRolesTable";
 import AddRole from "./AddRole/AddRole";
-import {getPrivilagesLength} from "../../redux/Role/role-selectors";
+import {getPrivilegesLengthSelect} from "../../redux/Role/role-selectors";
 
 const Roles = ({match}) => {
     const boardId = match.params.boardId;
     const dispatch = useDispatch();
 
-    const privilegesLength = useSelector(getPrivilagesLength);
+    const privilegesLength = useSelector(getPrivilegesLengthSelect);
 
     useEffect(() => {
         if(privilegesLength < 1){

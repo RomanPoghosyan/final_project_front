@@ -6,7 +6,7 @@ import List from "@material-ui/core/List";
 import NotificationItems from "./NotificationItems/NotificationItems";
 import NoNotifications from "./NoNotifications/NoNotifications";
 import {makeStyles} from "@material-ui/styles";
-import {getAllNotifications} from "../../redux/Notification/notification-selectors";
+import {getAllNotificationsSelect} from "../../redux/Notification/notification-selectors";
 
 const useStyles = makeStyles(theme => ({
     notifications: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
  */
 function AllNotifications() {
     const dispatch = useDispatch();
-    const notifications = useSelector(getAllNotifications);
+    const notifications = useSelector(getAllNotificationsSelect);
     const classes = useStyles();
     useEffect(() => {
         dispatch(getNotifications());

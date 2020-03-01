@@ -4,8 +4,6 @@ import initialRolesTableCell from "../../components/Roles/TableCells/initialRole
 
 export const getPrivilegesSelect = state => state.home.role.privileges;
 
-export const getPrivilagesLength = createSelector(getPrivilegesSelect, privileges => privileges.length);
-
 export const getMappedInitialPrivilegesSelect = createSelector(getPrivilegesSelect, (privileges) => {
     return [{id: 0, name: "Role"}, ...privileges].map(p => ({
         ...p, sortable: true,
@@ -25,3 +23,5 @@ export const getRolesSelect = state => state.home.role.roles;
 export const getInitialRolesSelect = createSelector(getRolesSelect, (roles) => roles.filter(r => r.type === "INITIAL"));
 
 export const getCustomRolesSelect = createSelector(getRolesSelect, (roles) => roles.filter(r => r.type === "CUSTOM"));
+
+export const getPrivilegesLengthSelect = createSelector(getPrivilegesSelect, privileges => privileges.length);

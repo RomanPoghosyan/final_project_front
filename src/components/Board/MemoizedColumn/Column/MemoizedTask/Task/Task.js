@@ -4,7 +4,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import PropTypes from 'prop-types';
 import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {getBoardIdSelect} from "../../../../../../redux/Board/selectors";
+import {getBoardIdSelect} from "../../../../../../redux/Board/board-selectors";
 
 const useStyles = makeStyles(theme => ({
     container: {

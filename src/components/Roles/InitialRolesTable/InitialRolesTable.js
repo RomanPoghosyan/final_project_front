@@ -2,7 +2,7 @@ import React from "react";
 import {useSelector} from "react-redux";
 import DataTable from "react-data-table-component";
 import Checkbox from "@material-ui/core/Checkbox";
-import {getInitialRolesSelect, getMappedInitialPrivilegesSelect,} from "../../../redux/Role/selectors";
+import {getInitialRolesSelect, getMappedInitialPrivilegesSelect} from "../../../redux/Role/role-selectors";
 
 
 const InitialRolesTable = () => {

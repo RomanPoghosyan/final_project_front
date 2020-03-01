@@ -6,7 +6,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import EditUserRoleForm from "./EditUserRoleForm/EditUserRoleForm";
 import {changeUserRole} from "../../../../redux/User/actions";
-import {getBoardIdSelect} from "../../../../redux/Board/selectors";
+import {getBoardIdSelect} from "../../../../redux/Board/board-selectors";
 import {getBoardUsersSelect} from "../../../../redux/User/user-selectors";
 
 

@@ -82,7 +82,8 @@ export const sendInvitationNotification = (notification) => (dispatch, getState)
                 dispatch(setNotify({
                     open: true, type: 'success', content: "Invitation sent!"
                 }));
-            });
+            })
+            // .catch();
     } else {
         dispatch(setNotify({
             open: true, type: 'error', content: "Something went wrong"

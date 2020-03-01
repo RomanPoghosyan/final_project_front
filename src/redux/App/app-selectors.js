@@ -1,1 +1,1 @@
-export const getInitialized = state => state.app.initialized;
+export const getInitializedSelect = state => state.app.initialized;
