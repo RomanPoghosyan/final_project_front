@@ -49,7 +49,7 @@ const BoardUsers = () => {
         <div>
             <div className={classes.container}>
                 {boardUsers.map(u => <AccountIcon key={u.id} firstName={u.first_name} lastName={u.last_name} height={30}
-                                                  width={30} borderRadius={"50%"} backgroundColor={"primary"}
+                                                  width={30} borderRadius={"50%"} backgroundColor={"primary"} padding={"4px 0 5px 0"}
                                                   onClick={() => handleClickOpen(u.id, u.roleId)}/>)}
             </div>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">

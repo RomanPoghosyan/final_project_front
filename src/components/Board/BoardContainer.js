@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
         display: "flex",
         flexDirection: "column",
         height: "100%",
-        backgroundColor: theme.palette.secondary.dark,
+        backgroundColor: theme.palette.background.main,
         overflowX: "auto"
     }
 }));

@@ -15,7 +15,7 @@ const useStyles = makeStyles ( theme => ({
         gridGap: '10px',
         "& > *": {
             cursor: "pointer",
-            backgroundColor: theme.palette.primary.main
+            backgroundColor: theme.palette.secondary.main
         }
     },
 }));

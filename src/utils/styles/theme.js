@@ -6,16 +6,20 @@ const theme = createMuiTheme({
             color: '#fff',
         },
         primary: {
-            main: "#89989d",
+            main: "#00425a",
+        },
+        background: {
+            main: "#fff"
         },
         secondary: {
-            main: "#886d64",
-            dark: "#3f2727",
+            main: "#417281",
         },
         text: {
             color: '#fff',
         },
-        textColor: '#fff',
+        popup: {
+            main: "#bfdde8",
+        },
         root: {
             textDecoration: 'none',
         },

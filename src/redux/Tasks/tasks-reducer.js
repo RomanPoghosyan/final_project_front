@@ -1,4 +1,10 @@
-import {ADD_TASK_SUCCESS, SET_CURRENT_TASK_INFO, SET_DAILY_TASKS, SET_TASKS} from "./action-types";
+import {
+    ADD_TASK_SUCCESS,
+    CHANGE_TASK_PROP_SUCCESS,
+    SET_CURRENT_TASK_INFO,
+    SET_DAILY_TASKS,
+    SET_TASKS
+} from "./action-types";
 
 
 const initialState = {
@@ -51,6 +57,19 @@ export const tasksReducer = (state = initialState, action) => {
                         }
                     },
                     current: task.id
+                };
+            }
+            case CHANGE_TASK_PROP_SUCCESS: {
+                const {id, prop, value} = action.payload;
+                return {
+                    ...state,
+                    tasks: {
+                        ...state.tasks,
+                        [id]: {
+                            ...state.tasks[id],
+                            [prop]: value,
+                        }
+                    }
                 };
             }
             default:

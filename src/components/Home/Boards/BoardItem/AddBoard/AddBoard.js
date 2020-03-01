@@ -23,6 +23,7 @@ const useStyles = makeStyles(theme => ({
         display: "grid",
         justifyItems: "center",
         alignItems: "center",
+        marginTop: 12
     },
     icons: {
         justifyContent: "flex-end"

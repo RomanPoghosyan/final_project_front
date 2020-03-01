@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
         display: "grid",
         gridTemplateColumns: "50px minmax(200px, 1fr)",
         padding: '5px',
-        backgroundColor: theme.palette.secondary.light
+        backgroundColor: theme.palette.primary.main,
     },
     auth: {
         justifySelf: "end",
