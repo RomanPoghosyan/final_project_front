@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
     wrapper: {
       width: "100%",
       height: "100%",
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: theme.palette.background.main,
     },
     form: {
         display: 'grid',

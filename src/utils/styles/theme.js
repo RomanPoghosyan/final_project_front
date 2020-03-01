@@ -14,6 +14,9 @@ const theme = createMuiTheme({
         secondary: {
             main: "#417281",
         },
+        column: {
+            main: "#388ba947",
+        },
         text: {
             color: '#fff',
         },

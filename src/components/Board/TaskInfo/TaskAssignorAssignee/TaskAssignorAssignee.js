@@ -5,6 +5,8 @@ import {blue} from "@material-ui/core/colors";
 import Grid from "@material-ui/core/Grid";
 import UserAvatar from "./UserAvatar/UserAvatar";
 import AssignTaskForm from "./AssignTaskForm/AssignTaskForm";
+import {useDispatch} from "react-redux";
+import {assignTask} from "../../../../redux/Tasks/actions";
 
 
 const useStyles = makeStyles({
@@ -30,8 +32,9 @@ const useStyles = makeStyles({
 
 const TaskAssignorAssignee = ({users, assignor, assignee}) => {
     const classes = useStyles();
+    const dispatch = useDispatch();
     const onSubmit = (formData) => {
-        console.log(formData);
+        dispatch(assignTask(formData.assigneeId));
     };
 
     return (

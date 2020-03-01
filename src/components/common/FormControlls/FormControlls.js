@@ -5,6 +5,8 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
 export const renderTextField = ({input, meta: {touched, invalid, error}, ...custom}) => (
     <TextField
@@ -16,15 +18,27 @@ export const renderTextField = ({input, meta: {touched, invalid, error}, ...cust
     />
 );
 
+export const renderTextArea = ({input, meta: {touched, invalid, error, dirty}, ...custom}) => {
+    return (
+        <>
+            <TextareaAutosize
+                {...input}
+                {...custom}
+            />
+            <FormHelperText error={Boolean(dirty && touched && invalid && error)}>{error}</FormHelperText>
+        </>
+    );
+};
+
 export const radioButton = ({input, children, ...rest}) => (
     <RadioGroup {...input} {...rest}
-                // valueSelected={input.value}
+        // valueSelected={input.value}
                 onChange={(event, value) => input.onChange(value)}>
         {children}
     </RadioGroup>
 );
 
-export const renderCheckbox = ({ input, label, ...rest }) => (
+export const renderCheckbox = ({input, label, ...rest}) => (
     <>
         <FormControlLabel
             control={
@@ -38,7 +52,7 @@ export const renderCheckbox = ({ input, label, ...rest }) => (
     </>
 );
 
-export const renderSelectField = ({input, label, meta: { touched, error }, children, ...custom}) => (
+export const renderSelectField = ({input, label, meta: {touched, error}, children, ...custom}) => (
     <FormControl error={touched && error} variant="outlined">
         <Select
             native

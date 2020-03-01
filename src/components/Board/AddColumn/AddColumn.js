@@ -15,11 +15,12 @@ const useStyles = makeStyles(theme => ({
         height: 37,
         display: "flex",
         flexDirection: "column",
-        backgroundColor: theme.palette.primary.main,
+        backgroundColor: theme.palette.column.main,
     },
     title: {
         padding: "8px",
         cursor: "pointer",
+        color: theme.palette.secondary.dark,
     },
     form: {
         display: "grid",

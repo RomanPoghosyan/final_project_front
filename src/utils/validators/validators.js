@@ -35,6 +35,7 @@ export const asyncValidate = (values, dispatch) => {
 export const requiredProjectName = requiredFieldCreator("Project name");
 export const requiredUsername = requiredFieldCreator("Username");
 export const requiredPassword = requiredFieldCreator("Password");
+export const requiredMicroTaskName = requiredFieldCreator("Micro task name");
 
 export const requiredFirstName = requiredFieldCreator("First name");
 export const requiredLastName = requiredFieldCreator("Last name");

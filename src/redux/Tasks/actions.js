@@ -99,3 +99,18 @@ export const changeDescription = (description) => (dispatch, getState) => {
             dispatch(setNotify({ open: true, type: 'error', content: "Could not change task description!"}));
         });
 };
+
+export const assignTask = (assigneeId) => (dispatch, getState) => {
+    const taskId = getState().home.tasks.current;
+    const boardId = getState().home.currentBoard.id;
+
+    taskAPI.assignTask({taskId, assigneeId, "projectId": boardId})
+        .then(({data}) => {
+            if (data.resultCode === 0) {
+                dispatch(changeTaskPropSuccess(taskId, "assigneeId", assigneeId));
+            }
+        })
+        .catch(({response: {data}}) => {
+            dispatch(setNotify({ open: true, type: 'error', content: "Could not change assignee!"}));
+        });
+};

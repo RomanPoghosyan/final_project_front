@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
         width: "220px",
         display: "flex",
         flexDirection: "column",
-        backgroundColor: theme.palette.primary.main,
+        backgroundColor: theme.palette.column.main,
     },
     title: {
         padding: "8px",
