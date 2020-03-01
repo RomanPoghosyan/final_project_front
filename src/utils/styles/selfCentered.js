@@ -1,0 +1,1 @@
+export const selfCentered = {alignSelf: "center", justifySelf: "center"};

@@ -9,15 +9,17 @@ import theme from "./utils/styles/theme";
 import {initialize} from './redux/App/actions';
 import {ConnectedRouter} from 'connected-react-router'
 import {getInitializedSelect} from "./redux/App/app-selectors";
+import {RiseLoader} from "react-spinners";
+import {selfCentered} from "./utils/styles/selfCentered";
 
 const useStyles = makeStyles({
     wrapper: {
         display: "grid",
         height: "100%",
-        minWidth: 0
+        minWidth: 0,
+
     }
 });
-
 
 const App = () => {
     const classes = useStyles();
@@ -28,7 +30,11 @@ const App = () => {
         dispatch(initialize());
     }, [dispatch]);
 
-    if (!initialized) return <div>Loading...</div>;
+    if (!initialized) {
+        return <div className={classes.wrapper}>
+            <RiseLoader loading={!initialized} margin={2} color={"rgb(54, 215, 183)"} size={50} css={selfCentered}/>
+        </div>
+    }
 
     return (
         <div className={classes.wrapper}>

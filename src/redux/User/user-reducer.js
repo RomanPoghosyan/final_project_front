@@ -64,8 +64,6 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 boardUsers: state.boardUsers.map(u => {
-                    console.log(u.id);
-                    console.log(action.payload.userId);
                     if (u.id === +action.payload.userId) {
                         return {
                             ...u,

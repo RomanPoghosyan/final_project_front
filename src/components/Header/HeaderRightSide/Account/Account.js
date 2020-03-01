@@ -44,6 +44,7 @@ function Account () {
     }
 
     const [firstName, lastName] = useSelector(getFullName);
+
     return (
         <>
             <AccountIcon onClick={handleClick} firstName={firstName} lastName={lastName} backgroundColor={"secondary"} />

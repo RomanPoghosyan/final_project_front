@@ -11,6 +11,7 @@ import Notify from "../Notify/Notify";
 import {useDispatch, useSelector} from "react-redux";
 import {requestPermission} from "../../redux/User/actions";
 import {getCurrentFbTokenSelect} from "../../redux/User/user-selectors";
+import Spinner from "../common/Spinners/Spinner/Spinner";
 
 const BoardContainer = React.lazy(() => import("../Board/BoardContainer"));
 const Roles = React.lazy(() => import("../Roles/Roles"));
@@ -37,15 +38,13 @@ const Main = ({isAuth}) => {
     return (
         <div className={classes.mainWrapper}>
             <Header/>
-            {/*<div style={{overflowX: "auto"}}>*/}
                 <Switch>
                     <Route exact path={"/"} component={MainContent}/>
                     <Route path={'/account-settings'} component={AccountSettings}/>
-                    <Route path={"/roles/:boardId"} render={() => <Suspense fallback={"loading"}><Roles /></Suspense>}/>
-                    <Route path={"/board/:boardId"} boardId="Number" render={() => <Suspense fallback={"loading"}><BoardContainer /></Suspense>}/>
-                    <Route path={"/notifications"} render={() => <Suspense fallback={"loading"}><AllNotifications/></Suspense> }/>
+                    <Route path={"/roles/:boardId"} render={() => <Suspense fallback={<Spinner size={20}/>}><Roles /></Suspense>}/>
+                    <Route path={"/board/:boardId"} boardId="Number" render={() => <Suspense fallback={<Spinner size={150}/>}><BoardContainer /></Suspense>}/>
+                    <Route path={"/notifications"} render={() => <Suspense fallback={<Spinner size={150}/>}><AllNotifications/></Suspense> }/>
                 </Switch>
-            {/*</div>*/}
             <Notify />
         </div>
     );

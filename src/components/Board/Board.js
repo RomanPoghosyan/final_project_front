@@ -8,6 +8,7 @@ import {makeStyles} from "@material-ui/core";
 import MemoizedColumn from "./MemoizedColumn/MemoizedColumn";
 import {PropTypes} from "prop-types";
 import {Route} from "react-router-dom";
+import Spinner from "../common/Spinners/Spinner/Spinner";
 const TaskInfoContainer = React.lazy(() => import("./TaskInfo/TaskInfoContainer"));
 
 
@@ -25,7 +26,8 @@ const Board = ({board, tasks, taskMoved}) => {
         taskMoved(result);
     };
 
-    if(!board.isFetched) return <p>Loading...</p>
+    if(!board.isFetched)
+        return <Spinner size={75} />;
 
     const columns = board.columnOrder.map((columnId, index) => {
         const column = board.columns[columnId];

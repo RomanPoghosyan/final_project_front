@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {updateUser} from "../../redux/User/actions";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import {getCurrentUser} from "../../redux/User/user-selectors";
+import Spinner from "../common/Spinners/Spinner/Spinner";
 
 const useStyles = makeStyles(theme => ({
     wrapper: {
@@ -46,7 +47,8 @@ const AccountSettings = () => {
         dispatch(updateUser(formData));
     };
 
-    if(!isAuth) return <p>Loading...</p>;
+    if(!isAuth)
+        return <Spinner size={50} />
     return (
         <div className={classes.wrapper}>
             <AccountSettingsForm onSubmit={onSubmit} user={user} classes={classes}/>

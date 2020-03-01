@@ -7,6 +7,7 @@ import {getBoardUsersSelect, getUserSelect} from "../../../redux/User/user-selec
 import TaskTitle from "./TaskTitle/TaskTitle";
 import TaskDescription from "./TaskDescription/TaskDescription";
 import TaskAssignorAssignee from "./TaskAssignorAssignee/TaskAssignorAssignee";
+import Spinner from "../../common/Spinners/Spinner/Spinner";
 
 
 const useStyles = makeStyles({
@@ -29,7 +30,8 @@ const TaskInfo = ({taskInfo}) => {
     const assignor = useSelector(getUserSelect(taskInfo.assignorId));
     const assignee = useSelector(getUserSelect(taskInfo.assigneeId));
 
-    if (!taskInfo.isFetched) return <p>Patience...</p>;
+    if (!taskInfo.isFetched)
+        return <Spinner size={75}/>;
 
     return (
         <div className={classes.taskInfo}>
