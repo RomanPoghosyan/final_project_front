@@ -23,7 +23,6 @@ const useStyles = makeStyles({
 
 const TaskDescription = ({description}) => {
     const classes = useStyles();
-    console.log("RENDERED");
     return (
         <WithEditMode value={description} thunkCreator={changeDescription}>
             {(value, editMode, activateEditMode, deactivateEditMode, onValueChange) => (
