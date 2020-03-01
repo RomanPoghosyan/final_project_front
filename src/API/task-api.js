@@ -32,5 +32,23 @@ export const taskAPI = {
             }
         })
     },
+    changeTitle(body){
+        return instance.put(`tasks/title`, {
+            ...body
+        }, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        })
+    },
+    changeDescription(body){
+        return instance.put(`tasks/description`, {
+            ...body
+        }, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        })
+    },
 };
 
