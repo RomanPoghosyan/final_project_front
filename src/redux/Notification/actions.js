@@ -27,7 +27,7 @@ export const getNotifications = () => dispatch => {
             dispatch(setNotifications(data.body));
         }).catch(({response: {data}}) => {
             dispatch(setNotify({
-                open: true, type: 'error', content: `${data.messages.length ? data.messages[0] :
+                open: true, type: 'error', content: `${data.message.length ? data.message :
                     "Something went wrong"}`
             }));
         })

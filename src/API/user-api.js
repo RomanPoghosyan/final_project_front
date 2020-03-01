@@ -31,5 +31,26 @@ export const userAPI = {
                 [AUTHORIZATION]: getToken(),
             }
         });
-    }
+    },
+    setFbToken ( token ) {
+        return instance.put ( `users/set-fb-token`, token, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        })
+    },
+    getBoardUsers(boardId){
+        return instance.get (`users/all/${boardId}`, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        });
+    },
+    changeUserRole(data){
+        return instance.put ('users/role',  {...data}, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        });
+    },
 };

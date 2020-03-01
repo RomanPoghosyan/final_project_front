@@ -7,7 +7,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import EditUserRoleForm from "./EditUserRoleForm/EditUserRoleForm";
 import {changeUserRole} from "../../../../redux/User/actions";
 import {getBoardIdSelect} from "../../../../redux/Board/selectors";
-import {getBoardUsersSelect} from "../../../../redux/User/selectors";
+import {getBoardUsersSelect} from "../../../../redux/User/user-selectors";
 
 
 const useStyles = makeStyles(theme => ({

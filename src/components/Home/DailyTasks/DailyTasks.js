@@ -3,6 +3,7 @@ import {makeStyles} from "@material-ui/core";
 import List from "@material-ui/core/List";
 import {useDispatch, useSelector} from "react-redux";
 import {getDailyTasks} from "../../../redux/Tasks/actions";
+import {getDailyTasksSelect} from "../../../redux/Tasks/tasks-selectors";
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -35,7 +36,7 @@ const useStyles = makeStyles(theme => ({
 const DailyTasks = () => {
     const classes = useStyles();
 
-    const dailyTasks = useSelector(state => state.home.tasks.dailyTasks);
+    const dailyTasks = useSelector(getDailyTasksSelect);
     const dispatch = useDispatch();
 
     useEffect(() => {

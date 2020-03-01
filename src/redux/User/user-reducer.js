@@ -1,5 +1,5 @@
-import {SET_SEARCHED_USERS, SET_USER_FULL_DATA, SET_FB_TOKEN} from "./action-types";
-import {CHANGE_USER_ROLE_SUCCESS, SET_BOARD_USERS, SET_SEARCHED_USERS, SET_USER_FULL_DATA} from "./action-types";
+import {SET_FB_TOKEN, CHANGE_USER_ROLE_SUCCESS, SET_BOARD_USERS,
+    SET_SEARCHED_USERS, SET_USER_FULL_DATA} from "./action-types";
 
 
 const initialState = {

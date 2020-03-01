@@ -5,11 +5,12 @@ import {push} from 'connected-react-router';
 import {withRouter} from "react-router-dom";
 import {getCurrentTaskInfo} from "../../../redux/Tasks/actions";
 import TaskInfo from "./TaskInfo";
+import {getByTaskId} from "../../../redux/Tasks/tasks-selectors";
 
 const TaskInfoContainer = (props) => {
     const dispatch = useDispatch();
     const {boardId, taskId} = props.match.params;
-    const taskInfo = useSelector(state => state.home.tasks.tasks[taskId]);
+    const taskInfo = useSelector(getByTaskId(taskId));
 
     useEffect(() => {
         dispatch(getCurrentTaskInfo(taskId))

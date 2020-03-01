@@ -9,7 +9,8 @@ import PropTypes from 'prop-types';
 import AccountSettings from "../AccountSettings/AccountSettings";
 import Notify from "../Notify/Notify";
 import {useDispatch, useSelector} from "react-redux";
-import {getCurrentFbToken, requestPermission} from "../../redux/User/actions";
+import {requestPermission} from "../../redux/User/actions";
+import {getCurrentFbTokenSelect} from "../../redux/User/user-selectors";
 
 const BoardContainer = React.lazy(() => import("../Board/BoardContainer"));
 const Roles = React.lazy(() => import("../Roles/Roles"));
@@ -25,7 +26,7 @@ const useStyles = makeStyles({
 const Main = ({isAuth}) => {
     const classes = useStyles();
     const MainContent = isAuth ? Home : Welcome;
-    const fbToken = useSelector(getCurrentFbToken);
+    const fbToken = useSelector(getCurrentFbTokenSelect);
     const dispatch = useDispatch();
     useEffect(() => {
             if ( isAuth && !fbToken ) {

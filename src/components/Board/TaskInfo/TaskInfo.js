@@ -10,7 +10,7 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import {useSelector} from "react-redux";
-import {getBoardUsersSelect, getUserSelect} from "../../../redux/User/selectors";
+import {getUserSelect} from "../../../redux/User/user-selectors";
 
 
 const useStyles = makeStyles({
@@ -23,7 +23,6 @@ const useStyles = makeStyles({
 
 const TaskInfo = ({taskInfo}) => {
     const classes = useStyles();
-    const users = useSelector(getBoardUsersSelect);
     const assignor = useSelector(getUserSelect(taskInfo.assignorId));
 
     if(!taskInfo.isFetched) return <p>Patience...</p>;

@@ -2,9 +2,11 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import BoardItem from "./BoardItem/BoardItem";
 import {List, makeStyles} from "@material-ui/core";
-import {getBoards} from "../../../redux/Boards/actions";
+import {getBoardsSelect} from "../../../redux/Boards/boards-selectors";
 import {PropTypes} from "prop-types";
 import AddBoard from "./BoardItem/AddBoard/AddBoard";
+import {getUserId} from "../../../redux/User/user-selectors";
+import {getBoards} from "../../../redux/Boards/actions";
 
 
 const useStyles = makeStyles ( theme => ({
@@ -22,14 +24,13 @@ const useStyles = makeStyles ( theme => ({
 
 function Boards() {
     const classes = useStyles();
-    const boards = useSelector(state => state.home.boards);
-    const userId = useSelector(state => state.user.currentUser.id);
+    const boards = useSelector(getBoardsSelect);
+    const userId = useSelector(getUserId);
     const dispatch = useDispatch();
 
     useEffect(() => {
         if (userId) dispatch(getBoards(userId));
     }, [userId, dispatch]);
-
 
     const boardList = boards.map ( (b) => {
         return <BoardItem key={b.id} board={b}/>

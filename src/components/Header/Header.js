@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import Logo from "../common/Logo/Logo";
 import {useSelector} from "react-redux";
 import HeaderRightHand from "./HeaderRightSide/HeaderRightSide";
+import {getIsAuthSelect} from "../../redux/User/user-selectors";
 
 const useStyles = makeStyles(theme => ({
     header: {
@@ -27,7 +28,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Header = () => {
-    const isAuth = useSelector(state => state.user.currentUser.isAuth);
+    const isAuth = useSelector(getIsAuthSelect);
     const classes = useStyles();
     return (
         <header className={classes.header}>

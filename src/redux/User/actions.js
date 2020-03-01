@@ -1,5 +1,5 @@
-import {SET_FB_TOKEN, SET_SEARCHED_USERS, SET_USER_FULL_DATA, USER_LOGOUT} from "./action-types";
 import {
+    SET_FB_TOKEN,
     CHANGE_USER_ROLE_SUCCESS,
     SET_BOARD_USERS,
     SET_SEARCHED_USERS,
@@ -137,13 +137,13 @@ export const logoutSuccess = () => ({type: USER_LOGOUT});
  *
  * logout ( should call to the server for logout and dispatch setUserData action )
  *
- * @returns {{type: *}}
- */
-export const logout = () => dispatch => {
+ * @returns {{type: */
+export const logout = () => (dispatch, getState) => {
     window.localStorage.removeItem('token');
     authAPI.logout();
     dispatch(logoutSuccess());
     dispatch(initializedSuccess());
+    messaging.deleteToken(getState().user.currentUser.fbToken).then ( setFbToken(''));
 };
 
 export const setSearchedUsers = (searchedUsers) => ({type: SET_SEARCHED_USERS, payload: searchedUsers});
@@ -171,21 +171,25 @@ export const setFbToken = token => {
 
 
 export const getCurrentFbToken = () => dispatch => {
+    console.log(dispatch);
     messaging.getToken()
         .then ( token => {
            userAPI.setFbToken(token)
                .then ( token => {
-                   dispatch(setFbToken(token))
+                   dispatch(setFbToken(token));
                })
-        }).catch(err => console.log('There are no token',err));
+        }).catch(err =>  dispatch(setFbToken('')));
 };
 
 export const requestPermission = () => dispatch => {
+    console.log(dispatch);
+    console.log('requestPermission');
     messaging.requestPermission()
         .then(async function() {
             dispatch(getCurrentFbToken());
         })
         .catch(function(err) {
+            dispatch(setFbToken(''));
             console.log("Unable to get permission to notify. ", err);
         });
     navigator.serviceWorker.addEventListener("message", ((message) => {

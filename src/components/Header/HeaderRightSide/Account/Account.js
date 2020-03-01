@@ -10,6 +10,7 @@ import {logout} from "../../../../redux/User/actions";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import AccountIcon from "../../../common/AccountIcon/AccountIcon";
+import {getFullName} from "../../../../redux/User/user-selectors";
 
 const useStyles = makeStyles(theme => ({
     header: {
@@ -39,7 +40,7 @@ function Account () {
         setAnchorEl(event.currentTarget);
     }
 
-    const [firstName, lastName] = useSelector(state => [state.user.currentUser.first_name, state.user.currentUser.last_name]);
+    const [firstName, lastName] = useSelector(getFullName);
     return (
         <>
             <AccountIcon onClick={handleClick} firstName={firstName} lastName={lastName} backgroundColor={"primary"} />

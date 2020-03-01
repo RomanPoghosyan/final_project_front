@@ -1,29 +1,23 @@
-import React from "react";
-import Checkbox from "@material-ui/core/Checkbox";
 import {createSelector} from "reselect";
-import tableCell from "../../components/Roles/TableCell/TableCell";
+import customRolesTableCell from "../../components/Roles/TableCells/customRolesTableCell";
+import initialRolesTableCell from "../../components/Roles/TableCells/initialRolesTableCell";
 
 export const getPrivilegesSelect = state => state.home.role.privileges;
 
 export const getPrivilagesLength = createSelector(getPrivilegesSelect, privileges => privileges.length);
 
-
 export const getMappedInitialPrivilegesSelect = createSelector(getPrivilegesSelect, (privileges) => {
-   return [{id: 0, name: "Role"}, ...privileges].map(p => ({
-       ...p, sortable: true,
-       cell: row => {
-           return p.name === "Role" ?
-               <div>{row.name}</div> :
-               <div><Checkbox disabled checked={row.privilegesIds.includes(p.id)}/></div>
-       },
-   }));
+    return [{id: 0, name: "Role"}, ...privileges].map(p => ({
+        ...p, sortable: true,
+        cell: initialRolesTableCell(p)
+    }));
 });
 
 export const getMappedCustomPrivilegesSelect = createSelector(getPrivilegesSelect, (privileges) => {
-   return [{id: 0, name: "Role"}, ...privileges].map(p => ({
-       ...p, sortable: true,
-       cell: tableCell(p)
-   }));
+    return [{id: 0, name: "Role"}, ...privileges].map(p => ({
+        ...p, sortable: true,
+        cell: customRolesTableCell(p)
+    }));
 });
 
 export const getRolesSelect = state => state.home.role.roles;
