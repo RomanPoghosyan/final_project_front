@@ -8,7 +8,7 @@ import store, {history} from "./redux/store";
 import theme from "./utils/styles/theme";
 import {initialize} from './redux/App/actions';
 import {ConnectedRouter} from 'connected-react-router'
-import {getInitialized} from "./redux/App/app-selectors";
+import {getInitializedSelect} from "./redux/App/app-selectors";
 
 const useStyles = makeStyles({
     wrapper: {
@@ -22,7 +22,7 @@ const useStyles = makeStyles({
 const App = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const initialized = useSelector(getInitialized);
+    const initialized = useSelector(getInitializedSelect);
 
     useEffect(() => {
         dispatch(initialize());

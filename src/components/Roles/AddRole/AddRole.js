@@ -2,7 +2,7 @@ import React from "react";
 import AddRoleForm from "./AddRoleForm/AddRoleForm";
 import {useDispatch, useSelector} from "react-redux";
 import {addRole} from "../../../redux/Role/actions";
-import {getPrivilegesSelect} from "../../../redux/Role/selectors";
+import {getPrivilegesSelect} from "../../../redux/Role/role-selectors";
 
 
 const AddRole = ({boardId}) => {

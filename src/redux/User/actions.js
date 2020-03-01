@@ -143,7 +143,7 @@ export const logout = () => (dispatch, getState) => {
     authAPI.logout();
     dispatch(logoutSuccess());
     dispatch(initializedSuccess());
-    messaging.deleteToken(getState().user.currentUser.fbToken).then ( setFbToken(''));
+    messaging.deleteToken(getState().user.currentUser.fbToken).then( () => dispatch(setFbToken('')) );
 };
 
 export const setSearchedUsers = (searchedUsers) => ({type: SET_SEARCHED_USERS, payload: searchedUsers});
@@ -171,7 +171,6 @@ export const setFbToken = token => {
 
 
 export const getCurrentFbToken = () => dispatch => {
-    console.log(dispatch);
     messaging.getToken()
         .then ( token => {
            userAPI.setFbToken(token)
@@ -182,8 +181,6 @@ export const getCurrentFbToken = () => dispatch => {
 };
 
 export const requestPermission = () => dispatch => {
-    console.log(dispatch);
-    console.log('requestPermission');
     messaging.requestPermission()
         .then(async function() {
             dispatch(getCurrentFbToken());

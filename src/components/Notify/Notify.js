@@ -3,10 +3,10 @@ import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 import {useDispatch, useSelector} from "react-redux";
 import {setNotify} from "../../redux/Notify/notify-reducer";
-import {getNotify} from "../../redux/Notify/notify-selectors";
+import {getNotifySelect} from "../../redux/Notify/notify-selectors";
 
 function Notify() {
-    const notification = useSelector(getNotify);
+    const notification = useSelector(getNotifySelect);
     const dispatch = useDispatch();
     function handleClose() {
         dispatch(setNotify({open: false, type: 'success', content: ''}))

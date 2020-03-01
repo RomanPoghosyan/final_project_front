@@ -6,7 +6,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import EditUserRoleForm from "./EditUserRoleForm/EditUserRoleForm";
 import {changeUserRole} from "../../../../redux/User/actions";
-import {getBoardIdSelect} from "../../../../redux/Board/selectors";
+import {getBoardIdSelect} from "../../../../redux/Board/board-selectors";
 import {getBoardUsersSelect} from "../../../../redux/User/user-selectors";
 
 
@@ -49,7 +49,7 @@ const BoardUsers = () => {
         <div>
             <div className={classes.container}>
                 {boardUsers.map(u => <AccountIcon key={u.id} firstName={u.first_name} lastName={u.last_name} height={30}
-                                                  width={30} borderRadius={"50%"} backgroundColor={"primary"}
+                                                  width={30} borderRadius={"50%"} backgroundColor={"primary"} padding={"4px 0 5px 0"}
                                                   onClick={() => handleClickOpen(u.id, u.roleId)}/>)}
             </div>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">

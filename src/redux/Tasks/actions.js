@@ -1,6 +1,12 @@
 import {taskAPI} from "../../API/api";
 import {addTaskToColumnSuccess} from "../Board/actions";
-import {ADD_TASK_SUCCESS, SET_CURRENT_TASK_INFO, SET_DAILY_TASKS, SET_TASKS} from "./action-types";
+import {
+    ADD_TASK_SUCCESS,
+    CHANGE_TASK_PROP_SUCCESS,
+    SET_CURRENT_TASK_INFO,
+    SET_DAILY_TASKS,
+    SET_TASKS
+} from "./action-types";
 import {setNotify} from "../Notify/notify-reducer";
 import {push} from "connected-react-router";
 
@@ -61,5 +67,35 @@ export const getCurrentTaskInfo = taskId => (dispatch, getState) => {
             const boardId = getState().home.currentBoard.id;
             dispatch(setNotify({ open: true, type: 'error', content: "Something went wrong! Task info not found!"}));
             dispatch(push(`/board/${boardId}`));
+        });
+};
+
+export const changeTaskPropSuccess = (id, prop, value) => ({type: CHANGE_TASK_PROP_SUCCESS, payload: {id, prop, value}});
+
+export const changeTitle = (title) => (dispatch, getState) => {
+    const taskId = getState().home.tasks.current;
+
+    taskAPI.changeTitle({taskId, title})
+        .then(({data}) => {
+            if (data.resultCode === 0) {
+                dispatch(changeTaskPropSuccess(taskId, "title", title));
+            }
+        })
+        .catch(({response: {data}}) => {
+            dispatch(setNotify({ open: true, type: 'error', content: "Could not change task title!"}));
+        });
+};
+
+export const changeDescription = (description) => (dispatch, getState) => {
+    const taskId = getState().home.tasks.current;
+
+    taskAPI.changeDescription({taskId, description})
+        .then(({data}) => {
+            if (data.resultCode === 0) {
+                dispatch(changeTaskPropSuccess(taskId, "description", description));
+            }
+        })
+        .catch(({response: {data}}) => {
+            dispatch(setNotify({ open: true, type: 'error', content: "Could not change task description!"}));
         });
 };

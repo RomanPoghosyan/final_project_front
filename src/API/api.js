@@ -6,10 +6,10 @@ import {taskAPI} from "./task-api";
 import {userAPI} from "./user-api";
 
 export  {
-  authAPI,
-  boardAPI,
-  notificationAPI,
-  rolesAPI,
-  taskAPI,
-  userAPI,
+    authAPI,
+    boardAPI,
+    notificationAPI,
+    rolesAPI,
+    taskAPI,
+    userAPI,
 };
