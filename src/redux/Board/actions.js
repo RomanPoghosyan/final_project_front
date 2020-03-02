@@ -23,7 +23,6 @@ export const getBoardData = (boardId) => (dispatch) => {
         .then(async ({data}) => {
             if (data.resultCode === 0) {
                 const {tasks, ...board} = data.body;
-
                 Promise.all([
                     dispatch(setTasks(tasks)),
                     dispatch(setBoardData(board)),

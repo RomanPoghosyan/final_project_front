@@ -11,7 +11,7 @@ import {initialize, initializedSuccess} from "../App/actions";
 import {setNotify} from "../Notify/notify-reducer";
 import {stopSubmit} from "redux-form";
 import {messaging} from "../../init-fcm";
-import {getNotifications} from "../Notification/actions";
+import {handleNotification} from "../Notification/actions";
 
 /**
  *
@@ -189,9 +189,11 @@ export const requestPermission = () => dispatch => {
             dispatch(setFbToken(''));
             console.log("Unable to get permission to notify. ", err);
         });
-    navigator.serviceWorker.addEventListener("message", ((message) => {
-        dispatch(getNotifications());
-        dispatch(setNotify({open: true, content:  "You have new notification", type: "warning"}));
+    navigator.serviceWorker.addEventListener("message", (message => {
+        const {data} = message;
+        const msgData = data["firebase-messaging-msg-data"];
+        const {notification} = msgData;
+        dispatch(handleNotification(notification));
     }));
     messaging.onMessage((payload) => console.log('Message received. ', payload));
 };

@@ -5,7 +5,7 @@ import {makeStyles} from "@material-ui/styles";
 import {useSelector} from "react-redux";
 import Badge from "@material-ui/core/Badge";
 import NotificationMenu from "./NotificationMenu/NotificationMenu";
-import {getAllNotificationsSelect} from "../../../../redux/Notification/notification-selectors";
+import {getFilteredNotificationsSelect} from "../../../../redux/Notification/notification-selectors";
 
 const useStyles = makeStyles(theme => ({
     notifications: {
@@ -42,7 +42,6 @@ const useStyles = makeStyles(theme => ({
 function Notification() {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
-    let notifications = useSelector(getAllNotificationsSelect);
     function handleClose() {
         setAnchorEl(null);
     }
@@ -51,7 +50,7 @@ function Notification() {
         setAnchorEl(event.currentTarget);
     }
 
-    notifications = notifications.filter( getAllNotificationsSelect );
+    let notifications = useSelector( getFilteredNotificationsSelect );
     if ( notifications.length > 5 ) {
         notifications = convertToFiveNotification();
     }

@@ -1,6 +1,8 @@
 import {notificationAPI} from "../../API/api";
 import {setNotify} from "../Notify/notify-reducer";
 import {SET_INVITATION_SUCCESS, SET_NOTIFICATION_STATUS_SUCCESS, SET_NOTIFICATIONS} from "./action-types";
+import {getBoardData} from "../Board/actions";
+import {getBoardUsers} from "../User/actions";
 
 /**
  *
@@ -67,6 +69,29 @@ export const setNotificationStatus = (notificationId, isSeen = false) => (dispat
         });
 };
 
+export const handleNotification = notification => (dispatch, getState) => {
+    if ( notification.title === 'INVITATION' ) {
+        dispatch(getNotifications());
+        dispatch(setNotify({open: true, content:  "You have new notification", type: "warning"}));
+    } else if ( notification.title === 'ACCEPT_INVITATION' ) {
+        dispatch(getBoardUsers(getState().home.currentBoard.id));
+        dispatch(setNotify({open: true, content: "Project invitation accepted successfully!", type:"success"}));
+    } else {
+        dispatch(getBoardData(getState().home.currentBoard.id));
+        // eslint-disable-next-line default-case
+        switch (notification.title) {
+            case 'TASK_REORDER':
+                dispatch(setNotify({open: true, content:  "Tasks are reordered!", type: "warning"}));
+                break;
+            case 'BOARD_REORDER':
+                dispatch(setNotify({open: true, content:  "Boards are reordered!", type: "warning"}));
+                break;
+            case 'ADD_COLUMN':
+                dispatch(setNotify({open: true, content:  "One board added!", type: "warning"}));
+        }
+    }
+};
+
 
 /**
  *
@@ -108,8 +133,7 @@ export const replyToInvitation = (notificationId, isAccepted) => (dispatch) => {
             setNotify({open: true, type: "success", content: `Invitation ${isAccepted? "accept" : "reject"}ed!`});
         }).catch(({response: {data}}) => {
             dispatch(setNotify({
-                open: true, type: 'error', content: `${data.messages.length ? data.messages[0] :
-                    "Something went wrong"}`
+                open: true, type: 'error', content: `Accept rejected!`
             }));
         });
 };

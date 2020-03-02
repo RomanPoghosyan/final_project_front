@@ -20,7 +20,7 @@ function NotificationMenu({anchorEl, notifications, classes, handleClose}) {
             {notifications.length > 0 ?
                 <div className={classes.notificationItems} >
                     <NotificationItems notifications={notifications}/>
-                    <Link to={"/all-notifications"} onClick={handleClose}>Просмотреть все</Link>
+                    <Link to={"/notifications"} onClick={handleClose}>See all</Link>
                 </div>
                 :
                 <section className={classes.notifications}>
