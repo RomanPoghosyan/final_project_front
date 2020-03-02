@@ -35,7 +35,6 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-
 const AccountSettings = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -52,6 +51,5 @@ const AccountSettings = () => {
         </div>
     )
 };
-
 
 export default  withAuthRedirect(false)(AccountSettings);
