@@ -2,6 +2,8 @@ import {createSelector} from "reselect";
 import customRolesTableCell from "../../components/Roles/TableCells/customRolesTableCell";
 import initialRolesTableCell from "../../components/Roles/TableCells/initialRolesTableCell";
 import {getBoardUsersSelect, getCurrentUser} from "../User/user-selectors";
+import * as privileges from "../../utils/constants/privileges-constants";
+
 
 export const getPrivilegesSelect = state => state.home.role.privileges;
 
@@ -12,12 +14,6 @@ export const getMappedInitialPrivilegesSelect = createSelector(getPrivilegesSele
     }));
 });
 
-export const getMappedCustomPrivilegesSelect = createSelector(getPrivilegesSelect, (privileges) => {
-    return [{id: 0, name: "Role"}, ...privileges].map(p => ({
-        ...p, sortable: true,
-        cell: customRolesTableCell(p)
-    }));
-});
 
 export const getRolesSelect = state => state.home.role.roles;
 
@@ -35,4 +31,13 @@ export const getUserPrivilegesSelect = createSelector(getCurrentUser, getBoardUs
     const roleId = userInfoInBoard.roleId;
     const role = roles.find(r => r.id === roleId);
     return role.privilegesIds
+});
+
+export const getMappedCustomPrivilegesSelect = createSelector([getPrivilegesSelect, getUserPrivilegesSelect], (allPrivileges, userPrivileges) => {
+    const privilegesIds = userPrivileges;
+    const isAllowed = privilegesIds.includes(privileges.CUSTOMIZE_ROLES_ID);
+    return [{id: 0, name: "Role"}, ...allPrivileges].map(p => ({
+        ...p, sortable: true,
+        cell: customRolesTableCell(p, isAllowed)
+    }));
 });

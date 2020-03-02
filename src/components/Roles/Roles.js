@@ -7,6 +7,7 @@ import InitialRolesTable from "./InitialRolesTable/InitialRolesTable";
 import CustomRolesTable from "./CustomRolesTable/CustomRolesTable";
 import AddRole from "./AddRole/AddRole";
 import {getPrivilegesLengthSelect} from "../../redux/Role/role-selectors";
+import withAuthRedirect from "../../hoc/withAuthRedirect";
 
 const Roles = ({match}) => {
     const boardId = match.params.boardId;
@@ -32,4 +33,5 @@ const Roles = ({match}) => {
 
 export default compose(
     withRouter,
+    withAuthRedirect(false)
 )(Roles);

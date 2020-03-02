@@ -3,7 +3,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import {useDispatch} from "react-redux";
 import {editRolePrivilege} from "../../../redux/Role/actions";
 
-const customRolesTableCell = privilege => row => {
+const customRolesTableCell = (privilege, isAllowed) => row => {
     const dispatch = useDispatch();
 
     return privilege.name === "Role" ?

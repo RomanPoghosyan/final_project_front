@@ -7,13 +7,15 @@ const useStyles = makeStyles(theme => ({
     board: {
         borderRadius: "3px",
         cursor: "pointer",
+        backgroundColor: theme.palette.column.main,
     },
     area: {
         height: "100%"
     },
     title: {
         padding: "7px",
-        color: theme.palette.typography.color,
+        color: theme.palette.secondary.main,
+
         // textDecorationColor: "underline red"
     },
     icons: {

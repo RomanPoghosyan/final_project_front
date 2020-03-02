@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
         width: '40px',
         minWidth: '0px',
         padding: '6px 0',
-        backgroundColor: theme.palette.secondary.main
+        // backgroundColor: theme.palette.secondary.main
     },
     notificationItems: {
         width: '80%',
@@ -63,6 +63,7 @@ function Notification() {
                     aria-haspopup="true"
                     variant="contained"
                     onClick={handleClick}
+                    color={"secondary"}
                     className={classes.notificationButton}
                 >
                     <NotificationsNone className={classes.notificationIcon}/>

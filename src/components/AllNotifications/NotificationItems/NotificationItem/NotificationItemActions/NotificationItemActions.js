@@ -12,21 +12,21 @@ function NotificationItemActions({classes, isSeen, isInvitation, invitationStatu
         <CardActions className={classes.actions}>
             {
                 isSeen ?
-                    <Button color={"inherit"} onClick={() => dispatch(setNotificationStatus(id, false))}>Mark as not
+                    <Button color={"secondary"} onClick={() => dispatch(setNotificationStatus(id, false))}>Mark as not
                         seen</Button> :
-                    <Button color={"inherit"} onClick={() => dispatch(setNotificationStatus(id, true))}>Mark as
+                    <Button color={"secondary"} onClick={() => dispatch(setNotificationStatus(id, true))}>Mark as
                         seen</Button>
             }
             {
                 isInvitation ?
                     (invitationStatus === "PENDING" ?
                         <>
-                            <Button color={"inherit"}
+                            <Button color={"secondary"}
                                     onClick={() => dispatch(replyToInvitation(id, true))}>Accept</Button>
-                            <Button color={"inherit"}
+                            <Button color={"secondary"}
                                     onClick={() => dispatch(replyToInvitation(id, false))}>Reject</Button></>
                         :
-                        <Button disabled color={"inherit"}>{invitationStatus}</Button>)
+                        <Button disabled color={"secondary"}>{invitationStatus}</Button>)
                     : null
 
             }

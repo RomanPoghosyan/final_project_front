@@ -12,7 +12,8 @@ const useStyles = makeStyles(( theme => ({
     },
     content: {
         display: "grid",
-        gridTemplateColumns: "1fr 1fr",
+        alignSelf: "center",
+        gridTemplateColumns: "1fr 2fr",
         width: '85%',
         height: "85%",
         color: '#fff',
@@ -35,7 +36,8 @@ const useStyles = makeStyles(( theme => ({
     },
     image: {
         width: "100%",
-
+        height: "100%",
+        objectFit: "cover",
     }
 })));
 
@@ -45,8 +47,10 @@ const Welcome = () => {
         <div className={classes.root}>
             <div className={classes.content}>
                 <div className={classes.left}>
-                    <h2>Time Controller lets you work more collaboratively and get more done.</h2>
-                    <h3>Time Controller boards, lists, and cards enable you to prioritize and organize your projects in a flexible, fun, and rewarding way.</h3>
+                    {/*<h2>Time Controller lets you work more collaboratively and get more done.</h2>*/}
+                    {/*<h3>Time Controller boards, lists, and cards enable you to prioritize and organize your projects in a flexible, fun, and rewarding way.</h3>*/}
+                    <h2>Time Controller</h2>
+                    <h3>No more confusion trying to figure out how things work. Save hours of time in managing and analyzing performance of your projects.</h3>
                 </div>
                 <div className={classes.right}>
                     <img className={classes.image} src={illustration} alt=""/>

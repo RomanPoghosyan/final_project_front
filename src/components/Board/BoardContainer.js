@@ -29,11 +29,10 @@ const BoardContainer = ({match}) => {
     // const memoizedCallback  = useCallback((boardId) => getBoardData(boardId), [getBoardData]);
 
     useEffect(() => {
-        console.log('aaaaaa');
         dispatch(getBoardData(boardId));
-        // dispatch(getBoardUsers(boardId));
-        // dispatch(getBoardRoles(boardId));
-        // dispatch(getPrivileges());
+        dispatch(getBoardUsers(boardId));
+        dispatch(getBoardRoles(boardId));
+        dispatch(getPrivileges());
     }, [dispatch, boardId]);
 
     return (

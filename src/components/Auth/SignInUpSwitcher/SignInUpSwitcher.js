@@ -4,6 +4,8 @@ import HeaderText from "../../common/HeaderText/HeaderText";
 import {Button, makeStyles} from "@material-ui/core";
 import {PropTypes} from "prop-types";
 import Logo from "../../common/Logo/Logo";
+import logoImg from '../../../assets/images/logoMedium.png';
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -31,7 +33,7 @@ const useStyles = makeStyles(theme => ({
 
 const SignInUpSwitcher = ({location}) => {
     const inSignIn = location === '/sign-in';
-    const logoElement =  <Link to={'/'}><Logo /></Link>;
+    const logoElement =  <Link to={'/'}><Logo img={logoImg} /></Link>;
     const classes = useStyles();
     const button = <Button children={inSignIn ? 'To Sign Up' : 'To Sign In'} variant={"contained"} className={classes.switcher}/>;
     return (
