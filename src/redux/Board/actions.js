@@ -18,9 +18,12 @@ export const dataFetched = (isFetched) => ({type: DATA_FETCHED, payload: isFetch
 export const setBoardData = (board) => ({type: SET_BOARD_DATA, payload: board});
 
 export const getBoardData = (boardId) => (dispatch) => {
+    console.log('bbb');
     dispatch(dataFetched(false));
+    console.log('ccc');
     boardAPI.getBoard(boardId)
         .then(async ({data}) => {
+            console.log('then');
             if (data.resultCode === 0) {
                 const {tasks, ...board} = data.body;
 
@@ -32,12 +35,17 @@ export const getBoardData = (boardId) => (dispatch) => {
                 });
             }
         })
-        .catch(({response: {data}}) => {
+        .catch((e) => {
+            console.log('catch');
+            console.log(e);
             dispatch(setNotify({
-                open: true, type: 'error', content: `${data.messages.length ? data.messages[0] :
-                    "Something went wrong"}`
+                open: true, type: 'error', content: `asddsa`
             }));
-            dispatch(push('/not-found'));
+            // dispatch(setNotify({
+            //     open: true, type: 'error', content: `${data.messages.length ? data.messages[0] :
+            //         "Something went wrong"}`
+            // }));
+            // dispatch(push('/not-found'));
         });
     // .catch(({response: {data}}) => {
     //     console.log(data);

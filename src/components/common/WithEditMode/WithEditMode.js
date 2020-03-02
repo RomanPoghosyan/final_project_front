@@ -16,7 +16,9 @@ const WithEditMode = (props) => {
 
     const deactivateEditMode = () => {
         setEditMode(false);
-        dispatch(props.thunkCreator(value));
+        if(props.thunkCreator) {
+            dispatch(props.thunkCreator(value));
+        }
     };
 
     const onValueChange = (e) => {

@@ -73,14 +73,22 @@ export const getUserData = () => dispatch => {
 export const updateUser = (user) => dispatch => {
     userAPI.updateUser(user)
         .then(({data}) => {
+            debugger;
             if (data.resultCode === 0) {
                 const {id, email, username, first_name, last_name, location, created_at, updated_at, phone_number} = data.body;
                 dispatch(setUserData(id, email, username, first_name, last_name, location, created_at, updated_at, phone_number, true));
                 dispatch(setNotify({open: true, type: 'success', content: 'Account settings are changed'}));
             }
         })
-        .catch(({response: {data}}) => {
-            let message = data.messages.length > 0 ? data.messages[0] : "Something went wrong";
+        .catch((e) => {
+            debugger;
+            let message = '';
+            if(!Array.isArray(e.messages)){
+                message = 'Something went wrong'
+             } else {
+               message = e.messages.length > 0 ? e.messages[0] : "Something went wrong";
+            }
+
             dispatch(stopSubmit("settings", {_error: message}));
             dispatch(setNotify({open: true, type: 'error', content: 'Account settings are not changed'}));
         });

@@ -9,6 +9,6 @@ export const getFullName = createSelector(getCurrentUser, user => {
 });
 export const getIsAuthSelect = state => state.user.currentUser.isAuth;
 export const getBoardUsersSelect = state => state.user.boardUsers;
-export const getUserSelect = userId => createSelector(getBoardUsersSelect, (users) => users.find(u => u.id === userId));
+export const getUserSelect = userId => createSelector([getBoardUsersSelect, () => userId], (users, uId) => users.find(u => u.id === uId));
 export const getUserId = state => state.user.currentUser.id;
 export const getCurrentFbTokenSelect = state => state.user.currentUser.fbToken;

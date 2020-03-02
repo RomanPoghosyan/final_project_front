@@ -36,7 +36,7 @@ const Main = ({isAuth}) => {
 
     return (
         <div className={classes.mainWrapper}>
-            <Header/>
+                <Header/>
             {/*<div style={{overflowX: "auto"}}>*/}
                 <Switch>
                     <Route exact path={"/"} component={MainContent}/>

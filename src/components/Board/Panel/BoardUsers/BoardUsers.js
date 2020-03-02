@@ -43,6 +43,7 @@ const BoardUsers = () => {
     const onSubmit = (formData) => {
         dispatch(changeUserRole(boardId, userId, formData.roleId));
         setRoleId(formData.roleId);
+        setOpen(false);
     };
 
     return (

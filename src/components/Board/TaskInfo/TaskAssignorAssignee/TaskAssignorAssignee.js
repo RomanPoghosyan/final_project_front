@@ -5,8 +5,11 @@ import {blue} from "@material-ui/core/colors";
 import Grid from "@material-ui/core/Grid";
 import UserAvatar from "./UserAvatar/UserAvatar";
 import AssignTaskForm from "./AssignTaskForm/AssignTaskForm";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {assignTask} from "../../../../redux/Tasks/actions";
+import WithEditMode from "../../../common/WithEditMode/WithEditMode";
+import {getUserPrivilegesSelect} from "../../../../redux/Role/role-selectors";
+import * as privileges from "../../../../utils/constants/privileges-constants";
 
 
 const useStyles = makeStyles({
@@ -32,9 +35,12 @@ const useStyles = makeStyles({
 
 const TaskAssignorAssignee = ({users, assignor, assignee}) => {
     const classes = useStyles();
+    const privilegesIds = useSelector(getUserPrivilegesSelect);
+    const allowAssignment = privilegesIds.includes(privileges.ASSIGN_TASK_ID);
     const dispatch = useDispatch();
-    const onSubmit = (formData) => {
+    const onSubmit = (deactivateEditMode) => (formData) => {
         dispatch(assignTask(formData.assigneeId));
+        deactivateEditMode();
     };
 
     return (
@@ -48,10 +54,20 @@ const TaskAssignorAssignee = ({users, assignor, assignee}) => {
                 <Grid item xs={7}>
                     <UserAvatar title={"Assignee"} classes={classes}>
                         <ListItemText>
-                            {assignee
-                                ? `${assignee.first_name} ${assignee.last_name}`
-                                : <AssignTaskForm onSubmit={onSubmit} users={users}/>
-                            }
+                            {/*{assignee*/}
+                            {/*    ? `${assignee.first_name} ${assignee.last_name}`*/}
+                            {/*    : <AssignTaskForm onSubmit={onSubmit} users={users}/>*/}
+                            {/*}*/}
+                            <WithEditMode value={assignee}>
+                                {(value, editMode, activateEditMode, deactivateEditMode, onValueChange) => (
+                                    <>
+                                        {(assignee && !editMode) || !allowAssignment
+                                            ? <span onClick={activateEditMode}>{assignee ? `${assignee.first_name} ${assignee.last_name}` : "Not assignee"}</span>
+                                            : <AssignTaskForm onSubmit={onSubmit(deactivateEditMode)} users={users}/>
+                                        }
+                                    </>
+                                )}
+                            </WithEditMode>
                         </ListItemText>
                     </UserAvatar>
                 </Grid>
@@ -62,30 +78,3 @@ const TaskAssignorAssignee = ({users, assignor, assignee}) => {
 
 export default TaskAssignorAssignee;
 
-
-// {/*<ListItem button>*/}
-// {/*    <ListItemText primary={"Assignor"}/>*/}
-// {/*    <ListItemText primary={"Assignee"}/>*/}
-// {/*</ListItem>*/}
-// {/*<ListItem button>*/}
-// {/*<ListItemAvatar>*/}
-// {/*<UserAvatar className={classes.avatar}>*/}
-// {/*    <PersonIcon/>*/}
-// {/*    </UserAvatar>*/}
-// {/*</ListItemAvatar>*/}
-// {/*<ListItemText primary={`${assignor.first_name} ${assignor.last_name}`}/>*/}
-// {/*<ListItemAvatar>*/}
-// {/*<UserAvatar className={classes.avatar}>*/}
-// {/*<PersonIcon/>*/}
-// {/*</UserAvatar>*/}
-// {/*</ListItemAvatar>*/}
-// {/*<ListItemText>*/}
-// {/*<Autocomplete*/}
-// {/*id="combo-box-demo"*/}
-// {/*options={options}*/}
-// {/*getOptionLabel={option => option.title}*/}
-// {/*// style={{width: "200px"}}*/}
-// {/*renderInput={params => <TextField style={{width: "150px"}} {...params} label="Combo box" variant="outlined"/>}*/}
-// {/*/>*/}
-// {/*</ListItemText>*/}
-// {/*</ListItem>*/}

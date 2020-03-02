@@ -6,6 +6,9 @@ import {connect} from "react-redux";
 import AddUserForm from "./AddUserForm/AddUserForm";
 import {sendInvitationNotification} from "../../../../redux/Notification/actions";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import {compose} from "redux";
+import withPrivilege from "../../../../hoc/withPrivilege";
+import * as privileges from "../../../../utils/constants/privileges-constants";
 
 const useStyles = makeStyles(theme => ({
     buttonContainer: {
@@ -54,4 +57,7 @@ const mapStateToProps = (state) => ({
     boardId: state.home.currentBoard.id,
 });
 
-export default connect(mapStateToProps, {sendInvitationNotification})(AddUser);
+export default compose(
+    withPrivilege(privileges.INVITE_USER_ID),
+    connect(mapStateToProps, {sendInvitationNotification})
+)(AddUser);

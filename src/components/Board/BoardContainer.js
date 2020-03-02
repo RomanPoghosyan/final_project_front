@@ -9,7 +9,7 @@ import Board from "./Board";
 import Panel from "./Panel/Panel";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import {getBoardUsers} from "../../redux/User/actions";
-import {getBoardRoles} from "../../redux/Role/actions";
+import {getBoardRoles, getPrivileges} from "../../redux/Role/actions";
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -29,9 +29,11 @@ const BoardContainer = ({match}) => {
     // const memoizedCallback  = useCallback((boardId) => getBoardData(boardId), [getBoardData]);
 
     useEffect(() => {
+        console.log('aaaaaa');
         dispatch(getBoardData(boardId));
-        dispatch(getBoardUsers(boardId));
-        dispatch(getBoardRoles(boardId));
+        // dispatch(getBoardUsers(boardId));
+        // dispatch(getBoardRoles(boardId));
+        // dispatch(getPrivileges());
     }, [dispatch, boardId]);
 
     return (

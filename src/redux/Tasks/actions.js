@@ -107,7 +107,7 @@ export const assignTask = (assigneeId) => (dispatch, getState) => {
     taskAPI.assignTask({taskId, assigneeId, "projectId": boardId})
         .then(({data}) => {
             if (data.resultCode === 0) {
-                dispatch(changeTaskPropSuccess(taskId, "assigneeId", assigneeId));
+                dispatch(changeTaskPropSuccess(taskId, "assigneeId", +assigneeId));
             }
         })
         .catch(({response: {data}}) => {

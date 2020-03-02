@@ -5,6 +5,9 @@ import AddTaskForm from "./AddTaskForm/AddTaskForm";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {addTask} from "../../../../../redux/Tasks/actions";
+import {compose} from "redux";
+import withPrivilege from "../../../../../hoc/withPrivilege";
+import * as privileges from "../../../../../utils/constants/privileges-constants";
 
 
 const useStyles = makeStyles(() => ({
@@ -64,4 +67,7 @@ AddTask.propTypes = {
     columnId: PropTypes.number,
 };
 
-export default connect(null, {addTask})(AddTask);
+export default compose(
+    withPrivilege(privileges.CREATE_TASK_ID),
+    connect(null, {addTask})
+)(AddTask);

@@ -20,8 +20,7 @@ import FormControl from "@material-ui/core/FormControl";
 
 let maxLength15 = maxLengthCreator(15);
 
-const AccountSettingsForm = ({classes, handleSubmit, error, initialize, user, submitSucceeded}) => {
-
+const AccountSettingsForm = ({classes, handleSubmit, error, initialize, user, submitting}) => {
     const memoizedCallback  = useCallback((user) => initialize(user), [initialize]);
 
     useEffect(() => {
@@ -54,7 +53,7 @@ const AccountSettingsForm = ({classes, handleSubmit, error, initialize, user, su
                 </FormGroup>
             </FormControl>
             <FormHelperText error={Boolean(error)}>{error}</FormHelperText>
-            <Button type={"submit"} variant={"contained"} color={"secondary"} disabled={submitSucceeded}
+            <Button type={"submit"} variant={"contained"} color={"secondary"} disabled={submitting}
                     className={classes.button}>Change information</Button>
         </form>
     )
@@ -66,7 +65,7 @@ AccountSettingsForm.propTypes = {
     error: PropTypes.string,
     initialize: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
-    submitSucceeded: PropTypes.bool.isRequired,
+    submitting: PropTypes.bool.isRequired,
 };
 
 export default reduxForm({form: "settings"})(AccountSettingsForm);
