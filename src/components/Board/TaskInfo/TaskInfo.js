@@ -7,6 +7,7 @@ import {getBoardUsersSelect, getUserSelect} from "../../../redux/User/user-selec
 import TaskTitle from "./TaskTitle/TaskTitle";
 import TaskDescription from "./TaskDescription/TaskDescription";
 import TaskAssignorAssignee from "./TaskAssignorAssignee/TaskAssignorAssignee";
+import MicroTasks from "./MicroTasks/MicroTasks";
 import Spinner from "../../common/Spinners/Spinner/Spinner";
 
 
@@ -41,6 +42,8 @@ const TaskInfo = ({taskInfo}) => {
                 <TaskAssignorAssignee users={users} assignor={assignor} assignee={assignee} />
                 {/*Description*/}
                 <TaskDescription description={taskInfo.description}/>
+                {/*MicroTasks*/}
+                <MicroTasks microTasks={taskInfo.microTasks}/>
             </DialogContent>
         </div>
     );

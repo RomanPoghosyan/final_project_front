@@ -1,12 +1,14 @@
 import React, {memo} from 'react';
 import {makeStyles} from "@material-ui/styles";
+import illustration from "../../assets/images/illustration.jpg";
 
 export const useStyles = makeStyles((theme => ({
     root: {
         display: "grid",
         justifyItems: "center",
         height: '100%',
-        background: theme.palette.primary.main
+        // backgroundImage: `url(${illustration})`
+        background: theme.palette.background.main
     },
     content: {
         display: "grid",
@@ -21,11 +23,19 @@ export const useStyles = makeStyles((theme => ({
         '& h3': {
             fontSize: "calc(1.9vw + 12px)",
             lineHeight: "calc(1.9vw + 14px)"
-        }
+        },
     },
     left: {
         display: "grid",
         color: theme.palette.secondary.dark,
+    },
+    right: {
+        width: "100%",
+        // color: theme.palette.secondary.dark,
+    },
+    image: {
+        width: "100%",
+
     }
 })));
 
@@ -38,7 +48,9 @@ const Welcome = () => {
                     <h2>Time Controller lets you work more collaboratively and get more done.</h2>
                     <h3>Time Controller boards, lists, and cards enable you to prioritize and organize your projects in a flexible, fun, and rewarding way.</h3>
                 </div>
-                <div className={classes.right} />
+                <div className={classes.right}>
+                    <img className={classes.image} src={illustration} alt=""/>
+                </div>
             </div>
             <div />
         </div>

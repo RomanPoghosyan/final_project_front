@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
         display: "flex",
     },
     isDragging: {
-        backgroundColor: "lightgreen",
+        // backgroundColor: "lightgreen",
     }
 }));
 

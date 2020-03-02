@@ -47,7 +47,7 @@ function Account () {
 
     return (
         <>
-            <AccountIcon onClick={handleClick} firstName={firstName} lastName={lastName} backgroundColor={"secondary"} />
+            <AccountIcon onClick={handleClick} firstName={firstName} lastName={lastName} backgroundColor={"secondary"} height={"36px"} />
             <StyledMenu
                 id="customized-menu"
                 anchorEl={anchorEl}

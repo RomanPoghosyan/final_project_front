@@ -50,5 +50,14 @@ export const taskAPI = {
             }
         })
     },
+    assignTask(body){
+        return instance.put(`tasks/assign`, {
+            ...body
+        }, {
+            headers: {
+                [AUTHORIZATION]: getToken(),
+            }
+        })
+    },
 };
 

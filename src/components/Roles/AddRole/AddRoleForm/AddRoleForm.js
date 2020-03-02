@@ -22,7 +22,12 @@ const useStyles = makeStyles(theme => ({
     },
     submitButton: {
         width: "100%",
-        marginTop: 20
+        marginTop: 20,
+        backgroundColor: theme.palette.secondary.main,
+        color: "white"
+    },
+    buttonContainer: {
+        padding: "16px"
     }
 }));
 
@@ -34,12 +39,15 @@ const AddRoleForm = ({handleSubmit, error, privileges}) => {
         <form onSubmit={handleSubmit} className={classes.form}>
             <div className={classes.fields}>
                 <span>
-                    <Field label={"Role name"} name={"role_name"} component={renderTextField} validate={[roleNameRequired, maxLength15]}/>
+                    <Field label={"Role name"} name={"role_name"} component={renderTextField}
+                           validate={[roleNameRequired, maxLength15]}/>
                 </span>
-                {privileges.length > 0 && <MemoizedCheckboxes privileges={privileges} />}
+                {privileges.length > 0 && <MemoizedCheckboxes privileges={privileges}/>}
             </div>
             <FormHelperText error={!!error}>{error}</FormHelperText>
-            <Button className={classes.submitButton} type={"submit"} variant={"contained"}>Add Role</Button>
+            <div className={classes.buttonContainer}>
+                <Button className={classes.submitButton} type={"submit"} color={"secondary"} >Add Role</Button>
+            </div>
         </form>
     );
 };
